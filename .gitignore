@@ -1,0 +1,14 @@
+### JetBrains PHPStorm IDE
+/.idea/
+
+### Composer
+/vendor/
+composer.lock
+
+### Tests
+/tests/output/
+!/tests/output/.gitkeep
+
+### Cookie
+/var/
+!/var/.gitkeep

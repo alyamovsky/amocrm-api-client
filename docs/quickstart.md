@@ -1,7 +1,6 @@
 ```php
 <?php
 require __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../autoload.php';
 
 $domain = '';
 $login = '';
@@ -35,7 +34,7 @@ try {
     // Валидация и заполнение сущности данными происходит позже, в методе клиента add либо update. Это связано с тем,
     // что для добавления и редактирования разные поля будут являться обязательными.
 
-    $result = $request->set($lead, 'add');
+    $result = $request->add($lead);
     echo $result;
 } catch (Exception $e) {
     echo $e->getFile() . ': ' . $e->getMessage();

@@ -118,7 +118,7 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
 
         foreach ($this->fieldsParams as $key => $params) {
             $fieldData = isset($data[$key]) ? $data[$key] : null;
-            if (($this->isValidatedField($key, $fieldData)) && (!empty($fieldData))) {
+            if (($this->isValidField($key, $fieldData)) && (!empty($fieldData))) {
                 $this->setField($key, $fieldData);
             }
         }
@@ -130,7 +130,7 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
      * @return bool
      * @throws EntityFieldsException
      */
-    private function isValidatedField($key, $value)
+    private function isValidField($key, $value)
     {
         // if the required field is missing
         if (empty($value) && (true === $this->fieldsParams[$key]['required_add'])) {

@@ -92,13 +92,31 @@ class Client
     }
 
     /**
+     * @param EntityInterface $entity
+     * @return string
+     */
+    public function add(EntityInterface $entity)
+    {
+        return $this->set($entity, 'add');
+    }
+
+    /**
+     * @param EntityInterface $entity
+     * @return string
+     */
+    public function update(EntityInterface $entity)
+    {
+        return $this->set($entity, 'update');
+    }
+
+    /**
      * Adds or updates an entity
      * @param EntityInterface $entity
      * @param string $action
      * @return string
      * @throws InvalidArgumentException
      */
-    public function set(EntityInterface $entity, $action)
+    private function set(EntityInterface $entity, $action)
     {
         if (('add' !== $action) && ('update' !== $action)) {
             throw new InvalidArgumentException("Action \"$action\" is not a proper action parameter");

@@ -4,7 +4,6 @@
 namespace ddlzz\AmoAPI;
 
 
-
 use ddlzz\AmoAPI\Request\Curl;
 use ddlzz\AmoAPI\Request\DataSender;
 
@@ -23,8 +22,17 @@ class ClientFactory
     public static function create(CredentialsManager $credentials, SettingsStorage $settings = null)
     {
         $settings = isset($settings) ? $settings : new SettingsStorage();
-        $dataSender = new DataSender(new Curl(), $settings);
+        $dataSender = self::buildSender($settings);
 
         return new Client($credentials, $dataSender, $settings);
+    }
+
+    /**
+     * @param SettingsStorage $settings
+     * @return DataSender
+     */
+    private static function buildSender(SettingsStorage $settings)
+    {
+        return new DataSender(new Curl(), $settings);
     }
 }

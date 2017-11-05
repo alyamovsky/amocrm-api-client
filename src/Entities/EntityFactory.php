@@ -12,7 +12,7 @@ use ddlzz\AmoAPI\SettingsStorage;
  * @package ddlzz\AmoAPI\Entities
  * @author ddlzz
  */
-class EntityFactory implements EntityFactoryInterface
+class EntityFactory
 {
     /** @var SettingsStorage */
     private static $settings;

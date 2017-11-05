@@ -5,6 +5,7 @@ namespace ddlzz\AmoAPI\Entities;
 
 use ddlzz\AmoAPI\Exceptions\EntityFieldsException;
 use ddlzz\AmoAPI\Utils\ArrayUtil;
+use ddlzz\AmoAPI\Validators\FieldsValidator;
 
 /**
  * Class BaseEntity
@@ -21,6 +22,9 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
 
     /** This value will be overwritten in constructor. */
     const CURRENT_TIME = 'current_time';
+
+    /** @var FieldsValidator */
+    protected $fieldsValidator;
 
     /** @var string */
     protected $requestName = '';
@@ -87,6 +91,8 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
 
         // Append fields of abstract parent class with the child entity data.
         $this->fieldsParams = array_merge($this->fieldsParams, $this->fieldsParamsAppend);
+
+        $this->fieldsValidator = new FieldsValidator($this->fieldsParams); // Composition
     }
 
     /**
@@ -118,54 +124,10 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
 
         foreach ($this->fieldsParams as $key => $params) {
             $fieldData = isset($data[$key]) ? $data[$key] : null;
-            if (($this->isValidField($key, $fieldData)) && (!empty($fieldData))) {
+            if (($this->fieldsValidator->isValid($key, $fieldData)) && (!empty($fieldData))) {
                 $this->setField($key, $fieldData);
             }
         }
-    }
-
-    /**
-     * @param string $key
-     * @param mixed $value
-     * @return bool
-     * @throws EntityFieldsException
-     */
-    private function isValidField($key, $value)
-    {
-        // if the required field is missing
-        if (empty($value) && (true === $this->fieldsParams[$key]['required_add'])) {
-            throw new EntityFieldsException("The required field \"$key\" is missing or empty");
-        } elseif (!empty($value)) {
-            // if the field type doesn't match with the value
-            switch ($this->fieldsParams[$key]['type']) {
-                case self::INT:
-                    if (!ctype_digit($value)) {
-                        throw new EntityFieldsException("The field \"$key\" must contain digits only");
-                    }
-                    break;
-                case self::STRING:
-                    if (!is_string($value) && !is_numeric($value)) {
-                        throw new EntityFieldsException("The field \"$key\" must be string");
-                    }
-                    break;
-                case self::BOOL:
-                    if (is_null(filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE))) {
-                        throw new EntityFieldsException("The field \"$key\" must contain boolean values only");
-                    }
-                    break;
-                case self::ARRAY:
-                    if (!is_array($value)) {
-                        throw new EntityFieldsException("The field \"$key\" must be an array");
-                    }
-                    break;
-                default:
-                    throw new EntityFieldsException(
-                        "Internal error: the field \"$key\" doesn't match any of the entity predefined fields"
-                    );
-            }
-        }
-
-        return true;
     }
 
     /**

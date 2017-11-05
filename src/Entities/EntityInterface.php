@@ -8,6 +8,7 @@ namespace ddlzz\AmoAPI\Entities;
  * Interface EntityInterface
  * @package ddlzz\AmoAPI\Interfaces
  * @author ddlzz
+ * @codeCoverageIgnore
  */
 interface EntityInterface
 {

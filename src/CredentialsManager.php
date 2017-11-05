@@ -3,8 +3,7 @@
 
 namespace ddlzz\AmoAPI;
 
-use ddlzz\AmoAPI\Exceptions\InvalidArgumentException;
-use ddlzz\AmoAPI\Utils\StringUtil;
+use ddlzz\AmoAPI\Validators\CredentialsValidator;
 
 
 /**
@@ -14,6 +13,9 @@ use ddlzz\AmoAPI\Utils\StringUtil;
  */
 class CredentialsManager
 {
+    /** @var CredentialsValidator */
+    private $validator;
+
     /** @var string */
     private $subdomain;
 
@@ -31,54 +33,11 @@ class CredentialsManager
      */
     public function __construct($domain, $login, $hash)
     {
-        $this->subdomain = $this->validateSubdomain($domain);
-        $this->login = $this->validateLogin($login);
-        $this->hash = $this->validateHash($hash);
-    }
+        $this->validator = new CredentialsValidator(); // Composition
 
-    /**
-     * @param string $subdomain
-     * @return string
-     * @throws InvalidArgumentException
-     */
-    private function validateSubdomain($subdomain)
-    {
-        if (!StringUtil::isAlNum($subdomain)) {
-            $message = sprintf('"%s" is not a valid subdomain', $subdomain);
-            throw new InvalidArgumentException($message);
-        }
-
-        return $subdomain;
-    }
-
-    /**
-     * @param string $login
-     * @return string
-     * @throws InvalidArgumentException
-     */
-    private function validateLogin($login)
-    {
-        if (!StringUtil::isEmail($login)) {
-            $message = sprintf('"%s" is not a valid login', $login);
-            throw new InvalidArgumentException($message);
-        }
-
-        return $login;
-    }
-
-    /**
-     * @param string $hash
-     * @return string
-     * @throws InvalidArgumentException
-     */
-    private function validateHash($hash)
-    {
-        if (!StringUtil::isAlNum($hash)) {
-            $message = sprintf('"%s" is not a valid hash', $hash);
-            throw new InvalidArgumentException($message);
-        }
-
-        return $hash;
+        $this->subdomain = $this->validator->validateSubdomain($domain);
+        $this->login = $this->validator->validateLogin($login);
+        $this->hash = $this->validator->validateHash($hash);
     }
 
     /**

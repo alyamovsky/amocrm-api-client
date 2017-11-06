@@ -48,6 +48,12 @@ class CredentialsManager
         return $this->subdomain;
     }
 
+    /** @return string */
+    public function getLogin()
+    {
+        return $this->login;
+    }
+
     /**
      * @return array
      */

@@ -39,7 +39,7 @@ class Client
         $this->credentials = $credentials;
         $this->dataSender = $dataSender;
         $this->settings = $settings;
-        $this->urlBuilder = new UrlBuilder($this->settings);
+        $this->urlBuilder = new UrlBuilder($this->settings); // Composition
 
         if (!$this->isAuthorized()) {
             $this->authorize();
@@ -57,9 +57,15 @@ class Client
 
         if ((!file_exists($cookieFile)) || (filemtime($cookieFile) <= $fourteenMinAgo)) {
             return false;
-        } else {
-            return true;
         }
+
+        // If login has been changed, we need to delete the cookie file for the changes to take effect
+        if (false === (strpos(file_get_contents($cookieFile), (str_replace('@', '%40', $this->credentials->getLogin()))))) {
+            unlink($cookieFile);
+            return false;
+        }
+
+        return true;
     }
 
     /**

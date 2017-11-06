@@ -35,9 +35,13 @@ class CredentialsManager
     {
         $this->validator = new CredentialsValidator(); // Composition
 
-        $this->subdomain = $this->validator->validateSubdomain($domain);
-        $this->login = $this->validator->validateLogin($login);
-        $this->hash = $this->validator->validateHash($hash);
+        $this->validator->validateSubdomain($domain);
+        $this->validator->validateLogin($login);
+        $this->validator->validateHash($hash);
+
+        $this->subdomain = $domain;
+        $this->login = $login;
+        $this->hash = $hash;
     }
 
     /**

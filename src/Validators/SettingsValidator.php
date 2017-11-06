@@ -8,21 +8,21 @@ use ddlzz\AmoAPI\Utils\StringUtil;
 
 
 /**
- * Class CredentialsValidator
+ * Class SettingsValidator
  * @package ddlzz\AmoAPI\Validators
  * @author ddlzz
  */
-class CredentialsValidator
+class SettingsValidator
 {
     /**
-     * @param string $subdomain
+     * @param string $scheme
      * @return bool
      * @throws InvalidArgumentException
      */
-    public function validateSubdomain($subdomain)
+    public function validateScheme($scheme)
     {
-        if (!StringUtil::isAlNum($subdomain)) {
-            $message = sprintf('"%s" is not a valid subdomain', $subdomain);
+        if (!StringUtil::isOnlyLetters($scheme)) {
+            $message = sprintf('"%s" is not a valid scheme', $scheme);
             throw new InvalidArgumentException($message);
         }
 
@@ -30,14 +30,14 @@ class CredentialsValidator
     }
 
     /**
-     * @param string $login
+     * @param string $domain
      * @return bool
      * @throws InvalidArgumentException
      */
-    public function validateLogin($login)
+    public function validateDomain($domain)
     {
-        if (!StringUtil::isEmail($login)) {
-            $message = sprintf('"%s" is not a valid login', $login);
+        if (!StringUtil::isDomain($domain)) {
+            $message = sprintf('"%s" is not a valid domain', $domain);
             throw new InvalidArgumentException($message);
         }
 
@@ -45,14 +45,14 @@ class CredentialsValidator
     }
 
     /**
-     * @param string $hash
+     * @param string $userAgent
      * @return bool
      * @throws InvalidArgumentException
      */
-    public function validateHash($hash)
+    public function validateUserAgent($userAgent)
     {
-        if (!StringUtil::isAlNum($hash)) {
-            $message = sprintf('"%s" is not a valid hash', $hash);
+        if (!StringUtil::isAlNum($userAgent)) {
+            $message = sprintf('"%s" is not a valid user agent', $userAgent);
             throw new InvalidArgumentException($message);
         }
 

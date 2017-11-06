@@ -3,6 +3,8 @@
 
 namespace ddlzz\AmoAPI;
 
+use ddlzz\AmoAPI\Validators\SettingsValidator;
+
 
 /**
  * Class SettingsStorage. All amo- and library related variables are stored here.
@@ -26,6 +28,9 @@ class SettingsStorage
         'leads' => '/api/v2/leads',
     ];
 
+    /** @var SettingsValidator */
+    private $validator;
+
     /** @var string */
     private $scheme = 'https';
 
@@ -34,6 +39,14 @@ class SettingsStorage
 
     /** @var string */
     private $userAgent = 'amoAPI PHP Client';
+
+    /**
+     * SettingsStorage constructor.
+     */
+    public function __construct()
+    {
+        $this->validator = new SettingsValidator(); // Composition
+    }
 
     /**
      * @return string
@@ -48,6 +61,7 @@ class SettingsStorage
      */
     public function setScheme($scheme)
     {
+        $this->validator->validateScheme($scheme);
         $this->scheme = $scheme;
     }
 
@@ -64,6 +78,7 @@ class SettingsStorage
      */
     public function setDomain($domain)
     {
+        $this->validator->validateDomain($domain);
         $this->domain = $domain;
     }
 
@@ -80,6 +95,7 @@ class SettingsStorage
      */
     public function setUserAgent($userAgent)
     {
+        $this->validator->validateUserAgent($userAgent);
         $this->userAgent = $userAgent;
     }
 

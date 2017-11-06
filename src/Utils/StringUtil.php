@@ -54,8 +54,7 @@ class StringUtil
      */
     public static function isOnlyLetters($value)
     {
-        if (!preg_match('/[A-Za-z]/', $value))
-        {
+        if (!preg_match('/[A-Za-z]/', $value)) {
             return false;
         }
 

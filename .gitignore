@@ -6,8 +6,8 @@
 composer.lock
 
 ### Tests
-/tests/output/
-!/tests/output/.gitkeep
+/tests-output/
+!/tests-output/.gitkeep
 
 ### Cookie
 /var/

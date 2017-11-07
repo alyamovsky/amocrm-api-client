@@ -54,10 +54,30 @@ class StringUtil
      */
     public static function isOnlyLetters($value)
     {
-        if (!preg_match('/[A-Za-z]/', $value)) {
+        if (!ctype_alpha($value)) {
             return false;
         }
 
         return true;
+    }
+
+    /**
+     * Checks if the variable contains letters and punctuation marks only.
+     * @param string $value
+     * @return bool
+     */
+    public static function isText($value)
+    {
+            return !preg_match('/[^A-Za-z0-9\.\-\'"!,;:()_\/\s]/', $value);
+    }
+
+    /**
+     * Checks if the variable is a valid URL path.
+     * @param string $value
+     * @return bool
+     */
+    public static function isPath($value)
+    {
+        return !preg_match('/[^A-Za-z0-9\/?&=,;\[\]\.#]/', $value);
     }
 }

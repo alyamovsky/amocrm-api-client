@@ -106,4 +106,13 @@ class SettingsStorage
     {
         return $this->methodsPaths;
     }
+
+    /**
+     * @param array $methodsPaths
+     */
+    public function setMethodsPaths(array $methodsPaths)
+    {
+        $this->validator->validateMethodsPaths($methodsPaths);
+        $this->methodsPaths = $methodsPaths;
+    }
 }

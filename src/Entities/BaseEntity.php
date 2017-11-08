@@ -4,6 +4,7 @@
 namespace ddlzz\AmoAPI\Entities;
 
 use ddlzz\AmoAPI\Exceptions\EntityFieldsException;
+use ddlzz\AmoAPI\Exceptions\InvalidArgumentException;
 use ddlzz\AmoAPI\Utils\ArrayUtil;
 use ddlzz\AmoAPI\Validators\FieldsValidator;
 
@@ -117,9 +118,14 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
     /**
      * @param string $action
      * @return void
+     * @throws InvalidArgumentException
      */
     public function setFieldsParams($action)
     {
+        if (('add' !== $action) && ('update' !== $action)) {
+            throw new InvalidArgumentException("Action \"$action\" is not a proper action parameter");
+        }
+
         $data = self::validateDataBeforeSet($this->container);
 
         foreach ($this->fieldsParams as $key => $params) {

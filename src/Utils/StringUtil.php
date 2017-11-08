@@ -68,7 +68,7 @@ class StringUtil
      */
     public static function isText($value)
     {
-            return !preg_match('/[^A-Za-z0-9\.\-\'"!,;:()_\/\s]/', $value);
+            return preg_match('/^[A-Za-z0-9\.\-\'"!,;:\?()_\/\s]+$/', $value);
     }
 
     /**
@@ -76,8 +76,17 @@ class StringUtil
      * @param string $value
      * @return bool
      */
-    public static function isPath($value)
+    public static function isUrlPath($value)
     {
-        return !preg_match('/[^A-Za-z0-9\/?&=,;\[\]\.#]/', $value);
+        return preg_match('/^\/[A-Za-z0-9\/?&=,;\[\]\.#]+$/', $value);
+    }
+
+    /**
+     * @param string $value
+     * @return bool
+     */
+    public static function isFilePath($value)
+    {
+        return preg_match('/^\/[A-Za-z0-9\/\._\s-]+$/', $value);
     }
 }

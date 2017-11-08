@@ -75,10 +75,25 @@ class SettingsValidator
                 throw new InvalidArgumentException("An array item \"$key\" must not be empty");
             }
 
-            if (!StringUtil::isPath($item)) {
+            if (!StringUtil::isUrlPath($item)) {
                 $message = sprintf('"%s" is not a valid method path', $item);
                 throw new InvalidArgumentException($message);
             }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param string $cookiePath
+     * @return bool
+     * @throws InvalidArgumentException
+     */
+    public function validateCookiePath($cookiePath)
+    {
+        if (!StringUtil::isFilePath($cookiePath)) {
+            $message = sprintf('"%s" is not a valid file path', $cookiePath);
+            throw new InvalidArgumentException($message);
         }
 
         return true;

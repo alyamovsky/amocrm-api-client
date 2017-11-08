@@ -3,6 +3,7 @@
 
 namespace ddlzz\AmoAPI;
 
+use ddlzz\AmoAPI\Exceptions\InvalidArgumentException;
 use ddlzz\AmoAPI\Validators\SettingsValidator;
 
 
@@ -14,8 +15,6 @@ use ddlzz\AmoAPI\Validators\SettingsValidator;
 class SettingsStorage
 {
     const LIB_PATH = __DIR__ . '/..';
-
-    const COOKIE_PATH = self::LIB_PATH . '/var/cookie.txt';
 
     const NAMESPACE_PREFIX = '\ddlzz\AmoAPI';
 
@@ -39,6 +38,9 @@ class SettingsStorage
 
     /** @var string */
     private $userAgent = 'amoAPI PHP Client';
+
+    /** @var string */
+    private $cookiePath = self::LIB_PATH . '/var/cookie.txt';
 
     /**
      * SettingsStorage constructor.
@@ -102,9 +104,23 @@ class SettingsStorage
     /**
      * @return array
      */
-    public function getMethodPaths()
+    public function getMethodsPaths()
     {
         return $this->methodsPaths;
+    }
+
+    /**
+     * @param string $code
+     * @return string mixed
+     * @throws InvalidArgumentException
+     */
+    public function getMethodPath($code)
+    {
+        if (!isset($this->methodsPaths[$code])) {
+            throw new InvalidArgumentException("The method with code \"$code\" doesn't exist");
+        }
+
+        return $this->methodsPaths[$code];
     }
 
     /**
@@ -114,5 +130,23 @@ class SettingsStorage
     {
         $this->validator->validateMethodsPaths($methodsPaths);
         $this->methodsPaths = $methodsPaths;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCookiePath()
+    {
+        return $this->cookiePath;
+    }
+
+    /**
+     * Please use the relative path only for this parameter.
+     * @param string $cookiePath
+     */
+    public function setCookiePath($cookiePath)
+    {
+        $this->validator->validateCookiePath($cookiePath);
+        $this->cookiePath = self::LIB_PATH . $cookiePath;
     }
 }

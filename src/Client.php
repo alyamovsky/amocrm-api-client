@@ -16,18 +16,17 @@ use ddlzz\AmoAPI\Request\UrlBuilder;
  */
 class Client
 {
-    /** @var SettingsStorage */
-    private $settings;
-
     /** @var CredentialsManager */
     private $credentials;
 
     /** @var DataSender */
     private $dataSender;
 
+    /** @var SettingsStorage */
+    private $settings;
+
     /** @var UrlBuilder */
     private $urlBuilder;
-
     /**
      * Client constructor.
      * @param CredentialsManager $credentials
@@ -52,7 +51,7 @@ class Client
      */
     private function isAuthorized()
     {
-        $cookieFile = $this->settings::COOKIE_PATH;
+        $cookieFile = $this->settings->getCookiePath();
         $fourteenMinAgo = time() - 60 * 14;
 
         if ((!file_exists($cookieFile)) || (filemtime($cookieFile) <= $fourteenMinAgo)) {
@@ -75,13 +74,9 @@ class Client
      */
     private function prepareMethodUrl($methodCode)
     {
-        $methods = $this->settings->getMethodPaths();
-        if (!isset($methods[$methodCode])) {
-            throw new InvalidArgumentException("The method with code \"$methodCode\" doesn't exist");
-        }
-
         $host = $this->urlBuilder->makeUserHost($this->credentials->getSubdomain());
-        $methodPath = $methods[$methodCode];
+        $methodPath = $this->settings->getMethodPath($methodCode);
+
         return $host . $methodPath;
     }
 
@@ -120,14 +115,9 @@ class Client
      * @param EntityInterface $entity
      * @param string $action
      * @return string
-     * @throws InvalidArgumentException
      */
     private function set(EntityInterface $entity, $action)
     {
-        if (('add' !== $action) && ('update' !== $action)) {
-            throw new InvalidArgumentException("Action \"$action\" is not a proper action parameter");
-        }
-
         $entity->setFieldsParams($action);
         $data[$action][] = $entity->getFields();
         $url = $this->prepareMethodUrl($entity->getRequestName());

@@ -5,6 +5,7 @@ namespace ddlzz\AmoAPI;
 
 use ddlzz\AmoAPI\Exceptions\InvalidArgumentException;
 use ddlzz\AmoAPI\Entities\EntityInterface;
+use ddlzz\AmoAPI\Exceptions\RuntimeException;
 use ddlzz\AmoAPI\Request\DataSender;
 use ddlzz\AmoAPI\Request\UrlBuilder;
 
@@ -27,6 +28,7 @@ class Client
 
     /** @var UrlBuilder */
     private $urlBuilder;
+
     /**
      * Client constructor.
      * @param CredentialsManager $credentials
@@ -40,8 +42,8 @@ class Client
         $this->settings = $settings;
         $this->urlBuilder = new UrlBuilder($this->settings); // Composition
 
-        if (!$this->isAuthorized()) {
-            $this->authorize();
+        if (!$this->isAuthenticated()) {
+            $this->authenticate();
         }
     }
 
@@ -49,7 +51,7 @@ class Client
      * Checks if the cookie file exists and if it's valid.
      * @return bool
      */
-    private function isAuthorized()
+    private function isAuthenticated()
     {
         $cookieFile = $this->settings->getCookiePath();
         $fourteenMinAgo = time() - 60 * 14;
@@ -82,12 +84,20 @@ class Client
 
     /**
      * @return string
+     * @throws RuntimeException
      */
-    private function authorize()
+    private function authenticate()
     {
         $authUrl = $this->prepareMethodUrl('auth');
 
         $result = $this->dataSender->send($authUrl, $this->credentials->getCredentials());
+
+        // todo_ddlzz switch to Guzzle.
+        // Because of async nature of curl_exec we can not implement this check correctly.
+        //        if (!empty($result) && (!file_exists($this->settings->getCookiePath()))) {
+        //            $message = 'An error occurred while creating the cookie file ' . $this->settings->getCookiePath();
+        //            throw new RuntimeException($message);
+        //        }
 
         return $result;
     }
@@ -99,15 +109,6 @@ class Client
     public function add(EntityInterface $entity)
     {
         return $this->set($entity, 'add');
-    }
-
-    /**
-     * @param EntityInterface $entity
-     * @return string
-     */
-    public function update(EntityInterface $entity)
-    {
-        return $this->set($entity, 'update');
     }
 
     /**
@@ -135,7 +136,7 @@ class Client
         $now = microtime(true);
         static $lastCheck = null;
 
-        if (null === $lastCheck) {
+        if (null !== $lastCheck) {
             $sleepTime = 1;
             $lastRequestTime = $now - $lastCheck;
             if ($lastRequestTime < $sleepTime) {

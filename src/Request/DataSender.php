@@ -3,6 +3,7 @@
 
 namespace ddlzz\AmoAPI\Request;
 use ddlzz\AmoAPI\Exceptions\ErrorCodeException;
+use ddlzz\AmoAPI\Exceptions\FailedAuthException;
 use ddlzz\AmoAPI\SettingsStorage;
 
 
@@ -34,6 +35,7 @@ class DataSender
      * @param array $data
      * @return string
      * @throws ErrorCodeException
+     * @throws FailedAuthException
      */
     public function send($url, array $data = [])
     {
@@ -55,7 +57,9 @@ class DataSender
         $response = $this->curl->exec();
         $httpCode = $this->curl->getHttpCode();
 
-        if ((200 !== $httpCode) && (204 !== $httpCode)) {
+        if ((401 === $httpCode) || (403 === $httpCode)) {
+            throw new FailedAuthException('Auth failed! ' . $this->getErrorByHttpCode($httpCode), $response);
+        } elseif ((200 !== $httpCode) && (204 !== $httpCode)) {
             throw new ErrorCodeException($this->getErrorByHttpCode($httpCode), $response);
         }
 

@@ -1,12 +1,42 @@
-<phpunit 	bootstrap="vendor/autoload.php"			
-			colors="true"
-			convertErrorsToExceptions="true"
-			convertNoticesToExceptions="true"
-			convertWarningsToExceptions="true"
-			stopOnFailure="true">
-			<testsuites>
-				<testsuite name="Unit Tests">
-					<directory>tests</directory>
-				</testsuite>
-			</testsuites>
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/6.4/phpunit.xsd"
+        bootstrap="vendor/autoload.php"
+        forceCoversAnnotation="true"
+        beStrictAboutOutputDuringTests="true"
+        beStrictAboutTodoAnnotatedTests="true"
+        convertDeprecationsToExceptions="true"
+        stopOnWarning="true"
+        failOnWarning="true"
+        failOnRisky="true"
+        beStrictAboutCoversAnnotation="false"
+        beStrictAboutTestsThatDoNotTestAnything="true"
+        beStrictAboutChangesToGlobalState="true"
+        convertErrorsToExceptions="true"
+        convertNoticesToExceptions="true"
+        convertWarningsToExceptions="true"
+        stopOnError="false"
+        stopOnFailure="false"
+        stopOnIncomplete="false"
+        stopOnSkipped="false"
+        stopOnRisky="false"
+        verbose="true"
+        colors="true"
+>
+    <testsuites>
+        <testsuite name="An AmoCRM API library">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <logging>
+        <log type='coverage-clover' target='tests-output/clover.xml'/>
+    </logging>
+
+    <filter>
+        <whitelist>
+            <directory>src</directory>
+        </whitelist>
+    </filter>
 </phpunit>

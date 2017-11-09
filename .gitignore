@@ -7,7 +7,7 @@ composer.lock
 
 ### Tests
 /tests-output/
-!/tests-output/.gitkeep
+clover.xml
 
 ### Cookie
 /var/

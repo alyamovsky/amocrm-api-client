@@ -7,5 +7,4 @@
 
     <file>./src</file>
     <file>./tests</file>
-    <exclude-pattern>./tests/output/*</exclude-pattern>
 </ruleset>

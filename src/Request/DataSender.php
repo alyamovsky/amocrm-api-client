@@ -39,6 +39,8 @@ class DataSender
      */
     public function send($url, array $data = [])
     {
+        $this->curl->init();
+
         $this->curl->setReturnTransfer(true);
         $this->curl->setUserAgent($this->settings->getUserAgent());
         $this->curl->setUrl($url);
@@ -57,10 +59,12 @@ class DataSender
         $response = $this->curl->exec();
         $httpCode = $this->curl->getHttpCode();
 
+        $this->curl->close();
+
         if ((401 === $httpCode) || (403 === $httpCode)) {
-            throw new FailedAuthException('Auth failed! ' . $this->getErrorByHttpCode($httpCode), $response);
+            throw new FailedAuthException('Auth failed! ' . self::getErrorByHttpCode($httpCode), $response);
         } elseif ((200 !== $httpCode) && (204 !== $httpCode)) {
-            throw new ErrorCodeException($this->getErrorByHttpCode($httpCode), $response);
+            throw new ErrorCodeException(self::getErrorByHttpCode($httpCode), $response, $url);
         }
 
         return $response;
@@ -70,7 +74,7 @@ class DataSender
      * @param int $httpCode
      * @return string
      */
-    private function getErrorByHttpCode($httpCode)
+    private static function getErrorByHttpCode($httpCode)
     {
         $errors = [
             301 => '301 Moved permanently',

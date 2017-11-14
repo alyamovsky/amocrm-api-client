@@ -2,6 +2,7 @@
 
 
 namespace ddlzz\AmoAPI\Request;
+
 use ddlzz\AmoAPI\Exceptions\CurlException;
 
 
@@ -16,16 +17,14 @@ class Curl
     private $curl;
 
     /** Curl constructor. */
-    public function __construct()
+    public function init()
     {
         $this->curl = curl_init();
     }
 
-    public function __destruct()
+    public function close()
     {
-        if (is_resource($this->curl)) {
-            curl_close($this->curl);
-        }
+        curl_close($this->curl);
     }
 
     /**
@@ -172,5 +171,16 @@ class Curl
     public function getHttpCode()
     {
         return curl_getinfo($this->curl, CURLINFO_HTTP_CODE);
+    }
+
+    /**
+     * Closes the connection in case of abnormal termination
+     */
+    public function __destruct()
+    {
+        if (is_resource($this->curl)) {
+            curl_close($this->curl);
+            throw new CurlException('Curl class was not properly closed');
+        }
     }
 }

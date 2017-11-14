@@ -7,7 +7,6 @@ use ddlzz\AmoAPI\Client;
 use ddlzz\AmoAPI\CredentialsManager;
 use ddlzz\AmoAPI\Entities\Amo\Lead;
 use ddlzz\AmoAPI\Entities\EntityInterface;
-use ddlzz\AmoAPI\Exceptions\RuntimeException;
 use ddlzz\AmoAPI\Request\DataSender;
 use ddlzz\AmoAPI\SettingsStorage;
 use PHPUnit\Framework\TestCase;
@@ -74,7 +73,7 @@ final class ClientTest extends TestCase
 
         return json_encode($response);
     }
-    
+
     public function testCookieFileCreation()
     {
         $this->settings->setCookiePath('/var/nonexistent_cookie.txt');

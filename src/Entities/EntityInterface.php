@@ -28,4 +28,10 @@ interface EntityInterface
      */
     public function getFields();
 
+    /**
+     * @param array $data
+     * @return EntityInterface
+     */
+    public function fill(array $data);
+
 }

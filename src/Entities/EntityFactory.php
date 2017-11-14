@@ -17,20 +17,23 @@ class EntityFactory
     /** @var SettingsStorage */
     private static $settings;
 
-    private static function initSettings()
+    /**
+     * @param SettingsStorage $settings
+     */
+    private static function initSettings(SettingsStorage $settings = null)
     {
-        self::$settings = new SettingsStorage(); // todo_ddlzz hidden dependency
+        self::$settings = isset($settings) ? $settings: new SettingsStorage(); // todo_ddlzz hidden dependency
     }
 
     /**
-     * @param string $entityName
+     * @param string $entityType
      * @return EntityInterface
      */
-    public static function create($entityName)
+    public static function create($entityType)
     {
         self::initSettings();
 
-        $entity = self::prepareClassName($entityName);
+        $entity = self::prepareClassName($entityType);
         self::validateClass($entity);
 
         return new $entity;

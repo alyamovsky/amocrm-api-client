@@ -122,7 +122,7 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
      */
     public function setFieldsParams($action)
     {
-        if (('add' !== $action) && ('update' !== $action)) {
+        if (('add' !== $action) && ('update' !== $action) && ('fill' !== $action)) {
             throw new InvalidArgumentException("Action \"$action\" is not a proper action parameter");
         }
 
@@ -171,6 +171,17 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
     public function getFields()
     {
         return $this->fields;
+    }
+
+    /**
+     * @param array $data
+     * @return EntityInterface $this
+     */
+    public function fill(array $data)
+    {
+        $this->container = $data;
+        $this->setFieldsParams('fill');
+        return $this;
     }
 
     //////////////////////////////////////////////

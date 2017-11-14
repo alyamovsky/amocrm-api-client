@@ -27,6 +27,16 @@ class SettingsStorage
         'leads' => '/api/v2/leads',
     ];
 
+    /** @var array */
+    private $entitiesTypes = [
+        'lead' => 'leads',
+        'contact' => 'contacts',
+        'company' => 'companies',
+        'customer' => 'customers',
+        'task' => 'tasks',
+        'note' => 'notes',
+    ];
+
     /** @var SettingsValidator */
     private $validator;
 
@@ -148,5 +158,19 @@ class SettingsStorage
     {
         $this->validator->validateCookiePath($cookiePath);
         $this->cookiePath = self::LIB_PATH . $cookiePath;
+    }
+
+    /**
+     * @param string $type
+     * @return string
+     * @throws InvalidArgumentException
+     */
+    public function getMethodCodeByType($type)
+    {
+        if (!isset($this->entitiesTypes[$type])) {
+            throw new InvalidArgumentException("The entity with type \"$type\" doesn't exist");
+        }
+
+        return $this->entitiesTypes[$type];
     }
 }

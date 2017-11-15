@@ -12,24 +12,88 @@ use ddlzz\AmoAPI\Entities\EntityInterface;
  * @package ddlzz\AmoAPI\Entities
  * @author ddlzz
  */
-class Lead extends BaseEntity implements EntityInterface
+final class Lead extends BaseEntity implements EntityInterface
 {
     /** @var string */
     protected $requestName = 'leads';
 
     /** @var array */
     protected $fieldsParamsAppend = [
+        'name' => [
+            'type' => 'string',
+            'required_add' => true,
+            'required_update' => false,
+        ],
+        'is_deleted' => [
+            'type' => 'bool',
+            'required_add' => false,
+            'required_update' => false,
+        ],
+        'main_contact' => [
+            'type' => 'array', // [id => int, _links => array]
+            'required_add' => false,
+            'required_update' => false,
+        ],
+        'group_id' => [
+            'type' => 'int',
+            'required_add' => false,
+            'required_update' => false,
+        ],
+        'company' => [
+            'type' => 'array', // [id => int, name => string, _links => array]
+            'required_add' => false,
+            'required_update' => false,
+        ],
+        'closed_at' => [
+            'type' => 'int',
+            'required_add' => false,
+            'required_update' => false,
+        ],
+        'closest_task_at' => [
+            'type' => 'int',
+            'required_add' => false,
+            'required_update' => false,
+        ],
+        'tags' => [
+            'type' => 'array', // [[id => int, name => string], [id => int, name => string]]
+            'required_add' => false,
+            'required_update' => false,
+        ],
+        'custom_fields' => [
+            'type' => 'array', // [[id => int, name => string, values => [value => string?, enum => string?]], ...]
+            'required_add' => false,
+            'required_update' => false,
+        ],
+        'status_id' => [
+            'type' => 'int',
+            'required_add' => false,
+            'required_update' => false,
+        ],
         'sale' => [
             'type' => 'int',
             'required_add' => false,
-            'required_update' => true,
-            'alias' => 'price',
-            'default' => null,
+            'required_update' => false,
+        ],
+        'contacts' => [
+            'type' => 'array', // [id => int, id => int]
+            'required_add' => false,
+            'required_update' => false,
+        ],
+        'pipeline' => [
+            'type' => 'array', // [id => int, _links => array]
+            'required_add' => false,
+            'required_update' => false,
         ],
     ];
 
     /** @var array */
     protected $aliasesAppend = [
-        'sale' => 'price'
+        'is_deleted' => 'deleted',
+        'main_contact' => 'main_contact_id',
+        'company' => 'linked_company_id',
+        'closed_at' => 'date_close',
+        'closest_task_at' => 'closest_task',
+        'sale' => 'price',
+        'pipeline' => 'pipeline_id',
     ];
 }

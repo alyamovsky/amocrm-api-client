@@ -15,26 +15,24 @@ use ddlzz\AmoAPI\SettingsStorage;
 class EntityFactory
 {
     /** @var SettingsStorage */
-    private static $settings;
+    private $settings;
 
     /**
      * @param SettingsStorage $settings
      */
-    private static function initSettings(SettingsStorage $settings = null)
+    public function __construct(SettingsStorage $settings)
     {
-        self::$settings = isset($settings) ? $settings: new SettingsStorage(); // todo_ddlzz hidden dependency
+        $this->settings = $settings;
     }
 
     /**
      * @param string $entityType
      * @return EntityInterface
      */
-    public static function create($entityType)
+    public function create($entityType)
     {
-        self::initSettings();
-
-        $entity = self::prepareClassName($entityType);
-        self::validateClass($entity);
+        $entity = $this->prepareClassName($entityType);
+        $this->validateClass($entity);
 
         return new $entity;
     }
@@ -43,9 +41,9 @@ class EntityFactory
      * @param string $className
      * @return string
      */
-    private static function prepareClassName($className)
+    private function prepareClassName($className)
     {
-        return self::$settings::NAMESPACE_PREFIX . '\Entities\Amo\\' . rtrim(ucfirst($className), 's');
+        return $this->settings::NAMESPACE_PREFIX . '\Entities\Amo\\' . rtrim(ucfirst($className), 's');
     }
 
     /**
@@ -53,7 +51,7 @@ class EntityFactory
      * @return bool
      * @throws EntityFactoryException
      */
-    private static function validateClass($className)
+    private function validateClass($className)
     {
         if (!class_exists($className)) {
             throw new EntityFactoryException("Class \"$className\" does not exists");
@@ -61,7 +59,7 @@ class EntityFactory
 
         $reflection = new \ReflectionClass($className);
 
-        if (!$reflection->implementsInterface(self::$settings::NAMESPACE_PREFIX . '\Entities\EntityInterface')) {
+        if (!$reflection->implementsInterface($this->settings::NAMESPACE_PREFIX . '\Entities\EntityInterface')) {
             throw new EntityFactoryException("Class \"$className\" does not implement EntityInterface");
         }
 

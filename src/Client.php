@@ -82,8 +82,9 @@ class Client
             throw new InvalidArgumentException("The $entityType with id $id is not found on the server");
         }
 
+        $entityFactory = new EntityFactory($this->settings);
         /** @var EntityInterface $entity */
-        $entity = EntityFactory::create($entityType);
+        $entity = $entityFactory->create($entityType);
         $entity->fill($result['_embedded']['items'][0]);
 
         return $entity;

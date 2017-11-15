@@ -39,36 +39,39 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
             'type' => 'int',
             'required_add' => false,
             'required_update' => true,
-            'alias' => null,
             'default' => null,
         ],
         'name' => [
             'type' => 'string',
             'required_add' => true,
             'required_update' => false,
-            'alias' => null,
             'default' => null,
         ],
         'created_at' => [
             'type' => 'int',
             'required_add' => true,
             'required_update' => false,
-            'alias' => 'date_create',
             'default' => self::CURRENT_TIME,
         ],
         'updated_at' => [
             'type' => 'int',
             'required_add' => false,
             'required_update' => true,
-            'alias' => 'last_modified',
             'default' => self::CURRENT_TIME,
         ],
     ];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $fieldsParamsAppend = [];
+
+    /** @var array */
+    protected $aliases = [
+        'created_at' => 'date_create',
+        'updated_at' => 'last_modified',
+    ];
+
+    /** @var array */
+    protected $aliasesAppend = [];
 
     /**
      * EntityInterface data goes here
@@ -84,8 +87,9 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
         // Because PHP doesn't support expressions as a default value for fields, we will evaluate them ourselves.
         $this->fieldsParams = ArrayUtil::searchAndReplace(self::CURRENT_TIME, time(), $this->fieldsParams);
 
-        // Append fields of abstract parent class with the child entity data.
+        // Append fields and aliases of abstract parent class with the child entity data.
         $this->fieldsParams = array_merge($this->fieldsParams, $this->fieldsParamsAppend);
+        $this->aliases = array_merge($this->aliases, $this->aliasesAppend);
 
         $this->fieldsValidator = new FieldsValidator($this->fieldsParams); // Composition
     }
@@ -110,6 +114,23 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
     }
 
     /**
+     * @param array $data
+     * @return array
+     */
+    private function renameAliases(array $data)
+    {
+        foreach ($data as $key => $value) {
+            if (in_array($key, $this->aliases)) {
+                $newKey = array_search($key, $this->aliases);
+                $data[$newKey] = $data[$key];
+                unset($data[$key]);
+            }
+        }
+
+        return $data;
+    }
+
+    /**
      * @param string $action
      * @return void
      * @throws InvalidArgumentException
@@ -121,6 +142,7 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
         }
 
         $data = self::validateDataBeforeSet($this->container);
+        $data = $this->renameAliases($data);
 
         $this->fieldsValidator->setAction($action);
 

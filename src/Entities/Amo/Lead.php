@@ -27,4 +27,9 @@ class Lead extends BaseEntity implements EntityInterface
             'default' => null,
         ],
     ];
+
+    /** @var array */
+    protected $aliasesAppend = [
+        'sale' => 'price'
+    ];
 }

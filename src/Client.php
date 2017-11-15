@@ -5,6 +5,7 @@ namespace ddlzz\AmoAPI;
 
 use ddlzz\AmoAPI\Entities\EntityFactory;
 use ddlzz\AmoAPI\Entities\EntityInterface;
+use ddlzz\AmoAPI\Exceptions\InvalidArgumentException;
 use ddlzz\AmoAPI\Exceptions\RuntimeException;
 use ddlzz\AmoAPI\Request\DataSender;
 use ddlzz\AmoAPI\Request\UrlBuilder;
@@ -68,6 +69,7 @@ class Client
      * @param $entityType
      * @param $id
      * @return EntityInterface
+     * @throws InvalidArgumentException
      */
     public function findById($entityType, $id)
     {
@@ -75,6 +77,11 @@ class Client
         $params = ['id' => $id];
         $url = $this->urlBuilder->prepareMethodUrl($method, $params);
         $result = json_decode($this->dataSender->send($url), true);
+
+        if (empty($result)) {
+            throw new InvalidArgumentException("The $entityType with id $id is not found on the server");
+        }
+
         /** @var EntityInterface $entity */
         $entity = EntityFactory::create($entityType);
         $entity->fill($result['_embedded']['items'][0]);
@@ -97,6 +104,7 @@ class Client
      */
     public function update(EntityInterface $entity)
     {
+        $entity->setUpdatedAtParam();
         return $this->set($entity, 'update');
     }
 

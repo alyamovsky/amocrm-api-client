@@ -20,7 +20,7 @@ class Lead extends BaseEntity implements EntityInterface
     /** @var array */
     protected $fieldsParamsAppend = [
         'sale' => [
-            'type' => self::INT,
+            'type' => 'int',
             'required_add' => false,
             'required_update' => true,
             'alias' => 'price',

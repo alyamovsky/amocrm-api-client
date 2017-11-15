@@ -16,6 +16,9 @@ class FieldsValidator
     /** @var array */
     private $fieldsParams;
 
+    /** @var string */
+    private $action = '';
+
     /**
      * FieldsValidator constructor.
      * @param array $fieldsParams
@@ -23,6 +26,14 @@ class FieldsValidator
     public function __construct(array $fieldsParams)
     {
         $this->fieldsParams = $fieldsParams;
+    }
+
+    /**
+     * @param string $action
+     */
+    public function setAction($action)
+    {
+        $this->action = $action;
     }
 
     /**
@@ -34,9 +45,19 @@ class FieldsValidator
     public function isValid($key, $value)
     {
         // if the required field is missing
-        if (empty($value) && (true === $this->fieldsParams[$key]['required_add'])) {
-            throw new EntityFieldsException("The required field \"$key\" is missing or empty");
-        } elseif (!empty($value)) {
+        switch ($this->action) {
+            case 'add':
+                if (!isset($value) && (true === $this->fieldsParams[$key]['required_add'])) {
+                    throw new EntityFieldsException("Adding error: the required field \"$key\" is missing or empty");
+                }
+                break;
+            case 'update':
+                if (!isset($value) && (true === $this->fieldsParams[$key]['required_update'])) {
+                    throw new EntityFieldsException("Updating error: the required field \"$key\" is missing or empty");
+                }
+        }
+
+        if (!empty($value)) {
             // if the field type doesn't match with the value
             switch ($this->fieldsParams[$key]['type']) {
                 case 'int':
@@ -69,7 +90,7 @@ class FieldsValidator
      */
     private static function validateInt($key, $value)
     {
-        if (!ctype_digit($value)) {
+        if (!preg_match('/^\d+$/', $value)) {
             throw new EntityFieldsException("The field \"$key\" must contain digits only");
         }
 

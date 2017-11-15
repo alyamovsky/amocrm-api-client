@@ -15,12 +15,6 @@ use ddlzz\AmoAPI\Validators\FieldsValidator;
  */
 abstract class BaseEntity implements \ArrayAccess, EntityInterface
 {
-    /** Constants for declaring fields type. */
-    const INT = 'int';
-    const STRING = 'string';
-    const BOOL = 'bool';
-    const ARRAY = 'array';
-
     /** This value will be overwritten in constructor. */
     const CURRENT_TIME = 'current_time';
 
@@ -42,28 +36,28 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
      */
     protected $fieldsParams = [
         'id' => [
-            'type' => self::INT,
+            'type' => 'int',
             'required_add' => false,
             'required_update' => true,
             'alias' => null,
             'default' => null,
         ],
         'name' => [
-            'type' => self::STRING,
+            'type' => 'string',
             'required_add' => true,
             'required_update' => false,
             'alias' => null,
             'default' => null,
         ],
         'created_at' => [
-            'type' => self::INT,
+            'type' => 'int',
             'required_add' => true,
             'required_update' => false,
             'alias' => 'date_create',
             'default' => self::CURRENT_TIME,
         ],
         'updated_at' => [
-            'type' => self::INT,
+            'type' => 'int',
             'required_add' => false,
             'required_update' => true,
             'alias' => 'last_modified',
@@ -128,6 +122,8 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
 
         $data = self::validateDataBeforeSet($this->container);
 
+        $this->fieldsValidator->setAction($action);
+
         foreach ($this->fieldsParams as $key => $params) {
             $fieldData = isset($data[$key]) ? $data[$key] : null;
             if (($this->fieldsValidator->isValid($key, $fieldData)) && (!empty($fieldData))) {
@@ -143,13 +139,13 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
     private function setField($key, $value)
     {
         switch ($this->fieldsParams[$key]['type']) {
-            case self::INT:
+            case 'int':
                 $value = (int)$value;
                 break;
-            case self::STRING:
+            case 'string':
                 $value = (string)$value;
                 break;
-            case self::BOOL:
+            case 'bool':
                 $value = (bool)$value;
                 break;
         }
@@ -182,6 +178,13 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
         $this->container = $data;
         $this->setFieldsParams('fill');
         return $this;
+    }
+
+    public function setUpdatedAtParam()
+    {
+        if ($this->container['updated_at'] === $this->fields['updated_at']) {
+            $this->container['updated_at'] = time();
+        }
     }
 
     //////////////////////////////////////////////

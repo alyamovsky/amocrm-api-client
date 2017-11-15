@@ -95,17 +95,6 @@ final class ClientTest extends TestCase
         $this::assertFalse(file_exists(__DIR__ . '/../var/test_wrong_login_cookie.txt'));
     }
 
-    // todo_ddlzz switch to Guzzle someday.
-    // Because of async nature of curl_exec we can not implement this check correctly.
-    //    /**
-    //     * @expectedException \ddlzz\AmoAPI\Exceptions\RuntimeException
-    //     */
-    //    public function testUnreachableCookiePath()
-    //    {
-    //        $this->settings->setCookiePath('/missing_folder/test_cookie.txt');
-    //        new Client($this->credentials, $this->dataSender, $this->settings);
-    //    }
-
     /**
      * @param EntityInterface $entity
      * @return string

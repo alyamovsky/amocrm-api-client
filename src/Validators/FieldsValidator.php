@@ -55,6 +55,7 @@ class FieldsValidator
                 if (!isset($value) && (true === $this->fieldsParams[$key]['required_update'])) {
                     throw new EntityFieldsException("Updating error: the required field \"$key\" is missing or empty");
                 }
+                break;
         }
 
         if (!empty($value)) {

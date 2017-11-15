@@ -5,7 +5,6 @@ namespace ddlzz\AmoAPI\Entities;
 
 use ddlzz\AmoAPI\Exceptions\EntityFieldsException;
 use ddlzz\AmoAPI\Exceptions\InvalidArgumentException;
-use ddlzz\AmoAPI\Utils\ArrayUtil;
 use ddlzz\AmoAPI\Validators\FieldsValidator;
 
 /**
@@ -15,9 +14,6 @@ use ddlzz\AmoAPI\Validators\FieldsValidator;
  */
 abstract class BaseEntity implements \ArrayAccess, EntityInterface
 {
-    /** This value will be overwritten in constructor. */
-    const CURRENT_TIME = 'current_time';
-
     /** @var FieldsValidator */
     protected $fieldsValidator;
 
@@ -39,25 +35,31 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
             'type' => 'int',
             'required_add' => false,
             'required_update' => true,
-            'default' => null,
         ],
-        'name' => [
-            'type' => 'string',
-            'required_add' => true,
+        'responsible_user_id' => [
+            'type' => 'int',
+            'required_add' => false,
             'required_update' => false,
-            'default' => null,
+        ],
+        'created_by' => [
+            'type' => 'int',
+            'required_add' => false,
+            'required_update' => false,
         ],
         'created_at' => [
             'type' => 'int',
             'required_add' => true,
             'required_update' => false,
-            'default' => self::CURRENT_TIME,
         ],
         'updated_at' => [
             'type' => 'int',
             'required_add' => false,
             'required_update' => true,
-            'default' => self::CURRENT_TIME,
+        ],
+        'account_id' => [
+            'type' => 'int',
+            'required_add' => false,
+            'required_update' => false,
         ],
     ];
 
@@ -68,6 +70,8 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
     protected $aliases = [
         'created_at' => 'date_create',
         'updated_at' => 'last_modified',
+        'created_by' => 'created_user_id',
+
     ];
 
     /** @var array */
@@ -84,9 +88,6 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
      */
     public function __construct()
     {
-        // Because PHP doesn't support expressions as a default value for fields, we will evaluate them ourselves.
-        $this->fieldsParams = ArrayUtil::searchAndReplace(self::CURRENT_TIME, time(), $this->fieldsParams);
-
         // Append fields and aliases of abstract parent class with the child entity data.
         $this->fieldsParams = array_merge($this->fieldsParams, $this->fieldsParamsAppend);
         $this->aliases = array_merge($this->aliases, $this->aliasesAppend);
@@ -139,6 +140,10 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
     {
         if (('add' !== $action) && ('update' !== $action) && ('fill' !== $action)) {
             throw new InvalidArgumentException("Action \"$action\" is not a proper action parameter");
+        }
+
+        if (!isset($this->container['created_at']) && !isset($this->container['date_create'])) {
+            $this->setCreatedAt();
         }
 
         $data = self::validateDataBeforeSet($this->container);
@@ -207,6 +212,11 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
         if ($this->container['updated_at'] === $this->fields['updated_at']) {
             $this->container['updated_at'] = time();
         }
+    }
+
+    private function setCreatedAt()
+    {
+        $this->container['created_at'] = time();
     }
 
     //////////////////////////////////////////////

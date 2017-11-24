@@ -123,7 +123,6 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
         }
     }
 
-
     /**
      * @return string
      */

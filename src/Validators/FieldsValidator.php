@@ -73,6 +73,9 @@ class FieldsValidator
                 case 'array':
                     self::validateArray($key, $value);
                     break;
+                case 'array|string':
+                    self::validateArrayString($key, $value);
+                    break;
                 default:
                     throw new EntityFieldsException(
                         "Internal error: the field \"$key\" doesn't match any of the entity predefined fields"
@@ -138,6 +141,23 @@ class FieldsValidator
     {
         if (!is_array($value)) {
             throw new EntityFieldsException("The field \"$key\" must be an array");
+        }
+
+        return true;
+    }
+
+    /**
+     * Because some fields must be either strings during entity creation or arrays during it's obtaining from server,
+     * we create this check
+     * @param string $key
+     * @param array $value
+     * @return bool
+     * @throws EntityFieldsException
+     */
+    private static function validateArrayString($key, $value) // todo_ddlzz test this and delete if possible
+    {
+        if ((!is_array($value)) && (!is_string($value) && !is_numeric($value))) {
+            throw new EntityFieldsException("The field \"$key\" must be an array or string");
         }
 
         return true;

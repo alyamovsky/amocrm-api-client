@@ -55,7 +55,7 @@ final class Lead extends BaseEntity implements EntityInterface
             'required_update' => false,
         ],
         'tags' => [
-            'type' => 'array', // [[id => int, name => string], [id => int, name => string]]
+            'type' => 'array|string', // [[id => int, name => string], [id => int, name => string]]
             'required_add' => false,
             'required_update' => false,
         ],

@@ -30,16 +30,6 @@ class UrlBuilder
     }
 
     /**
-     * @param string $domain
-     * @return string
-     */
-    private function makeUserHost($domain)
-    {
-        return $this->settings->getScheme() . '://' . $domain . '.' . $this->settings->getDomain();
-    }
-
-
-    /**
      * @param string $methodCode
      * @param array $params
      * @return string
@@ -63,5 +53,14 @@ class UrlBuilder
         $result = isset($query) ? $host . $methodPath . $query : $host . $methodPath;
 
         return $result;
+    }
+
+    /**
+     * @param string $domain
+     * @return string
+     */
+    private function makeUserHost($domain)
+    {
+        return $this->settings->getScheme() . '://' . $domain . '.' . $this->settings->getDomain();
     }
 }

@@ -28,23 +28,6 @@ class Curl
     }
 
     /**
-     * Sets various cURL options.
-     *
-     * @param string $option
-     * @param mixed $value
-     * @return bool
-     * @throws CurlException
-     */
-    private function setOpt($option, $value)
-    {
-        if (!is_resource($this->curl)) {
-            throw new CurlException('Curl class is not properly initialized');
-        }
-
-        return curl_setopt($this->curl, $option, $value);
-    }
-
-    /**
      * @return array|false
      * @throws CurlException
      */
@@ -56,7 +39,6 @@ class Curl
 
         return curl_exec($this->curl);
     }
-
 
     ///////////////////////////////
     // The list of possible options
@@ -182,5 +164,22 @@ class Curl
             curl_close($this->curl);
             throw new CurlException('Curl class was not properly closed');
         }
+    }
+
+    /**
+     * Sets various cURL options.
+     *
+     * @param string $option
+     * @param mixed $value
+     * @return bool
+     * @throws CurlException
+     */
+    private function setOpt($option, $value)
+    {
+        if (!is_resource($this->curl)) {
+            throw new CurlException('Curl class is not properly initialized');
+        }
+
+        return curl_setopt($this->curl, $option, $value);
     }
 }

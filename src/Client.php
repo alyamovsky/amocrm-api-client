@@ -51,21 +51,6 @@ class Client
     }
 
     /**
-     * @throws RuntimeException
-     */
-    private function checkAuth()
-    {
-        if (!$this->auth->isAuthenticated()) {
-            $result = $this->dataSender->send($this->urlBuilder->prepareMethodUrl('auth'), $this->credentials->getCredentials());
-
-            if (!empty($result) && (!file_exists($this->settings->getCookiePath()))) {
-                $message = 'An error occurred while creating the cookie file ' . $this->settings->getCookiePath();
-                throw new RuntimeException($message);
-            }
-        }
-    }
-
-    /**
      * @param $entityType
      * @param $id
      * @return EntityInterface
@@ -107,6 +92,21 @@ class Client
     {
         $entity->setUpdatedAtParam();
         return $this->set($entity, 'update');
+    }
+
+    /**
+     * @throws RuntimeException
+     */
+    private function checkAuth()
+    {
+        if (!$this->auth->isAuthenticated()) {
+            $result = $this->dataSender->send($this->urlBuilder->prepareMethodUrl('auth'), $this->credentials->getCredentials());
+
+            if (!empty($result) && (!file_exists($this->settings->getCookiePath()))) {
+                $message = 'An error occurred while creating the cookie file ' . $this->settings->getCookiePath();
+                throw new RuntimeException($message);
+            }
+        }
     }
 
     /**

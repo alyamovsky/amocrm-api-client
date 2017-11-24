@@ -96,42 +96,6 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
     }
 
     /**
-     * @param array $data
-     * @return array
-     * @throws EntityFieldsException
-     */
-    private static function validateDataBeforeSet(array $data)
-    {
-        if (empty($data)) {
-            throw new EntityFieldsException('Data is empty');
-        }
-
-        if (count(array_filter(array_keys($data), 'is_string')) < 1) {
-            $message = sprintf('Data is not an associative array: "%s"', var_export($data, true));
-            throw new EntityFieldsException($message);
-        }
-
-        return $data;
-    }
-
-    /**
-     * @param array $data
-     * @return array
-     */
-    private function renameAliases(array $data)
-    {
-        foreach ($data as $key => $value) {
-            if (in_array($key, $this->aliases)) {
-                $newKey = array_search($key, $this->aliases);
-                $data[$newKey] = $data[$key];
-                unset($data[$key]);
-            }
-        }
-
-        return $data;
-    }
-
-    /**
      * @param string $action
      * @return void
      * @throws InvalidArgumentException
@@ -159,26 +123,6 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
         }
     }
 
-    /**
-     * @param string $key
-     * @param mixed $value
-     */
-    private function setField($key, $value)
-    {
-        switch ($this->fieldsParams[$key]['type']) {
-            case 'int':
-                $value = (int)$value;
-                break;
-            case 'string':
-                $value = (string)$value;
-                break;
-            case 'bool':
-                $value = (bool)$value;
-                break;
-        }
-
-        $this->fields[$key] = $value;
-    }
 
     /**
      * @return string
@@ -217,6 +161,63 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
     private function setCreatedAt()
     {
         $this->container['created_at'] = time();
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     * @throws EntityFieldsException
+     */
+    private static function validateDataBeforeSet(array $data)
+    {
+        if (empty($data)) {
+            throw new EntityFieldsException('Data is empty');
+        }
+
+        if (count(array_filter(array_keys($data), 'is_string')) < 1) {
+            $message = sprintf('Data is not an associative array: "%s"', var_export($data, true));
+            throw new EntityFieldsException($message);
+        }
+
+        return $data;
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    private function renameAliases(array $data)
+    {
+        foreach ($data as $key => $value) {
+            if (in_array($key, $this->aliases)) {
+                $newKey = array_search($key, $this->aliases);
+                $data[$newKey] = $data[$key];
+                unset($data[$key]);
+            }
+        }
+
+        return $data;
+    }
+
+    /**
+     * @param string $key
+     * @param mixed $value
+     */
+    private function setField($key, $value)
+    {
+        switch ($this->fieldsParams[$key]['type']) {
+            case 'int':
+                $value = (int)$value;
+                break;
+            case 'string':
+                $value = (string)$value;
+                break;
+            case 'bool':
+                $value = (bool)$value;
+                break;
+        }
+
+        $this->fields[$key] = $value;
     }
 
     //////////////////////////////////////////////

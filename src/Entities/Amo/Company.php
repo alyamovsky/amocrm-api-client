@@ -12,7 +12,7 @@ use ddlzz\AmoAPI\Entities\EntityInterface;
  * @package ddlzz\AmoAPI\Entities\Amo
  * @author ddlzz
  */
-class Company extends BaseEntity implements EntityInterface
+final class Company extends BaseEntity implements EntityInterface
 {
     /** @var string */
     protected $requestName = 'companies';

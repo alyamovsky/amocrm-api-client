@@ -118,6 +118,8 @@ class Client
     private function set(EntityInterface $entity, $action)
     {
         $entity->setFieldsParams($action);
+
+        $data = [];
         $data[$action][] = $entity->getFields();
         $url = $this->urlBuilder->prepareMethodUrl($entity->getRequestName());
         $this->waitASec();

@@ -20,7 +20,7 @@ class ArrayUtil
      */
     public static function searchAndReplace($search, $replace, $haystack)
     {
-        $callback = function (&$value, $key, array $params) {
+        $callback = function(&$value, $key, array $params) {
             if (($params['search'] === $value)) {
                 $value = $params['replace'];
             }

@@ -43,7 +43,7 @@ class StringUtil
      */
     public static function isDomain($value)
     {
-        return (preg_match("/^([a-z\d](-*[a-z\d])*)(\.([a-z\d](-*[a-z\d])*))*$/i", $value) // valid chars check
+        return (bool)(preg_match("/^([a-z\d](-*[a-z\d])*)(\.([a-z\d](-*[a-z\d])*))*$/i", $value) // valid chars check
             && preg_match("/^.{1,253}$/", $value) // overall length check
             && preg_match("/^[^\.]{1,63}(\.[^\.]{1,63})*$/", $value)); // length of each label
     }
@@ -68,7 +68,7 @@ class StringUtil
      */
     public static function isText($value)
     {
-            return preg_match('/^[A-Za-z0-9\.\-\'"!,;:\?()_\/\s]+$/', $value);
+            return  (bool)preg_match('/^[A-Za-z0-9\.\-\'"!,;:\?()_\/\s]+$/', $value);
     }
 
     /**
@@ -87,6 +87,6 @@ class StringUtil
      */
     public static function isFilePath($value)
     {
-        return preg_match('/^\/[A-Za-z0-9\/\._\s-]+$/', $value);
+        return  (bool)preg_match('/^\/[A-Za-z0-9\/\._\s-]+$/', $value);
     }
 }

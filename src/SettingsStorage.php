@@ -25,6 +25,11 @@ class SettingsStorage
         'auth' => '/private/api/auth.php?type=json',
         'current' => '/api/v2/account?with=users,custom_fields',
         'leads' => '/api/v2/leads',
+        'contacts' => '/api/v2/contacts',
+        'companies' => '/api/v2/companies',
+        'tasks' => '/api/v2/tasks',
+        'customers' => '/api/v2/customers',
+        'notes' => '/api/v2/notes',
     ];
 
     /** @var array */

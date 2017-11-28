@@ -60,4 +60,10 @@ final class Task extends BaseEntity implements EntityInterface
             'required_update' => false,
         ],
     ];
+
+    /** @var array */
+    protected $aliasesAppend = [
+        'is_completed' => 'status', // todo_ddlzz bool => int
+        'complete_till_at' => 'complete_till',
+    ];
 }

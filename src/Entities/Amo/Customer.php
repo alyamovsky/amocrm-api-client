@@ -85,4 +85,13 @@ final class Customer extends BaseEntity implements EntityInterface
             'required_update' => false,
         ],
     ];
+
+    /** @var array */
+    protected $aliasesAppend = [
+        'responsible_user_id' => 'main_user_id',
+        'updated_at' => 'date_modify',
+        'is_deleted' => 'deleted',
+        'main_contact' => 'main_contact_id',
+        'closest_task_at' => 'last_task_date',
+    ];
 }

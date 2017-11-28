@@ -66,4 +66,11 @@ final class Company extends BaseEntity implements EntityInterface
             'required_update' => false,
         ],
     ];
+
+    /** @var array */
+    protected $aliasesAppend = [
+        'updated_by' => 'modified_user_id',
+        'leads' => 'linked_leads_id',
+        'closest_task_at' => 'closest_task',
+    ];
 }

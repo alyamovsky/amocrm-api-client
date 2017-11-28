@@ -55,4 +55,10 @@ final class Note extends BaseEntity implements EntityInterface
             'required_update' => false,
         ],
     ];
+
+    /** @var array */
+    protected $aliasesAppend = [
+        'updated_by' => 'editable',
+        'attachment' => 'ATTACHEMENT',
+    ];
 }

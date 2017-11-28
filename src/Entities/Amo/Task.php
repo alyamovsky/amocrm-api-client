@@ -40,7 +40,7 @@ final class Task extends BaseEntity implements EntityInterface
             'required_update' => false,
         ],
         'task_type' => [
-            'type' => 'int',
+            'type' => 'int', // todo_ddlzz int|string
             'required_add' => false,
             'required_update' => false,
         ],

@@ -38,8 +38,10 @@ class Client
      * @param CredentialsManager $credentials
      * @param DataSender $dataSender
      * @param \ddlzz\AmoAPI\SettingsStorage $settings
+     * @throws Exceptions\CurlException
      * @throws Exceptions\ErrorCodeException
      * @throws Exceptions\FailedAuthException
+     * @throws InvalidArgumentException
      * @throws RuntimeException
      */
     public function __construct(CredentialsManager $credentials, DataSender $dataSender, SettingsStorage $settings)
@@ -57,6 +59,8 @@ class Client
      * @param $entityType
      * @param $id
      * @return EntityInterface
+     * @throws Exceptions\CurlException
+     * @throws Exceptions\EntityFactoryException
      * @throws Exceptions\ErrorCodeException
      * @throws Exceptions\FailedAuthException
      * @throws InvalidArgumentException
@@ -83,8 +87,10 @@ class Client
     /**
      * @param EntityInterface $entity
      * @return string
+     * @throws Exceptions\CurlException
      * @throws Exceptions\ErrorCodeException
      * @throws Exceptions\FailedAuthException
+     * @throws InvalidArgumentException
      */
     public function add(EntityInterface $entity)
     {
@@ -94,8 +100,10 @@ class Client
     /**
      * @param EntityInterface $entity
      * @return string
+     * @throws Exceptions\CurlException
      * @throws Exceptions\ErrorCodeException
      * @throws Exceptions\FailedAuthException
+     * @throws InvalidArgumentException
      */
     public function update(EntityInterface $entity)
     {
@@ -104,8 +112,10 @@ class Client
     }
 
     /**
+     * @throws Exceptions\CurlException
      * @throws Exceptions\ErrorCodeException
      * @throws Exceptions\FailedAuthException
+     * @throws InvalidArgumentException
      * @throws RuntimeException
      */
     private function checkAuth()
@@ -125,8 +135,10 @@ class Client
      * @param EntityInterface $entity
      * @param string $action
      * @return string
+     * @throws Exceptions\CurlException
      * @throws Exceptions\ErrorCodeException
      * @throws Exceptions\FailedAuthException
+     * @throws InvalidArgumentException
      */
     private function set(EntityInterface $entity, $action)
     {

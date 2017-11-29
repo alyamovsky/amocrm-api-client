@@ -47,6 +47,7 @@ class Curl
     /**
      * @param string $url
      * @return bool
+     * @throws CurlException
      */
     public function setUrl($url)
     {
@@ -56,6 +57,7 @@ class Curl
     /**
      * @param bool $value
      * @return bool
+     * @throws CurlException
      */
     public function setReturnTransfer($value)
     {
@@ -65,6 +67,7 @@ class Curl
     /**
      * @param string $agent
      * @return bool
+     * @throws CurlException
      */
     public function setUserAgent($agent)
     {
@@ -74,6 +77,7 @@ class Curl
     /**
      * @param array $header
      * @return bool
+     * @throws CurlException
      */
     public function setHttpHeader(array $header)
     {
@@ -83,6 +87,7 @@ class Curl
     /**
      * @param bool $value
      * @return bool
+     * @throws CurlException
      */
     public function setHeader($value)
     {
@@ -92,6 +97,7 @@ class Curl
     /**
      * @param string $cookieFile
      * @return bool
+     * @throws CurlException
      */
     public function setCookieFile($cookieFile)
     {
@@ -101,6 +107,7 @@ class Curl
     /**
      * @param string $cookieJar
      * @return bool
+     * @throws CurlException
      */
     public function setCookieJar($cookieJar)
     {
@@ -110,6 +117,7 @@ class Curl
     /**
      * @param bool $value
      * @return bool
+     * @throws CurlException
      */
     public function setSSLVerifyPeer($value)
     {
@@ -119,6 +127,7 @@ class Curl
     /**
      * @param bool $value
      * @return bool
+     * @throws CurlException
      */
     public function setSSLVerifyHost($value)
     {
@@ -128,6 +137,7 @@ class Curl
     /**
      * @param string $request
      * @return bool
+     * @throws CurlException
      */
     public function setCustomRequest($request)
     {
@@ -137,6 +147,7 @@ class Curl
     /**
      * @param mixed $postFields
      * @return bool
+     * @throws CurlException
      */
     public function setPostFields($postFields)
     {
@@ -157,6 +168,7 @@ class Curl
 
     /**
      * Closes the connection in case of abnormal termination
+     * @throws CurlException
      */
     public function __destruct()
     {

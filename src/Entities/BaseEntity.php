@@ -99,6 +99,7 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
      * @param string $action
      * @return void
      * @throws InvalidArgumentException
+     * @throws EntityFieldsException
      */
     public function setFieldsParams($action)
     {
@@ -142,6 +143,8 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
     /**
      * @param array $data
      * @return EntityInterface $this
+     * @throws EntityFieldsException
+     * @throws InvalidArgumentException
      */
     public function fill(array $data)
     {

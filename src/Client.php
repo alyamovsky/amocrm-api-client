@@ -38,6 +38,9 @@ class Client
      * @param CredentialsManager $credentials
      * @param DataSender $dataSender
      * @param \ddlzz\AmoAPI\SettingsStorage $settings
+     * @throws Exceptions\ErrorCodeException
+     * @throws Exceptions\FailedAuthException
+     * @throws RuntimeException
      */
     public function __construct(CredentialsManager $credentials, DataSender $dataSender, SettingsStorage $settings)
     {
@@ -54,6 +57,8 @@ class Client
      * @param $entityType
      * @param $id
      * @return EntityInterface
+     * @throws Exceptions\ErrorCodeException
+     * @throws Exceptions\FailedAuthException
      * @throws InvalidArgumentException
      */
     public function findById($entityType, $id)
@@ -78,6 +83,8 @@ class Client
     /**
      * @param EntityInterface $entity
      * @return string
+     * @throws Exceptions\ErrorCodeException
+     * @throws Exceptions\FailedAuthException
      */
     public function add(EntityInterface $entity)
     {
@@ -87,6 +94,8 @@ class Client
     /**
      * @param EntityInterface $entity
      * @return string
+     * @throws Exceptions\ErrorCodeException
+     * @throws Exceptions\FailedAuthException
      */
     public function update(EntityInterface $entity)
     {
@@ -95,6 +104,8 @@ class Client
     }
 
     /**
+     * @throws Exceptions\ErrorCodeException
+     * @throws Exceptions\FailedAuthException
      * @throws RuntimeException
      */
     private function checkAuth()
@@ -114,6 +125,8 @@ class Client
      * @param EntityInterface $entity
      * @param string $action
      * @return string
+     * @throws Exceptions\ErrorCodeException
+     * @throws Exceptions\FailedAuthException
      */
     private function set(EntityInterface $entity, $action)
     {

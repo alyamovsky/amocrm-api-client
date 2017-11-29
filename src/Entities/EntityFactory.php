@@ -28,6 +28,7 @@ class EntityFactory
     /**
      * @param string $entityType
      * @return EntityInterface
+     * @throws EntityFactoryException
      */
     public function create($entityType)
     {

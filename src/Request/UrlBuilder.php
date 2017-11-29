@@ -33,6 +33,7 @@ class UrlBuilder
      * @param string $methodCode
      * @param array $params
      * @return string
+     * @throws \ddlzz\AmoAPI\Exceptions\InvalidArgumentException
      */
     public function prepareMethodUrl($methodCode, $params = [])
     {

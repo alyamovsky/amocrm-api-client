@@ -36,6 +36,7 @@ class DataSender
      * @return string
      * @throws ErrorCodeException
      * @throws FailedAuthException
+     * @throws \ddlzz\AmoAPI\Exceptions\CurlException
      */
     public function send($url, array $data = [])
     {

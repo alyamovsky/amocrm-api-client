@@ -30,6 +30,7 @@ class CredentialsManager
      * @param string $domain
      * @param string $login
      * @param string $hash
+     * @throws Exceptions\InvalidArgumentException
      */
     public function __construct($domain, $login, $hash)
     {

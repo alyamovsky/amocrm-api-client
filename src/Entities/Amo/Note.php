@@ -40,7 +40,7 @@ final class Note extends BaseEntity implements EntityInterface
             'required_update' => false,
         ],
         'attachment' => [
-            'type' => 'stirng', // ?
+            'type' => 'string', // ?
             'required_add' => false,
             'required_update' => false,
         ],

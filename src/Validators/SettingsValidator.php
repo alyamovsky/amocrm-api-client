@@ -34,7 +34,7 @@ class SettingsValidator
      * @return bool
      * @throws InvalidArgumentException
      */
-    public function validateDomain(string $domain)
+    public function validateDomain($domain)
     {
         if (!StringUtil::isDomain($domain)) {
             $message = sprintf('"%s" is not a valid domain', $domain);
@@ -60,17 +60,17 @@ class SettingsValidator
     }
 
     /**
-     * @param array $methodsPaths
+     * @param array $paths
      * @return bool
      * @throws InvalidArgumentException
      */
-    public function validateMethodsPaths(array $methodsPaths)
+    public function validateMethodsPaths(array $paths)
     {
-        if (empty($methodsPaths)) {
+        if (empty($paths)) {
             throw new InvalidArgumentException('An array "method Paths" must not be empty');
         }
 
-        foreach ($methodsPaths as $key => $item) {
+        foreach ($paths as $key => $item) {
             if (empty($item)) {
                 throw new InvalidArgumentException("An array item \"$key\" must not be empty");
             }
@@ -85,14 +85,14 @@ class SettingsValidator
     }
 
     /**
-     * @param string $cookiePath
+     * @param string $path
      * @return bool
      * @throws InvalidArgumentException
      */
-    public function validateCookiePath($cookiePath)
+    public function validateCookiePath($path)
     {
-        if (!StringUtil::isFilePath($cookiePath)) {
-            $message = sprintf('"%s" is not a valid file path', $cookiePath);
+        if (!StringUtil::isFilePath($path)) {
+            $message = sprintf('"%s" is not a valid file path', $path);
             throw new InvalidArgumentException($message);
         }
 

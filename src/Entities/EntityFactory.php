@@ -26,42 +26,42 @@ class EntityFactory
     }
 
     /**
-     * @param string $entityType
+     * @param string $type
      * @return EntityInterface
      * @throws EntityFactoryException
      */
-    public function create($entityType)
+    public function create($type)
     {
-        $entity = $this->prepareClassName($entityType);
+        $entity = $this->prepareClassName($type);
         $this->validateClass($entity);
 
         return new $entity;
     }
 
     /**
-     * @param string $className
+     * @param string $name
      * @return string
      */
-    private function prepareClassName($className)
+    private function prepareClassName($name)
     {
-        return $this->settings::NAMESPACE_PREFIX . '\Entities\Amo\\' . rtrim(ucfirst($className), 's');
+        return $this->settings::NAMESPACE_PREFIX . '\Entities\Amo\\' . rtrim(ucfirst($name), 's');
     }
 
     /**
-     * @param string $className
+     * @param string $name
      * @return bool
      * @throws EntityFactoryException
      */
-    private function validateClass($className)
+    private function validateClass($name)
     {
-        if (!class_exists($className)) {
-            throw new EntityFactoryException("Class \"$className\" does not exists");
+        if (!class_exists($name)) {
+            throw new EntityFactoryException("Class \"$name\" does not exists");
         }
 
-        $reflection = new \ReflectionClass($className);
+        $reflection = new \ReflectionClass($name);
 
         if (!$reflection->implementsInterface($this->settings::NAMESPACE_PREFIX . '\Entities\EntityInterface')) {
-            throw new EntityFactoryException("Class \"$className\" does not implement EntityInterface");
+            throw new EntityFactoryException("Class \"$name\" does not implement EntityInterface");
         }
 
         return true;

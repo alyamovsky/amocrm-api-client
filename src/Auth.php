@@ -34,16 +34,16 @@ class Auth
      */
     public function isAuthenticated()
     {
-        $cookieFile = $this->cookiePath;
-        $fourteenMinAgo = time() - 60 * 14;
+        $cookie = $this->cookiePath;
+        $cookieLifetime = time() - 60 * 14; // 14 minutes
 
-        if ((!file_exists($cookieFile)) || (filemtime($cookieFile) <= $fourteenMinAgo)) {
+        if ((!file_exists($cookie)) || (filemtime($cookie) <= $cookieLifetime)) {
             return false;
         }
 
         // If login has been changed, we need to delete the cookie file for the changes to take effect
-        if (false === (strpos(file_get_contents($cookieFile), (str_replace('@', '%40', $this->login))))) {
-            unlink($cookieFile);
+        if (false === (strpos(file_get_contents($cookie), (str_replace('@', '%40', $this->login))))) {
+            unlink($cookie);
             return false;
         }
 

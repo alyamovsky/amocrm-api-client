@@ -30,15 +30,15 @@ class UrlBuilder
     }
 
     /**
-     * @param string $methodCode
+     * @param string $code
      * @param array $params
      * @return string
      * @throws \ddlzz\AmoAPI\Exceptions\InvalidArgumentException
      */
-    public function prepareMethodUrl($methodCode, $params = [])
+    public function prepareMethodUrl($code, $params = [])
     {
         $host = $this->makeUserHost($this->subdomain);
-        $methodPath = $this->settings->getMethodPath($methodCode);
+        $path = $this->settings->getMethodPath($code);
 
         if (!empty($params)) {
             $query = '?';
@@ -51,7 +51,7 @@ class UrlBuilder
             }
         }
 
-        $result = isset($query) ? $host . $methodPath . $query : $host . $methodPath;
+        $result = isset($query) ? $host . $path . $query : $host . $path;
 
         return $result;
     }

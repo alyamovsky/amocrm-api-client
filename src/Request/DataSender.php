@@ -58,24 +58,24 @@ class DataSender
         }
 
         $response = $this->curl->exec();
-        $httpCode = $this->curl->getHttpCode();
+        $code = $this->curl->getHttpCode();
 
         $this->curl->close();
 
-        if ((401 === $httpCode) || (403 === $httpCode)) {
-            throw new FailedAuthException('Auth failed! ' . self::getErrorByHttpCode($httpCode), $response);
-        } elseif ((200 !== $httpCode) && (204 !== $httpCode)) {
-            throw new ErrorCodeException(self::getErrorByHttpCode($httpCode), $response, $url);
+        if ((401 === $code) || (403 === $code)) {
+            throw new FailedAuthException('Auth failed! ' . self::getErrorByHttpCode($code), $response);
+        } elseif ((200 !== $code) && (204 !== $code)) {
+            throw new ErrorCodeException(self::getErrorByHttpCode($code), $response, $url);
         }
 
         return $response;
     }
 
     /**
-     * @param int $httpCode
+     * @param int $code
      * @return string
      */
-    private static function getErrorByHttpCode($httpCode)
+    private static function getErrorByHttpCode($code)
     {
         $errors = [
             301 => '301 Moved permanently',
@@ -90,6 +90,6 @@ class DataSender
             504 => '504 Gateway Timeout',
         ];
 
-        return isset($errors[$httpCode]) ? $errors[$httpCode] : $httpCode . ' Unknown error';
+        return isset($errors[$code]) ? $errors[$code] : $code . ' Unknown error';
     }
 }

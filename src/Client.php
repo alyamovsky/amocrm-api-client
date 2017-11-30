@@ -163,9 +163,9 @@ class Client
 
         if (null !== $lastCheck) {
             $sleepTime = 1;
-            $lastRequestTime = $now - $lastCheck;
-            if ($lastRequestTime < $sleepTime) {
-                usleep(($sleepTime - $lastRequestTime) * 1000000);
+            $lastRequest = $now - $lastCheck;
+            if ($lastRequest < $sleepTime) {
+                usleep(($sleepTime - $lastRequest) * 1000000);
             }
         }
 

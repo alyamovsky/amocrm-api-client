@@ -142,13 +142,13 @@ class SettingsStorage
     }
 
     /**
-     * @param array $methodsPaths
+     * @param array $paths
      * @throws InvalidArgumentException
      */
-    public function setMethodsPaths(array $methodsPaths)
+    public function setMethodsPaths(array $paths)
     {
-        $this->validator->validateMethodsPaths($methodsPaths);
-        $this->methodsPaths = $methodsPaths;
+        $this->validator->validateMethodsPaths($paths);
+        $this->methodsPaths = $paths;
     }
 
     /**
@@ -160,13 +160,13 @@ class SettingsStorage
     }
 
     /**
-     * @param string $cookiePath
+     * @param string $path
      * @throws InvalidArgumentException
      */
-    public function setCookiePath($cookiePath)
+    public function setCookiePath($path)
     {
-        $this->validator->validateCookiePath($cookiePath);
-        $this->cookiePath = self::LIB_PATH . $cookiePath;
+        $this->validator->validateCookiePath($path);
+        $this->cookiePath = self::LIB_PATH . $path;
     }
 
     /**

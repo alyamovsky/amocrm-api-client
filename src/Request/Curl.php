@@ -95,13 +95,13 @@ class Curl
     }
 
     /**
-     * @param string $cookieFile
+     * @param string $cookie
      * @return bool
      * @throws CurlException
      */
-    public function setCookieFile($cookieFile)
+    public function setCookieFile($cookie)
     {
-        return $this->setOpt(CURLOPT_COOKIEFILE, $cookieFile);
+        return $this->setOpt(CURLOPT_COOKIEFILE, $cookie);
     }
 
     /**
@@ -145,13 +145,13 @@ class Curl
     }
 
     /**
-     * @param mixed $postFields
+     * @param mixed $fields
      * @return bool
      * @throws CurlException
      */
-    public function setPostFields($postFields)
+    public function setPostFields($fields)
     {
-        return $this->setOpt(CURLOPT_POSTFIELDS, $postFields);
+        return $this->setOpt(CURLOPT_POSTFIELDS, $fields);
     }
 
     //////////////////////

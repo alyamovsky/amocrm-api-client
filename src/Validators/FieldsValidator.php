@@ -44,22 +44,9 @@ class FieldsValidator
      */
     public function isValid($key, $value)
     {
-        // if the required field is missing
-        switch ($this->action) {
-            case 'add':
-                if (!isset($value) && (true === $this->fieldsParams[$key]['required_add'])) {
-                    throw new EntityFieldsException("Adding error: the required field \"$key\" is missing or empty");
-                }
-                break;
-            case 'update':
-                if (!isset($value) && (true === $this->fieldsParams[$key]['required_update'])) {
-                    throw new EntityFieldsException("Updating error: the required field \"$key\" is missing or empty");
-                }
-                break;
-        }
+        $this->validateRequired($key, $value);
 
         if (!empty($value)) {
-            // if the field type doesn't match with the value
             switch ($this->fieldsParams[$key]['type']) {
                 case 'int':
                     self::validateInt($key, $value);
@@ -81,6 +68,30 @@ class FieldsValidator
                         "Internal error: the field \"$key\" doesn't match any of the entity predefined fields"
                     );
             }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param $key
+     * @param $value
+     * @return bool
+     * @throws EntityFieldsException
+     */
+    private function validateRequired($key, $value)
+    {
+        switch ($this->action) {
+            case 'add':
+                if (!isset($value) && (true === $this->fieldsParams[$key]['required_add'])) {
+                    throw new EntityFieldsException("Adding error: the required field \"$key\" is missing or empty");
+                }
+                break;
+            case 'update':
+                if (!isset($value) && (true === $this->fieldsParams[$key]['required_update'])) {
+                    throw new EntityFieldsException("Updating error: the required field \"$key\" is missing or empty");
+                }
+                break;
         }
 
         return true;

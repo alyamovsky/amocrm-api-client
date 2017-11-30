@@ -30,11 +30,11 @@ class ClientFactoryTest extends TestCase
         $login = 'test@test.com';
         $this->credentials = new CredentialsManager('test', $login, md5('test'));
 
-        $vfsRoot = vfsStream::setup();
-        $file = vfsStream::newFile('test_correct_login_cookie.txt')->at($vfsRoot)->setContent(str_replace('@', '%40', $login));
+        $cookieDir = vfsStream::setup();
+        $cookieFile = vfsStream::newFile('cookie.txt')->at($cookieDir)->setContent(str_replace('@', '%40', $login));
 
         $this->settings = new SettingsStorage();
-        $this->settings->setCookiePath($file->url());
+        $this->settings->setCookiePath($cookieFile->url());
     }
 
     public function testCanBeCreated()

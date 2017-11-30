@@ -7,6 +7,7 @@ use ddlzz\AmoAPI\Client;
 use ddlzz\AmoAPI\ClientFactory;
 use ddlzz\AmoAPI\CredentialsManager;
 use ddlzz\AmoAPI\SettingsStorage;
+use org\bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;
 
 
@@ -29,20 +30,16 @@ class ClientFactoryTest extends TestCase
         $login = 'test@test.com';
         $this->credentials = new CredentialsManager('test', $login, md5('test'));
 
-        file_put_contents(__DIR__ . '/../var/test_correct_login_cookie.txt', str_replace('@', '%40', $login));
+        $vfsRoot = vfsStream::setup();
+        $file = vfsStream::newFile('test_correct_login_cookie.txt')->at($vfsRoot)->setContent(str_replace('@', '%40', $login));
 
         $this->settings = new SettingsStorage();
-        $this->settings->setCookiePath('/var/test_correct_login_cookie.txt');
+        $this->settings->setCookiePath($file->url());
     }
 
     public function testCanBeCreated()
     {
         $client = ClientFactory::create($this->credentials, $this->settings);
         $this::assertInstanceOf(Client::class, $client);
-    }
-
-    protected function tearDown()
-    {
-        unlink(__DIR__ . '/../var/test_correct_login_cookie.txt');
     }
 }

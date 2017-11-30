@@ -160,7 +160,6 @@ class SettingsStorage
     }
 
     /**
-     * Please use the relative path only for this parameter.
      * @param string $cookiePath
      * @throws InvalidArgumentException
      */

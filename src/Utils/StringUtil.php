@@ -82,11 +82,12 @@ class StringUtil
     }
 
     /**
+     * The valid file path starts with '/' or 'vfs://'
      * @param string $value
      * @return bool
      */
     public static function isFilePath($value)
     {
-        return  (bool)preg_match('/^\/[A-Za-z0-9\/\._\s-]+$/', $value);
+        return (bool)preg_match('/^(vfs:\/)?\/[A-Za-z0-9\/\._\s-]+$/', $value);
     }
 }

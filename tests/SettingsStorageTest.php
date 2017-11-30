@@ -4,6 +4,7 @@
 namespace Tests\AmoAPI;
 
 use ddlzz\AmoAPI\SettingsStorage;
+use org\bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -23,9 +24,6 @@ final class SettingsStorageTest extends TestCase
 
     /** @var string */
     private $userAgent = 'Some user agent?!';
-
-    /** @var string */
-    private $cookiePath = '/var/cookie.txt';
 
     /** @var array */
     private $methodsPaths = [
@@ -175,8 +173,11 @@ final class SettingsStorageTest extends TestCase
 
     public function testGetCookiePath()
     {
-        $this->settingsStorage->setCookiePath($this->cookiePath);
-        self::assertEquals((str_replace('tests', 'src', __DIR__ . '/..')) . $this->cookiePath, $this->settingsStorage->getCookiePath());
+        $vfsRoot = vfsStream::setup();
+        $file = vfsStream::newFile('cookie.txt')->at($vfsRoot);
+
+        $this->settingsStorage->setCookiePath($file->url());
+        self::assertEquals($file->url(), $this->settingsStorage->getCookiePath());
     }
 
     /**

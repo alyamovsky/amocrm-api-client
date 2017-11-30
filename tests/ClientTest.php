@@ -9,6 +9,9 @@ use ddlzz\AmoAPI\Entities\Amo\Lead;
 use ddlzz\AmoAPI\Entities\EntityInterface;
 use ddlzz\AmoAPI\Request\DataSender;
 use ddlzz\AmoAPI\SettingsStorage;
+use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamDirectory;
+use org\bovigo\vfs\vfsStreamFile;
 use PHPUnit\Framework\TestCase;
 
 
@@ -30,6 +33,12 @@ final class ClientTest extends TestCase
     /** @var SettingsStorage */
     private $settings;
 
+    /** @var vfsStreamDirectory */
+    private $cookieDir;
+
+    /** @var vfsStreamFile */
+    private $cookieFile;
+
     protected function setUp()
     {
         $login = 'test@test.com';
@@ -37,7 +46,8 @@ final class ClientTest extends TestCase
         $this->dataSender = $this->createMock(DataSender::class);
         $this->settings = new SettingsStorage();
 
-        file_put_contents(__DIR__ . '/../var/test_correct_login_cookie.txt', str_replace('@', '%40', $login));
+        $this->cookieDir = vfsStream::setup();
+        $this->cookieFile = vfsStream::newFile('cookie.txt')->at($this->cookieDir)->setContent(str_replace('@', '%40', $login));
     }
 
     /**
@@ -82,17 +92,17 @@ final class ClientTest extends TestCase
 
     public function testCreationFromValidParams()
     {
-        $this->settings->setCookiePath('/var/test_correct_login_cookie.txt');
+        $this->settings->setCookiePath($this->cookieFile->url());
         $this::assertInstanceOf(Client::class, new Client($this->credentials, $this->dataSender, $this->settings));
     }
 
     public function testCheckIrrelevantCookie()
     {
-        file_put_contents(__DIR__ . '/../var/test_wrong_login_cookie.txt', 'wrong_login%40.test.com');
+        $incorrectCookie = vfsStream::newFile('incorrect_cookie.txt')->at($this->cookieDir)->setContent('wrong_login%40.test.com');
 
-        $this->settings->setCookiePath('/var/test_wrong_login_cookie.txt');
+        $this->settings->setCookiePath($incorrectCookie->url());
         new Client($this->credentials, $this->dataSender, $this->settings);
-        $this::assertFalse(file_exists(__DIR__ . '/../var/test_wrong_login_cookie.txt'));
+        $this::assertFalse(file_exists($incorrectCookie->url()));
     }
 
     /**
@@ -105,7 +115,7 @@ final class ClientTest extends TestCase
         /** @noinspection PhpUndefinedMethodInspection */
         $this->dataSender->method('send')->willReturn($response);
 
-        $this->settings->setCookiePath('/var/test_correct_login_cookie.txt');
+        $this->settings->setCookiePath($this->cookieFile->url());
         $client = new Client($this->credentials, $this->dataSender, $this->settings);
 
         return $client->add($entity);
@@ -142,14 +152,5 @@ final class ClientTest extends TestCase
         $deltaTime = $end - $start;
 
         $this::assertGreaterThan($repeatCounts - 1, $deltaTime);
-    }
-
-    protected function tearDown()
-    {
-        if (file_exists(__DIR__ . '/../var/test_wrong_login_cookie.txt')) {
-            unlink(__DIR__ . '/../var/test_wrong_login_cookie.txt');
-        }
-
-        unlink(__DIR__ . '/../var/test_correct_login_cookie.txt');
     }
 }

@@ -166,7 +166,7 @@ class SettingsStorage
     public function setCookiePath($path)
     {
         $this->validator->validateCookiePath($path);
-        $this->cookiePath = self::LIB_PATH . $path;
+        $this->cookiePath = $path;
     }
 
     /**

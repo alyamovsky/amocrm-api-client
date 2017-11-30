@@ -1,20 +1,6 @@
 # amoCRM PHP API Client
-Библиотека для работы с АПИ [amoCRM](https://amocrm.ru/).
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ddlzz/amocrm-api-client/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/ddlzz/amocrm-api-client/?branch=develop) [![Code Coverage](https://scrutinizer-ci.com/g/ddlzz/amocrm-api-client/badges/coverage.png?b=develop)](https://scrutinizer-ci.com/g/ddlzz/amocrm-api-client/?branch=develop) [![Build Status](https://scrutinizer-ci.com/g/ddlzz/amocrm-api-client/badges/build.png?b=develop)](https://scrutinizer-ci.com/g/ddlzz/amocrm-api-client/build-status/develop)
-## Установка
-Введите в командной строке:
-```
-$ composer require ddlzz/amocrm-api-client
-```
-
-Или пропишите в `composer.json`:
-```
-{
-     "require": {
-         "ddlzz/amocrm-api-client": "@stable"
-     }
-}
-```
+Библиотека для работы с АПИ [amoCRM](https://amocrm.ru/).
  
 ## Пример
  ```php

@@ -68,7 +68,7 @@ class DataSender
             throw new ErrorCodeException(self::getErrorByHttpCode($code), $response, $url);
         }
 
-        return $response;
+        return (string)$response;
     }
 
     /**

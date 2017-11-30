@@ -1,5 +1,6 @@
 # amoCRM PHP API Client
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ddlzz/amocrm-api-client/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/ddlzz/amocrm-api-client/?branch=develop) [![Code Coverage](https://scrutinizer-ci.com/g/ddlzz/amocrm-api-client/badges/coverage.png?b=develop)](https://scrutinizer-ci.com/g/ddlzz/amocrm-api-client/?branch=develop) [![Build Status](https://scrutinizer-ci.com/g/ddlzz/amocrm-api-client/badges/build.png?b=develop)](https://scrutinizer-ci.com/g/ddlzz/amocrm-api-client/build-status/develop)
+
 Библиотека для работы с АПИ [amoCRM](https://amocrm.ru/).
  
 ## Пример
@@ -17,8 +18,8 @@
     /** @var \ddlzz\AmoAPI\Client $request */
     $request = \ddlzz\AmoAPI\ClientFactory::create($credentials);
 
-    // Если вы используете другой домен, например amocrm.com, или протокол http, например работая с dev-сервером amocrm,
-    // можете указать эти параметры в настройках:
+    // Если вы используете другой домен, например amocrm.com, или протокол http,
+    // например работая с dev-сервером amocrm, можете указать эти параметры в настройках:
 
     // $settings = new \ddlzz\AmoAPI\SettingsStorage();
     // $settings->setScheme('http');
@@ -32,11 +33,12 @@
 
     // Заполним модель данными. Формат заполнения такой:
     $lead['name'] = 'testlol';
-    $lead['created_at'] = time(); // Обязательные поля created_at и modified_at будут заполнены автоматически, если не указывать их явно
-    $lead['sale'] = 150000; // Аналог из старого АПИ - price. Вы можете использовать как старые, так и новые варианты
-    // названия поля. Старые будут преобразованы в новые далее при валидации.
-    // Валидация и заполнение сущности данными происходит позже, в методе клиента add либо update. Это связано с тем,
-    // что для добавления и редактирования разные поля будут являться обязательными.
+    $lead['created_at'] = time(); // Обязательные поля created_at и modified_at будут заполнены
+    // автоматически, если не указывать их явно
+    $lead['sale'] = 150000; // Аналог из старого АПИ - price. Вы можете использовать как старые,
+    // так и новые варианты названия поля. Старые будут преобразованы в новые далее при валидации.
+    // Из-за того, что для добавления и редактирования разные поля будут являться обязательными,
+    // валидация и заполнение сущности данными происходит позже, в методе клиента add либо update.
 
     $result = $request->add($lead);
     echo $result;

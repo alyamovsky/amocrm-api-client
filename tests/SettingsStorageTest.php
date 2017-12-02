@@ -220,8 +220,8 @@ final class SettingsStorageTest extends TestCase
 
     /**
      * @dataProvider provideDataForTestGetMethodCodeByType
-     * @param $key
-     * @param $value
+     * @param string $key
+     * @param string $value
      */
     public function testGetMethodCodeByType($key, $value)
     {

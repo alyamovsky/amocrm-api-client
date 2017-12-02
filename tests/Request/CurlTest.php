@@ -61,4 +61,13 @@ class CurlTest extends TestCase
         $this::assertStringEqualsFile(__FILE__, $this->curl->exec());
         $this->curl->close();
     }
+
+    /**
+     * @expectedException \ddlzz\amoAPI\Exceptions\CurlException
+     * @expectedExceptionMessage Curl class is not properly initialized
+     */
+    public function testExecFail()
+    {
+        $this->curl->exec();
+    }
 }

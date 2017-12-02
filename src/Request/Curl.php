@@ -16,7 +16,6 @@ class Curl
     /** @var resource */
     private $curl;
 
-    /** Curl constructor. */
     public function init()
     {
         $this->curl = curl_init();
@@ -38,6 +37,14 @@ class Curl
         }
 
         return curl_exec($this->curl);
+    }
+
+    /**
+     * @return resource
+     */
+    public function getResource()
+    {
+        return $this->curl;
     }
 
     ///////////////////////////////

@@ -56,7 +56,7 @@ class Client
     }
 
     /**
-     * @param $entityType
+     * @param $type
      * @param $id
      * @return EntityInterface
      * @throws Exceptions\CurlException
@@ -65,20 +65,20 @@ class Client
      * @throws Exceptions\FailedAuthException
      * @throws InvalidArgumentException
      */
-    public function findById($entityType, $id)
+    public function findById($type, $id)
     {
-        $method = $this->settings->getMethodCodeByType($entityType);
+        $method = $this->settings->getMethodCodeByType($type);
         $params = ['id' => $id];
         $url = $this->urlBuilder->prepareMethodUrl($method, $params);
         $result = json_decode($this->dataSender->send($url), true);
 
         if (empty($result)) {
-            throw new InvalidArgumentException("The $entityType with id $id is not found on the server");
+            throw new InvalidArgumentException("The $type with id $id is not found on the server");
         }
 
         $entityFactory = new EntityFactory($this->settings);
         /** @var EntityInterface $entity */
-        $entity = $entityFactory->create($entityType);
+        $entity = $entityFactory->create($type);
         $entity->fill($result['_embedded']['items'][0]);
 
         return $entity;

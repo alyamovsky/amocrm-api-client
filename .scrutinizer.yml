@@ -23,7 +23,9 @@ filter:
     excluded_paths:
         - 'tests/*'
 checks:
-    php: true
+    php:
+        parameter_doc_comments: true
+        remove_trailing_whitespace: true
 coding_style:
     php:
         spaces:

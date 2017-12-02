@@ -155,7 +155,7 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
 
     public function setUpdatedAtParam()
     {
-        if ($this->container['updated_at'] === $this->fields['updated_at']) {
+        if ((isset($this->fields['updated_at'])) && ($this->container['updated_at'] === $this->fields['updated_at'])) {
             $this->container['updated_at'] = time();
         }
     }

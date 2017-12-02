@@ -202,4 +202,37 @@ final class SettingsStorageTest extends TestCase
     {
         $this->settingsStorage->setCookiePath($cookiePath);
     }
+
+    /**
+     * @return array
+     */
+    public function provideDataForTestGetMethodCodeByType()
+    {
+        return [
+            ['lead', 'leads'],
+            ['contact', 'contacts'],
+            ['company', 'companies'],
+            ['customer', 'customers'],
+            ['task', 'tasks'],
+            ['note', 'notes'],
+        ];
+    }
+
+    /**
+     * @dataProvider provideDataForTestGetMethodCodeByType
+     * @param $key
+     * @param $value
+     */
+    public function testGetMethodCodeByType($key, $value)
+    {
+        self::assertEquals($this->settingsStorage->getMethodCodeByType($key), $value);
+    }
+
+    /**
+     * @expectedException \ddlzz\AmoAPI\Exceptions\InvalidArgumentException
+     */
+    public function testNonexistentMethodCode()
+    {
+        $this->settingsStorage->getMethodCodeByType('cat');
+    }
 }

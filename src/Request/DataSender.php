@@ -61,12 +61,7 @@ class DataSender
         $code = $this->curl->getHttpCode();
 
         $this->curl->close();
-
-        if ((401 === $code) || (403 === $code)) {
-            throw new FailedAuthException('Auth failed! ' . self::getErrorByHttpCode($code), $response);
-        } elseif ((200 !== $code) && (204 !== $code)) {
-            throw new ErrorCodeException(self::getErrorByHttpCode($code), $response, $url);
-        }
+        $this->validateCode($code, $url, $response);
 
         return (string)$response;
     }
@@ -91,5 +86,24 @@ class DataSender
         ];
 
         return isset($errors[$code]) ? $errors[$code] : $code . ' Unknown error';
+    }
+
+    /**
+     * @param int $code
+     * @param string $url
+     * @param string $response
+     * @return bool
+     * @throws ErrorCodeException
+     * @throws FailedAuthException
+     */
+    private function validateCode($code, $url, $response)
+    {
+        if ((401 === $code) || (403 === $code)) {
+            throw new FailedAuthException('Auth failed! ' . self::getErrorByHttpCode($code), $response);
+        } elseif ((200 !== $code) && (204 !== $code)) {
+            throw new ErrorCodeException(self::getErrorByHttpCode($code), $response, $url);
+        }
+
+        return true;
     }
 }

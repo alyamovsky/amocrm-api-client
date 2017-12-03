@@ -62,11 +62,11 @@ class CurlTest extends TestCase
 
     public function testDestructor()
     {
-        $curl = new Curl();
-        $curl->init();
-        $handle = $curl->getResource();
+        $curl1 = new Curl();
+        $curl1->init();
         unset($curl);
-        $this::assertFalse('curl' === get_resource_type($handle));
+        $curl2 = new Curl();
+        self::assertTrue(null === $curl2->getResource());
     }
 
     public function testExec()
@@ -103,13 +103,13 @@ class CurlTest extends TestCase
      */
     public function testSetOptFail()
     {
-        $this->curl->setUrl('http://127.0.0.1');
+        $this->curl->setUrl($this->url);
     }
 
     public function testSetUrl()
     {
         $this->curl->init();
-        $this::assertTrue($this->curl->setUrl('http://127.0.0.1'));
+        $this::assertTrue($this->curl->setUrl($this->url));
         $this->curl->close();
     }
 

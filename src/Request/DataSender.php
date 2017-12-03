@@ -50,7 +50,7 @@ class DataSender
         $this->curl->setCookieFile($this->settings->getCookiePath());
         $this->curl->setCookieJar($this->settings->getCookiePath());
         $this->curl->setSSLVerifyPeer(false);
-        $this->curl->setSSLVerifyHost(false);
+        $this->curl->setSSLVerifyHost(2);
 
         if (!empty($data)) {
             $this->curl->setCustomRequest('POST');

@@ -14,16 +14,16 @@ use ddlzz\AmoAPI\Exceptions\CurlException;
 class Curl
 {
     /** @var resource */
-    private $curl;
+    private $handle;
 
     public function init()
     {
-        $this->curl = curl_init();
+        $this->handle = curl_init();
     }
 
     public function close()
     {
-        curl_close($this->curl);
+        curl_close($this->handle);
     }
 
     /**
@@ -32,11 +32,11 @@ class Curl
      */
     public function exec()
     {
-        if (!is_resource($this->curl)) {
+        if (!is_resource($this->handle)) {
             throw new CurlException('Curl class is not properly initialized');
         }
 
-        return curl_exec($this->curl);
+        return curl_exec($this->handle);
     }
 
     /**
@@ -44,7 +44,7 @@ class Curl
      */
     public function getResource()
     {
-        return $this->curl;
+        return $this->handle;
     }
 
     ///////////////////////////////
@@ -132,7 +132,7 @@ class Curl
     }
 
     /**
-     * @param bool $value
+     * @param int $value
      * @return bool
      * @throws CurlException
      */
@@ -170,18 +170,16 @@ class Curl
      */
     public function getHttpCode()
     {
-        return curl_getinfo($this->curl, CURLINFO_HTTP_CODE);
+        return curl_getinfo($this->handle, CURLINFO_HTTP_CODE);
     }
 
     /**
      * Closes the connection in case of abnormal termination
-     * @throws CurlException
      */
     public function __destruct()
     {
-        if (is_resource($this->curl)) {
-            curl_close($this->curl);
-            throw new CurlException('Curl class was not properly closed');
+        if (is_resource($this->handle)) {
+            curl_close($this->handle);
         }
     }
 
@@ -195,10 +193,10 @@ class Curl
      */
     private function setOpt($option, $value)
     {
-        if (!is_resource($this->curl)) {
+        if (!is_resource($this->handle)) {
             throw new CurlException('Curl class is not properly initialized');
         }
 
-        return curl_setopt($this->curl, $option, $value);
+        return curl_setopt($this->handle, $option, $value);
     }
 }

@@ -101,7 +101,7 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
      * @throws InvalidArgumentException
      * @throws EntityFieldsException
      */
-    public function setFieldsParams($action)
+    public function setFields($action)
     {
         if (('add' !== $action) && ('update' !== $action) && ('fill' !== $action)) {
             throw new InvalidArgumentException("Action \"$action\" is not a proper action parameter");
@@ -149,7 +149,7 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
     public function fill(array $data)
     {
         $this->container = $data;
-        $this->setFieldsParams('fill');
+        $this->setFields('fill');
         return $this;
     }
 

@@ -8,7 +8,6 @@ namespace ddlzz\AmoAPI\Entities;
  * Interface EntityInterface
  * @package ddlzz\AmoAPI\Interfaces
  * @author ddlzz
- * @codeCoverageIgnore
  */
 interface EntityInterface
 {
@@ -16,7 +15,7 @@ interface EntityInterface
      * @param $action
      * @return string
      */
-    public function setFieldsParams($action);
+    public function setFields($action);
 
     /**
      * @return string

@@ -142,7 +142,7 @@ class Client
      */
     private function set(EntityInterface $entity, $action)
     {
-        $entity->setFieldsParams($action);
+        $entity->setFields($action);
 
         $data = [];
         $data[$action][] = $entity->getFields();

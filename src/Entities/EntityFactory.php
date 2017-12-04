@@ -58,12 +58,6 @@ class EntityFactory
             throw new EntityFactoryException("Class \"$name\" does not exists");
         }
 
-        $reflection = new \ReflectionClass($name);
-
-        if (!$reflection->implementsInterface($this->settings::NAMESPACE_PREFIX . '\Entities\EntityInterface')) {
-            throw new EntityFactoryException("Class \"$name\" does not implement EntityInterface");
-        }
-
         return true;
     }
 }

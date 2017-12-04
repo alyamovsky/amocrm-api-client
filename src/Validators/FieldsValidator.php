@@ -46,7 +46,7 @@ class FieldsValidator
     {
         $this->validateRequired($key, $value);
 
-        if (!empty($value)) {
+        if (isset($value)) {
             switch ($this->fieldsParams[$key]['type']) {
                 case 'int':
                     self::validateInt($key, $value);
@@ -105,7 +105,7 @@ class FieldsValidator
      */
     private static function validateInt($key, $value)
     {
-        if (!preg_match('/^\d+$/', $value)) {
+        if (!is_int($value) || !preg_match('/^\d+$/', (string)$value)) {
             throw new EntityFieldsException("The field \"$key\" must contain digits only");
         }
 

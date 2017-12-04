@@ -47,7 +47,7 @@ class DataSenderTest extends TestCase
     /**
      * @expectedException \ddlzz\AmoAPI\Exceptions\FailedAuthException
      */
-    public function test401error()
+    public function testFailedAuth()
     {
         /** @noinspection PhpUndefinedMethodInspection */
         $this->curl->method('getHttpCode')->willReturn(401);
@@ -59,7 +59,7 @@ class DataSenderTest extends TestCase
     /**
      * @expectedException \ddlzz\AmoAPI\Exceptions\ErrorCodeException
      */
-    public function test500error()
+    public function testHttpError()
     {
         /** @noinspection PhpUndefinedMethodInspection */
         $this->curl->method('getHttpCode')->willReturn(500);

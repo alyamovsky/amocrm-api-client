@@ -20,6 +20,6 @@ class FailedAuthException extends AmoException
     {
         parent::__construct($message);
 
-        $this->message .= ' Server response: ' . $response;
+        $this->message .= '. Server response: ' . $response;
     }
 }

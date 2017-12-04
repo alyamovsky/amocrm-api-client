@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  * Class ArrayUtilTest
  * @package Tests\AmoAPI\Utils
  * @author ddlzz
- * @covers \ddlzz\amoAPI\Utils\ArrayUtil
+ * @covers \ddlzz\AmoAPI\Utils\ArrayUtil
  */
 class ArrayUtilTest extends TestCase
 {

@@ -58,12 +58,12 @@ final class ClientTest extends TestCase
     public function testCookieFileCreation()
     {
         $this->settings->setCookiePath('/nonexistent_cookie.txt');
-        $this::assertInstanceOf(Client::class, new Client($this->credentials, $this->dataSender, $this->settings));
+        self::assertInstanceOf(Client::class, new Client($this->credentials, $this->dataSender, $this->settings));
     }
 
     public function testCreationFromValidParams()
     {
-        $this::assertInstanceOf(Client::class, new Client($this->credentials, $this->dataSender, $this->settings));
+        self::assertInstanceOf(Client::class, new Client($this->credentials, $this->dataSender, $this->settings));
     }
 
     public function testCheckIrrelevantCookie()
@@ -74,7 +74,7 @@ final class ClientTest extends TestCase
 
         $this->settings->setCookiePath($incorrectCookie->url());
         new Client($this->credentials, $this->dataSender, $this->settings);
-        $this::assertFalse(file_exists($incorrectCookie->url()));
+        self::assertFalse(file_exists($incorrectCookie->url()));
     }
 
     /** @expectedException \ddlzz\amoAPI\Exceptions\RuntimeException */
@@ -96,7 +96,7 @@ final class ClientTest extends TestCase
 
         $result = json_decode($this->fakeSetEntity($entity, 'add'), true);
 
-        $this::assertEquals($this->settings->getMethodPath($entity->getRequestName()), $result['_link']['self']['href']);
+        self::assertEquals($this->settings->getMethodPath($entity->getRequestName()), $result['_link']['self']['href']);
     }
 
     public function testUpdateLead()
@@ -110,7 +110,7 @@ final class ClientTest extends TestCase
 
         $result = json_decode($this->fakeSetEntity($entity, 'update'), true);
 
-        $this::assertEquals($this->settings->getMethodPath($entity->getRequestName()), $result['_link']['self']['href']);
+        self::assertEquals($this->settings->getMethodPath($entity->getRequestName()), $result['_link']['self']['href']);
     }
 
     public function testSlowDown()
@@ -131,7 +131,7 @@ final class ClientTest extends TestCase
 
         $deltaTime = $end - $start;
 
-        $this::assertGreaterThan($repeatCounts - 1, $deltaTime);
+        self::assertGreaterThan($repeatCounts - 1, $deltaTime);
     }
 
     public function testCanFindById()
@@ -146,7 +146,7 @@ final class ClientTest extends TestCase
         $client = new Client($this->credentials, $this->dataSender, $this->settings);
         $entity = $client->findById($type, $id);
 
-        $this::assertEquals($id, $entity->getFields()['id']);
+        self::assertEquals($id, $entity->getFields()['id']);
     }
 
     /**

@@ -32,7 +32,7 @@ class DataSenderTest extends TestCase
 
     public function testCanBeCreatedWithValidParams()
     {
-        $this::assertInstanceOf(DataSender::class, new DataSender($this->curl, $this->settings));
+        self::assertInstanceOf(DataSender::class, new DataSender($this->curl, $this->settings));
     }
 
     public function testSend()
@@ -41,7 +41,7 @@ class DataSenderTest extends TestCase
         $this->curl->method('getHttpCode')->willReturn(200);
 
         $dataSender = new DataSender($this->curl, $this->settings);
-        $this::assertEquals($this->curl->exec(), $dataSender->send('http://catdog.test', ['foo']));
+        self::assertEquals($this->curl->exec(), $dataSender->send('http://catdog.test', ['foo']));
     }
 
     /**

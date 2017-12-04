@@ -81,7 +81,7 @@ class FieldsValidatorTest extends TestCase
     public function testIsValid($key, $value)
     {
         $validator = new FieldsValidator($this->fieldsParams);
-        $this::assertTrue($validator->isValid($key, $value));
+        self::assertTrue($validator->isValid($key, $value));
     }
 
     /**
@@ -160,7 +160,7 @@ class FieldsValidatorTest extends TestCase
         $validator = new FieldsValidator($this->fieldsParams);
         foreach (['add', 'update'] as $action) {
             $validator->setAction($action);
-            $this::assertTrue($validator->isValid($key, $value));
+            self::assertTrue($validator->isValid($key, $value));
         }
     }
 

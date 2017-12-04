@@ -34,7 +34,7 @@ final class CredentialsManagerTest extends TestCase
 
     public function testCreationFromValidParams()
     {
-        $this::assertInstanceOf(CredentialsManager::class, new CredentialsManager($this->subdomain, $this->login, $this->hash));
+        self::assertInstanceOf(CredentialsManager::class, new CredentialsManager($this->subdomain, $this->login, $this->hash));
     }
 
     /**

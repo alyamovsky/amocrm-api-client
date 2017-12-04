@@ -160,7 +160,7 @@ final class SettingsStorageTest extends TestCase
     public function testGetCorrectMethodPath()
     {
         $this->settingsStorage->setMethodsPaths($this->methodsPaths);
-        $this::assertEquals($this->settingsStorage->getMethodsPaths()['foo'], $this->settingsStorage->getMethodPath('foo'));
+        self::assertEquals($this->settingsStorage->getMethodsPaths()['foo'], $this->settingsStorage->getMethodPath('foo'));
     }
 
     /**

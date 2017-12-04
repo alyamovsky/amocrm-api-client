@@ -40,6 +40,6 @@ class ClientFactoryTest extends TestCase
     public function testCanBeCreated()
     {
         $client = ClientFactory::create($this->credentials, $this->settings);
-        $this::assertInstanceOf(Client::class, $client);
+        self::assertInstanceOf(Client::class, $client);
     }
 }

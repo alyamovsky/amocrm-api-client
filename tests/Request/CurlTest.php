@@ -43,13 +43,13 @@ class CurlTest extends TestCase
      */
     public function testCurlExtensionIsLoaded()
     {
-        $this::assertTrue(extension_loaded('curl'));
+        self::assertTrue(extension_loaded('curl'));
     }
 
     public function testInit()
     {
         $this->curl->init();
-        $this::assertTrue(is_resource($this->curl->getResource()));
+        self::assertTrue(is_resource($this->curl->getResource()));
         $this->curl->close();
     }
 
@@ -57,7 +57,7 @@ class CurlTest extends TestCase
     {
         $this->curl->init();
         $this->curl->close();
-        $this::assertFalse(is_resource($this->curl));
+        self::assertFalse(is_resource($this->curl));
     }
 
     public function testDestructor()
@@ -83,7 +83,7 @@ class CurlTest extends TestCase
 
         $mock = $this->mockBuilder->build();
         $mock->enable();
-        $this::assertEquals($output, $this->curl->exec());
+        self::assertEquals($output, $this->curl->exec());
         $mock->disable();
 
         $this->curl->close();
@@ -109,77 +109,77 @@ class CurlTest extends TestCase
     public function testSetUrl()
     {
         $this->curl->init();
-        $this::assertTrue($this->curl->setUrl($this->url));
+        self::assertTrue($this->curl->setUrl($this->url));
         $this->curl->close();
     }
 
     public function testSetReturnTransfer()
     {
         $this->curl->init();
-        $this::assertTrue($this->curl->setReturnTransfer(true));
+        self::assertTrue($this->curl->setReturnTransfer(true));
         $this->curl->close();
     }
 
     public function testSetUserAgent()
     {
         $this->curl->init();
-        $this::assertTrue($this->curl->setUserAgent('foo'));
+        self::assertTrue($this->curl->setUserAgent('foo'));
         $this->curl->close();
     }
 
     public function testSetHttpHeader()
     {
         $this->curl->init();
-        $this::assertTrue($this->curl->setHttpHeader(['foo: bar']));
+        self::assertTrue($this->curl->setHttpHeader(['foo: bar']));
         $this->curl->close();
     }
 
     public function testSetHeader()
     {
         $this->curl->init();
-        $this::assertTrue($this->curl->setHeader(true));
+        self::assertTrue($this->curl->setHeader(true));
         $this->curl->close();
     }
 
     public function testSetCookieFile()
     {
         $this->curl->init();
-        $this::assertTrue($this->curl->setCookieFile('foo.txt'));
+        self::assertTrue($this->curl->setCookieFile('foo.txt'));
         $this->curl->close();
     }
 
     public function testSetCookieJar()
     {
         $this->curl->init();
-        $this::assertTrue($this->curl->setCookieJar('foo.txt'));
+        self::assertTrue($this->curl->setCookieJar('foo.txt'));
         $this->curl->close();
     }
 
     public function testSetSSLVerifyPeer()
     {
         $this->curl->init();
-        $this::assertTrue($this->curl->setSSLVerifyPeer(true));
+        self::assertTrue($this->curl->setSSLVerifyPeer(true));
         $this->curl->close();
     }
 
     public function testSetSSLVerifyHost()
     {
         $this->curl->init();
-        $this::assertTrue($this->curl->setSSLVerifyHost(2));
+        self::assertTrue($this->curl->setSSLVerifyHost(2));
         $this->curl->close();
     }
 
     public function testSetCustomRequest()
     {
         $this->curl->init();
-        $this::assertTrue($this->curl->setCustomRequest('POST'));
+        self::assertTrue($this->curl->setCustomRequest('POST'));
         $this->curl->close();
     }
 
     public function testSetPostFields()
     {
         $this->curl->init();
-        $this::assertTrue($this->curl->setPostFields('{"foobar":"42"}'));
+        self::assertTrue($this->curl->setPostFields('{"foobar":"42"}'));
         $this->curl->close();
     }
 
@@ -196,7 +196,7 @@ class CurlTest extends TestCase
 
         $mock = $this->mockBuilder->build();
         $mock->enable();
-        $this::assertEquals(200, $this->curl->getHttpCode());
+        self::assertEquals(200, $this->curl->getHttpCode());
         $mock->disable();
 
         $this->curl->close();

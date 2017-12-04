@@ -17,7 +17,7 @@ class StringUtil
      */
     public static function isAlNum($value)
     {
-        if (!ctype_alnum($value)) {
+        if (!self::isCorrectType($value) || !ctype_alnum((string)$value)) {
             return false;
         }
 
@@ -43,7 +43,8 @@ class StringUtil
      */
     public static function isDomain($value)
     {
-        return (bool)(preg_match("/^([a-z\d](-*[a-z\d])*)(\.([a-z\d](-*[a-z\d])*))*$/i", $value) // valid chars check
+        return (self::isCorrectType($value))
+            && (preg_match("/^([a-z\d](-*[a-z\d])*)(\.([a-z\d](-*[a-z\d])*))*$/i", $value) // valid chars check
             && preg_match("/^.{1,253}$/", $value) // overall length check
             && preg_match("/^[^\.]{1,63}(\.[^\.]{1,63})*$/", $value)); // length of each label
     }
@@ -54,7 +55,7 @@ class StringUtil
      */
     public static function isOnlyLetters($value)
     {
-        if (!ctype_alpha($value)) {
+        if (!self::isCorrectType($value) || !ctype_alpha($value)) {
             return false;
         }
 
@@ -68,7 +69,7 @@ class StringUtil
      */
     public static function isText($value)
     {
-        return (bool)preg_match('/^[A-Za-z0-9\.\-\'"!,;:\?()_\/\s]+$/', $value);
+        return (self::isCorrectType($value) && preg_match('/^[A-Za-z0-9\.\-\'"!,;:\?()_\/\s]+$/', $value));
     }
 
     /**
@@ -78,7 +79,7 @@ class StringUtil
      */
     public static function isUrlPath($value)
     {
-        return (bool)preg_match('/^\/[A-Za-z0-9\/?&=,;\[\]\.#]+$/', $value);
+        return (self::isCorrectType($value) && preg_match('/^\/[A-Za-z0-9\/?&=,;@\[\]\.#]+$/', $value));
     }
 
     /**
@@ -88,6 +89,15 @@ class StringUtil
      */
     public static function isFilePath($value)
     {
-        return (bool)preg_match('/^(vfs:\/)?\/[A-Za-z0-9\/\._\s-]+$/', $value);
+        return (self::isCorrectType($value) && preg_match('/^(vfs:\/)?\/[A-Za-z0-9\/\._\s-]+$/', $value));
+    }
+
+    /**
+     * @param mixed $value
+     * @return bool
+     */
+    private static function isCorrectType($value)
+    {
+        return (is_int($value) || (is_string($value)));
     }
 }

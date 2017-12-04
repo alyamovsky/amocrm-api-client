@@ -139,7 +139,6 @@ final class SettingsStorageTest extends TestCase
     {
         return [
             [['foo' => '/$test', 'bar' => '/123']],
-            [['foo' => '/test', 'bar' => '/test@test']],
             [['foo' => 'test', 'bar' => '/testtest']],
             [['foo' => '/data://foo']],
             [['foo' => '']],

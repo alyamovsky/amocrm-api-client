@@ -90,7 +90,7 @@ class CurlTest extends TestCase
     }
 
     /**
-     * @expectedException \ddlzz\amoAPI\Exceptions\CurlException
+     * @expectedException \ddlzz\AmoAPI\Exceptions\CurlException
      * @expectedExceptionMessage Curl class is not properly initialized
      */
     public function testExecFail()
@@ -99,7 +99,7 @@ class CurlTest extends TestCase
     }
 
     /**
-     * @expectedException \ddlzz\amoAPI\Exceptions\CurlException
+     * @expectedException \ddlzz\AmoAPI\Exceptions\CurlException
      */
     public function testSetOptFail()
     {

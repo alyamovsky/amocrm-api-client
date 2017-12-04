@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  * Class FieldsValidatorTest
  * @package Tests\AmoAPI\Validators
  * @author ddlzz
- * @covers \ddlzz\amoAPI\Validators\FieldsValidator
+ * @covers \ddlzz\AmoAPI\Validators\FieldsValidator
  */
 class FieldsValidatorTest extends TestCase
 {

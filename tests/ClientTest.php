@@ -77,7 +77,7 @@ final class ClientTest extends TestCase
         self::assertFalse(file_exists($incorrectCookie->url()));
     }
 
-    /** @expectedException \ddlzz\amoAPI\Exceptions\RuntimeException */
+    /** @expectedException \ddlzz\AmoAPI\Exceptions\RuntimeException */
     public function testFailCreatingCookie()
     {
         /** @noinspection PhpUndefinedMethodInspection */

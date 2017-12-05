@@ -91,7 +91,7 @@ final class CurlTest extends TestCase
 
     /**
      * @expectedException \ddlzz\AmoAPI\Exceptions\CurlException
-     * @expectedExceptionMessage Curl class is not properly initialized
+     * @expectedExceptionMessageRegExp ~.*not properly initialized.*~
      */
     public function testExecFail()
     {

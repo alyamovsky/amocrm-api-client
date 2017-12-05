@@ -38,7 +38,7 @@ final class EntityFactoryTest extends TestCase
 
     /**
      * @expectedException \ddlzz\AmoAPI\Exceptions\EntityFactoryException
-     * @expectedExceptionMessageRegExp ~Class .* does not exists~
+     * @expectedExceptionMessageRegExp ~.*does not exists~
      */
     public function testCreateEntityNonexistentClassException()
     {

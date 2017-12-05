@@ -12,7 +12,6 @@ use PHPUnit\Framework\TestCase;
  * @package Tests\AmoAPI
  * @author ddlzz
  * @covers \ddlzz\AmoAPI\SettingsStorage
- * @covers \ddlzz\AmoAPI\Validators\SettingsValidator
  */
 final class SettingsStorageTest extends TestCase
 {

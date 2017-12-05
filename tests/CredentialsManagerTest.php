@@ -11,7 +11,6 @@ use PHPUnit\Framework\TestCase;
  * @package Tests\AmoAPI
  * @author ddlzz
  * @covers \ddlzz\AmoAPI\CredentialsManager
- * @covers \ddlzz\AmoAPI\Validators\CredentialsValidator
  */
 final class CredentialsManagerTest extends TestCase
 {

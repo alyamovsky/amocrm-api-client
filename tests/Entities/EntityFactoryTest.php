@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
  * @author ddlzz
  * @covers \ddlzz\AmoAPI\Entities\EntityFactory
  */
-class EntityFactoryTest extends TestCase
+final class EntityFactoryTest extends TestCase
 {
     /** @var SettingsStorage */
     private $settings;

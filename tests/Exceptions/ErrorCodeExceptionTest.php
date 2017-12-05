@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
  * @author ddlzz
  * @covers \ddlzz\AmoAPI\Exceptions\ErrorCodeException
  */
-class ErrorCodeExceptionTest extends TestCase
+final class ErrorCodeExceptionTest extends TestCase
 {
     public function testExceptionParams()
     {

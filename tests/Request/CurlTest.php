@@ -17,7 +17,7 @@ use phpmock\MockBuilder;
  * @author ddlzz
  * @covers \ddlzz\AmoAPI\Request\Curl
  */
-class CurlTest extends TestCase
+final class CurlTest extends TestCase
 {
     /** @var SettingsStorage */
     private $settings;

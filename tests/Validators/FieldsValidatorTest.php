@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
  * @author ddlzz
  * @covers \ddlzz\AmoAPI\Validators\FieldsValidator
  */
-class FieldsValidatorTest extends TestCase
+final class FieldsValidatorTest extends TestCase
 {
     /** @var array */
     private $fieldsParams = [

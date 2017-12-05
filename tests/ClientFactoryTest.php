@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
  * @author ddlzz
  * @covers  \ddlzz\AmoAPI\ClientFactory
  */
-class ClientFactoryTest extends TestCase
+final class ClientFactoryTest extends TestCase
 {
     /** @var CredentialsManager */
     private $credentials;

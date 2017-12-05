@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
  * @author ddlzz
  * @covers \ddlzz\AmoAPI\Exceptions\FailedAuthException
  */
-class FailedAuthExceptionTest extends TestCase
+final class FailedAuthExceptionTest extends TestCase
 {
     public function testExceptionParams()
     {

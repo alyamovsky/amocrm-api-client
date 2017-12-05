@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
  * @author ddlzz
  * @covers \ddlzz\AmoAPI\Request\DataSender
  */
-class DataSenderTest extends TestCase
+final class DataSenderTest extends TestCase
 {
     /** @var SettingsStorage */
     private $settings;

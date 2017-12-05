@@ -21,7 +21,6 @@ use PHPUnit\Framework\TestCase;
  * @author ddlzz
  * @covers \ddlzz\AmoAPI\Client
  * @covers \ddlzz\AmoAPI\Auth
- * @covers \ddlzz\AmoAPI\Request\UrlBuilder
  */
 final class ClientTest extends TestCase
 {

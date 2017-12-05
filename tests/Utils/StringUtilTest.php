@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
  * @author ddlzz
  * @covers \ddlzz\AmoAPI\Utils\StringUtil
  */
-class StringUtilTest extends TestCase
+final class StringUtilTest extends TestCase
 {
     /**
      * @return array

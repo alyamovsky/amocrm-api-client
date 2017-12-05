@@ -69,7 +69,7 @@ class Client
     {
         $method = $this->settings->getMethodCodeByType($type);
         $params = ['id' => $id];
-        $url = $this->urlBuilder->prepareMethodUrl($method, $params);
+        $url = $this->urlBuilder->buildMethodUrl($method, $params);
         $result = json_decode($this->dataSender->send($url), true);
 
         if (empty($result)) {
@@ -107,7 +107,7 @@ class Client
      */
     public function update(EntityInterface $entity)
     {
-        $entity->setUpdatedAtParam();
+        $entity->setUpdatedAt();
         return $this->set($entity, 'update');
     }
 
@@ -121,7 +121,7 @@ class Client
     private function checkAuth()
     {
         if (!$this->auth->isAuthenticated()) {
-            $result = $this->dataSender->send($this->urlBuilder->prepareMethodUrl('auth'), $this->credentials->getCredentials());
+            $result = $this->dataSender->send($this->urlBuilder->buildMethodUrl('auth'), $this->credentials->getCredentials());
 
             if (!empty($result) && (!file_exists($this->settings->getCookiePath()))) {
                 $message = 'An error occurred while creating the cookie file ' . $this->settings->getCookiePath();
@@ -146,7 +146,7 @@ class Client
 
         $data = [];
         $data[$action][] = $entity->getFields();
-        $url = $this->urlBuilder->prepareMethodUrl($entity->getRequestName());
+        $url = $this->urlBuilder->buildMethodUrl($entity->getRequestName());
         $this->waitASec();
         $result = $this->dataSender->send($url, $data);
 

@@ -2,6 +2,8 @@
 
 
 namespace ddlzz\AmoAPI\Request;
+
+use ddlzz\AmoAPI\Exceptions\InvalidArgumentException;
 use ddlzz\AmoAPI\SettingsStorage;
 
 
@@ -33,9 +35,9 @@ class UrlBuilder
      * @param string $code
      * @param array $params
      * @return string
-     * @throws \ddlzz\AmoAPI\Exceptions\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public function prepareMethodUrl($code, $params = [])
+    public function buildMethodUrl($code, $params = [])
     {
         $host = $this->makeUserHost($this->subdomain);
         $path = $this->settings->getMethodPath($code);
@@ -57,11 +59,11 @@ class UrlBuilder
     }
 
     /**
-     * @param string $domain
+     * @param string $subdomain
      * @return string
      */
-    private function makeUserHost($domain)
+    private function makeUserHost($subdomain)
     {
-        return $this->settings->getScheme() . '://' . $domain . '.' . $this->settings->getDomain();
+        return $this->settings->getScheme() . '://' . $subdomain . '.' . $this->settings->getDomain();
     }
 }

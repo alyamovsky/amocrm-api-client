@@ -12,10 +12,10 @@ use ddlzz\AmoAPI\Validators\FieldsValidator;
  * @package ddlzz\AmoAPI\Entities
  * @author ddlzz
  */
-abstract class BaseEntity implements \ArrayAccess, EntityInterface
+abstract class BaseEntity implements \ArrayAccess
 {
     /** @var FieldsValidator */
-    protected $fieldsValidator;
+    private $fieldsValidator;
 
     /** @var string */
     protected $requestName = '';
@@ -30,7 +30,7 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
      * Fields parameters for validation purposes. These are fields that are used in every entity.
      * @var array
      */
-    protected $fieldsParams = [
+    private $fieldsParams = [
         'id' => [
             'type' => 'int',
             'required_add' => false,
@@ -67,7 +67,7 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
     protected $fieldsParamsAppend = [];
 
     /** @var array */
-    protected $aliases = [
+    private $aliases = [
         'created_at' => 'date_create',
         'updated_at' => 'last_modified',
         'created_by' => 'created_user_id',
@@ -78,10 +78,10 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
     protected $aliasesAppend = [];
 
     /**
-     * EntityInterface data goes here
+     * Entity data goes here
      * @var array
      */
-    protected $fields = [];
+    private $fields = [];
 
     /**
      * BaseEntity constructor.
@@ -107,17 +107,18 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
             throw new InvalidArgumentException("Action \"$action\" is not a proper action parameter");
         }
 
+        self::validateDataBeforeSet($this->container);
+
         if (!isset($this->container['created_at']) && !isset($this->container['date_create'])) {
             $this->setCreatedAt();
         }
 
-        $data = self::validateDataBeforeSet($this->container);
-        $data = $this->renameAliases($data);
+        $this->container = $this->renameAliases($this->container);
 
         $this->fieldsValidator->setAction($action);
 
         foreach ($this->fieldsParams as $key => $params) {
-            $fieldData = isset($data[$key]) ? $data[$key] : null;
+            $fieldData = isset($this->container[$key]) ? $this->container[$key] : null;
             if (($this->fieldsValidator->isValid($key, $fieldData)) && (!empty($fieldData))) {
                 $this->setField($key, $fieldData);
             }
@@ -142,7 +143,7 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
 
     /**
      * @param array $data
-     * @return EntityInterface $this
+     * @return BaseEntity
      * @throws EntityFieldsException
      * @throws InvalidArgumentException
      */
@@ -153,7 +154,11 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
         return $this;
     }
 
-    public function setUpdatedAtParam()
+    /**
+     * The updated_at field must be greater than the existing one, so
+     * we update it automatically if none was passed by user.
+     */
+    public function setUpdatedAt()
     {
         if ((isset($this->fields['updated_at'])) && ($this->container['updated_at'] === $this->fields['updated_at'])) {
             $this->container['updated_at'] = time();
@@ -167,7 +172,7 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
 
     /**
      * @param array $data
-     * @return array
+     * @return bool
      * @throws EntityFieldsException
      */
     private static function validateDataBeforeSet(array $data)
@@ -181,7 +186,7 @@ abstract class BaseEntity implements \ArrayAccess, EntityInterface
             throw new EntityFieldsException($message);
         }
 
-        return $data;
+        return true;
     }
 
     /**

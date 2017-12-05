@@ -36,6 +36,6 @@ interface EntityInterface
     /**
      * Sets the 'updated_at' value as current time if nothing was passed to it.
      */
-    public function setUpdatedAtParam();
+    public function setUpdatedAt();
 
 }

@@ -39,7 +39,7 @@ final class CredentialsManagerTest extends TestCase
     /**
      * @expectedException \ddlzz\AmoAPI\Exceptions\InvalidArgumentException
      */
-    public function testSubdomainValidation()
+    public function testSubdomainValidationFail()
     {
         new CredentialsManager('some string', $this->login, $this->hash);
     }
@@ -47,7 +47,7 @@ final class CredentialsManagerTest extends TestCase
     /**
      * @expectedException \ddlzz\AmoAPI\Exceptions\InvalidArgumentException
      */
-    public function testLoginValidation()
+    public function testLoginValidationFail()
     {
         new CredentialsManager($this->subdomain, 'test login', $this->hash);
     }
@@ -55,7 +55,7 @@ final class CredentialsManagerTest extends TestCase
     /**
      * @expectedException \ddlzz\AmoAPI\Exceptions\InvalidArgumentException
      */
-    public function testHashValidation()
+    public function testHashValidationFail()
     {
         new CredentialsManager($this->subdomain, $this->login, '@some $string!');
     }

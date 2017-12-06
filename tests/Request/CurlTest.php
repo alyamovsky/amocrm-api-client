@@ -100,6 +100,7 @@ final class CurlTest extends TestCase
 
     /**
      * @expectedException \ddlzz\AmoAPI\Exceptions\CurlException
+     * @expectedExceptionMessageRegExp ~.*not properly initialized.*~
      */
     public function testSetOptFail()
     {

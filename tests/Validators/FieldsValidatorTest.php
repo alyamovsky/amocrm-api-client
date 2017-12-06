@@ -117,7 +117,7 @@ final class FieldsValidatorTest extends TestCase
      * @param mixed $value
      * @expectedException \ddlzz\AmoAPI\Exceptions\EntityFieldsException
      */
-    public function testIsValidException($key, $value)
+    public function testIsValidFail($key, $value)
     {
         $validator = new FieldsValidator($this->fieldsParams);
         $validator->isValid($key, $value);
@@ -181,7 +181,7 @@ final class FieldsValidatorTest extends TestCase
      * @param mixed $value
      * @expectedException \ddlzz\AmoAPI\Exceptions\EntityFieldsException
      */
-    public function testValidateRequiredException($key, $value)
+    public function testValidateRequiredMissingValue($key, $value)
     {
         $validator = new FieldsValidator($this->fieldsParams);
         foreach (['add', 'update'] as $action) {

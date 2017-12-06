@@ -63,7 +63,7 @@ final class SettingsStorageTest extends TestCase
      * @expectedException \ddlzz\AmoAPI\Exceptions\InvalidArgumentException
      * @param string $scheme
      */
-    public function testSetScheme($scheme)
+    public function testSetIncorrectScheme($scheme)
     {
         $this->settingsStorage->setScheme($scheme);
     }
@@ -92,7 +92,7 @@ final class SettingsStorageTest extends TestCase
      * @expectedException \ddlzz\AmoAPI\Exceptions\InvalidArgumentException
      * @param string $domain
      */
-    public function testSetDomain($domain)
+    public function testSetIncorrectDomain($domain)
     {
         $this->settingsStorage->setDomain($domain);
     }
@@ -120,7 +120,7 @@ final class SettingsStorageTest extends TestCase
      * @expectedException \ddlzz\AmoAPI\Exceptions\InvalidArgumentException
      * @param string $userAgent
      */
-    public function testSetUserAgent($userAgent)
+    public function testSetIncorrectUserAgent($userAgent)
     {
         $this->settingsStorage->setUserAgent($userAgent);
     }
@@ -150,7 +150,7 @@ final class SettingsStorageTest extends TestCase
      * @expectedException \ddlzz\AmoAPI\Exceptions\InvalidArgumentException
      * @param array $methodsPaths
      */
-    public function testSetMethodsPaths($methodsPaths)
+    public function testSetIncorrectMethodsPaths($methodsPaths)
     {
         $this->settingsStorage->setMethodsPaths($methodsPaths);
     }
@@ -164,9 +164,9 @@ final class SettingsStorageTest extends TestCase
     /**
      * @expectedException \ddlzz\AmoAPI\Exceptions\InvalidArgumentException
      */
-    public function testGetWrongMethodPath()
+    public function testGetIncorrectMethodPath()
     {
-        $this->settingsStorage->getMethodPath('wrong_code');
+        $this->settingsStorage->getMethodPath('incorrect_code');
     }
 
     public function testGetCookiePath()
@@ -196,7 +196,7 @@ final class SettingsStorageTest extends TestCase
      * @expectedException \ddlzz\AmoAPI\Exceptions\InvalidArgumentException
      * @param string $cookiePath
      */
-    public function testSetCookiePath($cookiePath)
+    public function testSetIncorrectCookiePath($cookiePath)
     {
         $this->settingsStorage->setCookiePath($cookiePath);
     }

@@ -118,7 +118,7 @@ class FieldsValidator
      * @return bool
      * @throws EntityFieldsException
      */
-    private static function validateString($key, $value) // todo_ddlzz test this
+    private static function validateString($key, $value)
     {
         if (!is_string($value) && !is_numeric($value)) {
             throw new EntityFieldsException("The field \"$key\" must be string");

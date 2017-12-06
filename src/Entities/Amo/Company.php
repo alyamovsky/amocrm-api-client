@@ -40,6 +40,11 @@ final class Company extends BaseEntity implements EntityInterface
             'required_add' => false,
             'required_update' => false,
         ],
+        'leads_id' => [
+            'type' => 'array|string',
+            'required_add' => false,
+            'required_update' => false,
+        ],
         'closest_task_at' => [
             'type' => 'int',
             'required_add' => false,
@@ -60,8 +65,18 @@ final class Company extends BaseEntity implements EntityInterface
             'required_add' => false,
             'required_update' => false,
         ],
+        'contacts_id' => [
+            'type' => 'array|string',
+            'required_add' => false,
+            'required_update' => false,
+        ],
         'customers' => [
             'type' => 'array',
+            'required_add' => false,
+            'required_update' => false,
+        ],
+        'customers_id' => [
+            'type' => 'array|string',
             'required_add' => false,
             'required_update' => false,
         ],
@@ -70,7 +85,8 @@ final class Company extends BaseEntity implements EntityInterface
     /** @var array */
     protected $aliasesAppend = [
         'updated_by' => 'modified_user_id',
-        'leads' => 'linked_leads_id',
+        'leads_id' => 'linked_leads_id',
+        'contacts_id' => 'linked_contacts_id',
         'closest_task_at' => 'closest_task',
     ];
 }

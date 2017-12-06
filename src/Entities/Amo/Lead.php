@@ -30,7 +30,7 @@ final class Lead extends BaseEntity implements EntityInterface
             'required_update' => false,
         ],
         'main_contact' => [
-            'type' => 'array', // [id => int, _links => array]
+            'type' => 'array|string', // [id => int, _links => array]
             'required_add' => false,
             'required_update' => false,
         ],
@@ -41,6 +41,11 @@ final class Lead extends BaseEntity implements EntityInterface
         ],
         'company' => [
             'type' => 'array', // [id => int, name => string, _links => array]
+            'required_add' => false,
+            'required_update' => false,
+        ],
+        'company_id' => [
+            'type' => 'array|string', // [id => int, name => string, _links => array]
             'required_add' => false,
             'required_update' => false,
         ],
@@ -79,8 +84,18 @@ final class Lead extends BaseEntity implements EntityInterface
             'required_add' => false,
             'required_update' => false,
         ],
+        'contacts_id' => [
+            'type' => 'array|string', // [id => int, id => int]
+            'required_add' => false,
+            'required_update' => false,
+        ],
         'pipeline' => [
             'type' => 'array', // [id => int, _links => array]
+            'required_add' => false,
+            'required_update' => false,
+        ],
+        'pipeline_id' => [
+            'type' => 'int',
             'required_add' => false,
             'required_update' => false,
         ],

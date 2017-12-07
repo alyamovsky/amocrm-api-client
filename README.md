@@ -3,6 +3,22 @@
 
 Библиотека для работы с АПИ [amoCRM](https://amocrm.ru/).
  
+## Установка
+
+Введите в командной строке
+```
+composer require ddlzz/amocrm-api-client
+```
+
+Или пропишите в `composer.json`
+```
+{
+  "require": {
+    "ddlzz/amocrm-api-client": "0.*"
+  }
+}
+```
+
 ## Быстрый старт
  ```php
  <?php

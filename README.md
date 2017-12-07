@@ -1,5 +1,5 @@
 # amoCRM PHP API Client
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ddlzz/amocrm-api-client/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/ddlzz/amocrm-api-client/?branch=develop) [![Code Coverage](https://scrutinizer-ci.com/g/ddlzz/amocrm-api-client/badges/coverage.png?b=develop)](https://scrutinizer-ci.com/g/ddlzz/amocrm-api-client/?branch=develop) [![Build Status](https://scrutinizer-ci.com/g/ddlzz/amocrm-api-client/badges/build.png?b=develop)](https://scrutinizer-ci.com/g/ddlzz/amocrm-api-client/build-status/develop)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ddlzz/amocrm-api-client/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/ddlzz/amocrm-api-client/?branch=develop) [![Code Coverage](https://scrutinizer-ci.com/g/ddlzz/amocrm-api-client/badges/coverage.png?b=develop)](https://scrutinizer-ci.com/g/ddlzz/amocrm-api-client/?branch=develop) [![Build Status](https://travis-ci.org/ddlzz/amocrm-api-client.svg?branch=develop)](https://travis-ci.org/ddlzz/amocrm-api-client)
 
 Библиотека для работы с АПИ [amoCRM](https://amocrm.ru/).
  

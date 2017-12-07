@@ -81,17 +81,10 @@ class FieldsValidator
      */
     private function validateRequired($key, $value)
     {
-        switch ($this->action) {
-            case 'add':
-                if (!isset($value) && (true === $this->fieldsParams[$key]['required_add'])) {
-                    throw new EntityFieldsException("Adding error: the required field \"$key\" is missing or empty");
-                }
-                break;
-            case 'update':
-                if (!isset($value) && (true === $this->fieldsParams[$key]['required_update'])) {
-                    throw new EntityFieldsException("Updating error: the required field \"$key\" is missing or empty");
-                }
-                break;
+        if (('add' === $this->action) || ('update' === $this->action)) {
+            if (!isset($value) && (true === $this->fieldsParams[$key]['required_' . $this->action])) {
+                throw new EntityFieldsException(ucfirst($this->action) . " error: the required field \"$key\" is missing or empty");
+            }
         }
 
         return true;

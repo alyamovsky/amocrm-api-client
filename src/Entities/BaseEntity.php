@@ -108,13 +108,8 @@ abstract class BaseEntity implements \ArrayAccess
         }
 
         self::validateDataBeforeSet($this->container);
-
-        if (!isset($this->container['created_at']) && !isset($this->container['date_create'])) {
-            $this->setCreatedAt();
-        }
-
+        $this->setCreatedAt();
         $this->container = $this->renameAliases($this->container);
-
         $this->fieldsValidator->setAction($action);
 
         foreach ($this->fieldsParams as $key => $params) {
@@ -167,7 +162,9 @@ abstract class BaseEntity implements \ArrayAccess
 
     private function setCreatedAt()
     {
-        $this->container['created_at'] = time();
+        if (!isset($this->container['created_at']) && !isset($this->container['date_create'])) {
+            $this->container['created_at'] = time();
+        }
     }
 
     /**

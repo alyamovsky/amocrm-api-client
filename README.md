@@ -5,12 +5,12 @@
  
 ## Установка
 
-Введите в командной строке
+CLI:
 ```
 composer require ddlzz/amocrm-api-client
 ```
 
-Или пропишите в `composer.json`
+`composer.json`:
 ```
 {
   "require": {

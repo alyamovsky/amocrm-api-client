@@ -75,6 +75,11 @@ final class FieldsValidatorTest extends TestCase
 
     /**
      * @dataProvider provideDataForTestIsValid
+     * @covers \ddlzz\AmoAPI\Validators\FieldsValidator::validateInt
+     * @covers \ddlzz\AmoAPI\Validators\FieldsValidator::validateString
+     * @covers \ddlzz\AmoAPI\Validators\FieldsValidator::validateBool
+     * @covers \ddlzz\AmoAPI\Validators\FieldsValidator::validateArray
+     * @covers \ddlzz\AmoAPI\Validators\FieldsValidator::validateArraystring
      * @param string $key
      * @param mixed $value
      */
@@ -87,7 +92,7 @@ final class FieldsValidatorTest extends TestCase
     /**
      * @return array
      */
-    public function provideDataForTestIsValidException()
+    public function provideDataForTestIsValidFail()
     {
         return [
             ['int_param', -123],
@@ -112,7 +117,12 @@ final class FieldsValidatorTest extends TestCase
     }
 
     /**
-     * @dataProvider provideDataForTestIsValidException
+     * @dataProvider provideDataForTestIsValidFail
+     * @covers \ddlzz\AmoAPI\Validators\FieldsValidator::validateInt
+     * @covers \ddlzz\AmoAPI\Validators\FieldsValidator::validateString
+     * @covers \ddlzz\AmoAPI\Validators\FieldsValidator::validateBool
+     * @covers \ddlzz\AmoAPI\Validators\FieldsValidator::validateArray
+     * @covers \ddlzz\AmoAPI\Validators\FieldsValidator::validateArraystring
      * @param string $key
      * @param mixed $value
      * @expectedException \ddlzz\AmoAPI\Exceptions\EntityFieldsException

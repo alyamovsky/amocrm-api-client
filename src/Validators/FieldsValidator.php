@@ -47,30 +47,29 @@ class FieldsValidator
         $this->validateRequired($key, $value);
 
         if (isset($value)) {
-            switch ($this->fieldsParams[$key]['type']) {
-                case 'int':
-                    self::validateInt($key, $value);
-                    break;
-                case 'string':
-                    self::validateString($key, $value);
-                    break;
-                case 'bool':
-                    self::validateBool($key, $value);
-                    break;
-                case 'array':
-                    self::validateArray($key, $value);
-                    break;
-                case 'array|string':
-                    self::validateArrayString($key, $value);
-                    break;
-                default:
-                    throw new EntityFieldsException(
-                        "Internal error: the field \"$key\" doesn't match any of the entity predefined fields"
-                    );
-            }
+            $validate = $this->prepareValidateType($this->fieldsParams[$key]['type']);
+            self::$validate($key, $value);
         }
 
         return true;
+    }
+
+    /**
+     * @param string $key
+     * @return string
+     * @throws EntityFieldsException
+     */
+    private function prepareValidateType($key)
+    {
+        $key = str_replace('|', '', $key);
+        $method = 'validate' . ucfirst($key);
+        if (!method_exists(self::class, $method)) {
+            throw new EntityFieldsException(
+                "Internal error: the field \"$key\" doesn't match any of the entity predefined fields"
+            );
+        }
+
+        return $method;
     }
 
     /**
@@ -90,6 +89,7 @@ class FieldsValidator
         return true;
     }
 
+    /** @noinspection PhpUnusedPrivateMethodInspection */
     /**
      * @param string $key
      * @param int $value
@@ -105,6 +105,7 @@ class FieldsValidator
         return true;
     }
 
+    /** @noinspection PhpUnusedPrivateMethodInspection */
     /**
      * @param string $key
      * @param string $value
@@ -120,6 +121,7 @@ class FieldsValidator
         return true;
     }
 
+    /** @noinspection PhpUnusedPrivateMethodInspection */
     /**
      * @param string $key
      * @param bool $value
@@ -135,6 +137,7 @@ class FieldsValidator
         return true;
     }
 
+    /** @noinspection PhpUnusedPrivateMethodInspection */
     /**
      * @param string $key
      * @param array $value
@@ -150,6 +153,7 @@ class FieldsValidator
         return true;
     }
 
+    /** @noinspection PhpUnusedPrivateMethodInspection */
     /**
      * Because some fields must be either strings during entity creation or arrays during it's obtaining from server,
      * we create this check
@@ -158,7 +162,7 @@ class FieldsValidator
      * @return bool
      * @throws EntityFieldsException
      */
-    private static function validateArrayString($key, $value) // todo_ddlzz test this and delete if possible
+    private static function validateArraystring($key, $value)
     {
         if ((!is_array($value)) && (!is_string($value) && !is_numeric($value))) {
             throw new EntityFieldsException("The field \"$key\" must be an array or string");

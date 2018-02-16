@@ -45,7 +45,7 @@ class DataSender
         $this->curl->setReturnTransfer(true);
         $this->curl->setUserAgent($this->settings->getUserAgent());
         $this->curl->setUrl($url);
-        $this->curl->setHttpHeader([$this->settings::SENDER_HTTP_HEADER]);
+        $this->curl->setHttpHeader([$this->settings->SENDER_HTTP_HEADER]);
         $this->curl->setHeader(false);
         $this->curl->setCookieFile($this->settings->getCookiePath());
         $this->curl->setCookieJar($this->settings->getCookiePath());

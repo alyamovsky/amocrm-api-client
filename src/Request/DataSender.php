@@ -99,10 +99,14 @@ class DataSender
      */
     private function validateCode($code, $url, $response)
     {
-        if ((401 === $code) || (403 === $code)) {
-            throw new FailedAuthException('Auth failed! ' . self::getErrorByHttpCode($code), $response);
-        } elseif ((200 !== $code) && (204 !== $code)) {
-            throw new ErrorCodeException(self::getErrorByHttpCode($code), $response, $url);
+        switch ($code) {
+            case 401:
+            case 403:
+                throw new FailedAuthException('Auth failed! ' . self::getErrorByHttpCode($code), $response);
+                break;
+            case (200 !== $code && 204 !== $code):
+                throw new ErrorCodeException(self::getErrorByHttpCode($code), $response, $url);
+                break;
         }
 
         return true;

@@ -13,7 +13,7 @@
     /** @var \ddlzz\AmoAPI\Client $request */
     $request = \ddlzz\AmoAPI\ClientFactory::create($credentials);
 
-    $company = new \ddlzz\AmoAPI\Entities\Amo\Company();
+    $company = new \ddlzz\AmoAPI\Model\Amo\Company();
 
     // Заполним модель данными. Формат заполнения такой:
     $company['name'] = 'New company';

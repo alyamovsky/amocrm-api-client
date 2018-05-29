@@ -45,7 +45,7 @@ final class DataSenderTest extends TestCase
     }
 
     /**
-     * @expectedException \ddlzz\AmoAPI\Exceptions\FailedAuthException
+     * @expectedException \ddlzz\AmoAPI\Exception\FailedAuthException
      */
     public function testFailedAuth()
     {
@@ -57,7 +57,7 @@ final class DataSenderTest extends TestCase
     }
 
     /**
-     * @expectedException \ddlzz\AmoAPI\Exceptions\ErrorCodeException
+     * @expectedException \ddlzz\AmoAPI\Exception\ErrorCodeException
      */
     public function testHttpError()
     {

@@ -3,7 +3,7 @@
 
 namespace ddlzz\AmoAPI\Request;
 
-use ddlzz\AmoAPI\Exceptions\CurlException;
+use ddlzz\AmoAPI\Exception\CurlException;
 
 
 /**

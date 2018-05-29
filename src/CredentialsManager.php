@@ -3,7 +3,7 @@
 
 namespace ddlzz\AmoAPI;
 
-use ddlzz\AmoAPI\Validators\CredentialsValidator;
+use ddlzz\AmoAPI\Validator\CredentialsValidator;
 
 
 /**
@@ -30,7 +30,7 @@ class CredentialsManager
      * @param string $domain
      * @param string $login
      * @param string $hash
-     * @throws Exceptions\InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct($domain, $login, $hash)
     {

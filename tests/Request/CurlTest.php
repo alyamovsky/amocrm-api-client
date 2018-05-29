@@ -77,7 +77,7 @@ final class CurlTest extends TestCase
 
         $output = 'Cats and dogs are friends!';
 
-        $this->mockBuilder->setNamespace($this->settings::NAMESPACE_PREFIX . '\Request')
+        $this->mockBuilder->setNamespace(SettingsStorage::NAMESPACE_PREFIX . '\Request')
             ->setName("curl_exec")
             ->setFunctionProvider(new FixedValueFunction($output));
 
@@ -90,7 +90,7 @@ final class CurlTest extends TestCase
     }
 
     /**
-     * @expectedException \ddlzz\AmoAPI\Exceptions\CurlException
+     * @expectedException \ddlzz\AmoAPI\Exception\CurlException
      * @expectedExceptionMessageRegExp ~.*not properly initialized.*~
      */
     public function testExecFail()
@@ -99,7 +99,7 @@ final class CurlTest extends TestCase
     }
 
     /**
-     * @expectedException \ddlzz\AmoAPI\Exceptions\CurlException
+     * @expectedException \ddlzz\AmoAPI\Exception\CurlException
      * @expectedExceptionMessageRegExp ~.*not properly initialized.*~
      */
     public function testSetOptFail()
@@ -191,7 +191,7 @@ final class CurlTest extends TestCase
         $this->curl->setReturnTransfer(true);
         $this->curl->exec();
 
-        $this->mockBuilder->setNamespace($this->settings::NAMESPACE_PREFIX . '\Request')
+        $this->mockBuilder->setNamespace(SettingsStorage::NAMESPACE_PREFIX . '\Request')
             ->setName("curl_getinfo")
             ->setFunctionProvider(new FixedValueFunction(200));
 

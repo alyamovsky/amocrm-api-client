@@ -3,10 +3,10 @@
 
 namespace ddlzz\AmoAPI;
 
-use ddlzz\AmoAPI\Entities\EntityFactory;
-use ddlzz\AmoAPI\Entities\EntityInterface;
-use ddlzz\AmoAPI\Exceptions\InvalidArgumentException;
-use ddlzz\AmoAPI\Exceptions\RuntimeException;
+use ddlzz\AmoAPI\Model\EntityFactory;
+use ddlzz\AmoAPI\Model\EntityInterface;
+use ddlzz\AmoAPI\Exception\InvalidArgumentException;
+use ddlzz\AmoAPI\Exception\RuntimeException;
 use ddlzz\AmoAPI\Request\DataSender;
 use ddlzz\AmoAPI\Request\UrlBuilder;
 
@@ -38,9 +38,9 @@ class Client
      * @param CredentialsManager $credentials
      * @param DataSender $dataSender
      * @param \ddlzz\AmoAPI\SettingsStorage $settings
-     * @throws Exceptions\CurlException
-     * @throws Exceptions\ErrorCodeException
-     * @throws Exceptions\FailedAuthException
+     * @throws Exception\CurlException
+     * @throws Exception\ErrorCodeException
+     * @throws Exception\FailedAuthException
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
@@ -59,10 +59,10 @@ class Client
      * @param $type
      * @param $id
      * @return EntityInterface
-     * @throws Exceptions\CurlException
-     * @throws Exceptions\EntityFactoryException
-     * @throws Exceptions\ErrorCodeException
-     * @throws Exceptions\FailedAuthException
+     * @throws Exception\CurlException
+     * @throws Exception\EntityFactoryException
+     * @throws Exception\ErrorCodeException
+     * @throws Exception\FailedAuthException
      * @throws InvalidArgumentException
      */
     public function findById($type, $id)
@@ -87,9 +87,9 @@ class Client
     /**
      * @param EntityInterface $entity
      * @return string
-     * @throws Exceptions\CurlException
-     * @throws Exceptions\ErrorCodeException
-     * @throws Exceptions\FailedAuthException
+     * @throws Exception\CurlException
+     * @throws Exception\ErrorCodeException
+     * @throws Exception\FailedAuthException
      * @throws InvalidArgumentException
      */
     public function add(EntityInterface $entity)
@@ -100,9 +100,9 @@ class Client
     /**
      * @param EntityInterface $entity
      * @return string
-     * @throws Exceptions\CurlException
-     * @throws Exceptions\ErrorCodeException
-     * @throws Exceptions\FailedAuthException
+     * @throws Exception\CurlException
+     * @throws Exception\ErrorCodeException
+     * @throws Exception\FailedAuthException
      * @throws InvalidArgumentException
      */
     public function update(EntityInterface $entity)
@@ -112,9 +112,9 @@ class Client
     }
 
     /**
-     * @throws Exceptions\CurlException
-     * @throws Exceptions\ErrorCodeException
-     * @throws Exceptions\FailedAuthException
+     * @throws Exception\CurlException
+     * @throws Exception\ErrorCodeException
+     * @throws Exception\FailedAuthException
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
@@ -135,9 +135,9 @@ class Client
      * @param EntityInterface $entity
      * @param string $action
      * @return string
-     * @throws Exceptions\CurlException
-     * @throws Exceptions\ErrorCodeException
-     * @throws Exceptions\FailedAuthException
+     * @throws Exception\CurlException
+     * @throws Exception\ErrorCodeException
+     * @throws Exception\FailedAuthException
      * @throws InvalidArgumentException
      */
     private function set(EntityInterface $entity, $action)

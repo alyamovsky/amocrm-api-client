@@ -3,8 +3,8 @@
 
 namespace ddlzz\AmoAPI;
 
-use ddlzz\AmoAPI\Exceptions\InvalidArgumentException;
-use ddlzz\AmoAPI\Validators\SettingsValidator;
+use ddlzz\AmoAPI\Exception\InvalidArgumentException;
+use ddlzz\AmoAPI\Validator\SettingsValidator;
 
 
 /**

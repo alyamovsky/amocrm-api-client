@@ -2,8 +2,9 @@
 
 
 namespace ddlzz\AmoAPI\Request;
-use ddlzz\AmoAPI\Exceptions\ErrorCodeException;
-use ddlzz\AmoAPI\Exceptions\FailedAuthException;
+
+use ddlzz\AmoAPI\Exception\ErrorCodeException;
+use ddlzz\AmoAPI\Exception\FailedAuthException;
 use ddlzz\AmoAPI\SettingsStorage;
 
 
@@ -36,7 +37,7 @@ class DataSender
      * @return string
      * @throws ErrorCodeException
      * @throws FailedAuthException
-     * @throws \ddlzz\AmoAPI\Exceptions\CurlException
+     * @throws \ddlzz\AmoAPI\Exception\CurlException
      */
     public function send($url, array $data = [])
     {
@@ -45,7 +46,7 @@ class DataSender
         $this->curl->setReturnTransfer(true);
         $this->curl->setUserAgent($this->settings->getUserAgent());
         $this->curl->setUrl($url);
-        $this->curl->setHttpHeader([$this->settings::SENDER_HTTP_HEADER]);
+        $this->curl->setHttpHeader([SettingsStorage::SENDER_HTTP_HEADER]);
         $this->curl->setHeader(false);
         $this->curl->setCookieFile($this->settings->getCookiePath());
         $this->curl->setCookieJar($this->settings->getCookiePath());

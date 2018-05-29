@@ -37,7 +37,7 @@ final class CredentialsManagerTest extends TestCase
     }
 
     /**
-     * @expectedException \ddlzz\AmoAPI\Exceptions\InvalidArgumentException
+     * @expectedException \ddlzz\AmoAPI\Exception\InvalidArgumentException
      */
     public function testSubdomainValidationFail()
     {
@@ -45,7 +45,7 @@ final class CredentialsManagerTest extends TestCase
     }
 
     /**
-     * @expectedException \ddlzz\AmoAPI\Exceptions\InvalidArgumentException
+     * @expectedException \ddlzz\AmoAPI\Exception\InvalidArgumentException
      */
     public function testLoginValidationFail()
     {
@@ -53,7 +53,7 @@ final class CredentialsManagerTest extends TestCase
     }
 
     /**
-     * @expectedException \ddlzz\AmoAPI\Exceptions\InvalidArgumentException
+     * @expectedException \ddlzz\AmoAPI\Exception\InvalidArgumentException
      */
     public function testHashValidationFail()
     {

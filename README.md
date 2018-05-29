@@ -45,7 +45,7 @@ composer require ddlzz/amocrm-api-client
     // $request = \ddlzz\AmoAPI\ClientFactory::create($credentials, $settings);
 
     // Создадим модель сущности
-    $lead = new \ddlzz\AmoAPI\Entities\Amo\Lead();
+    $lead = new \ddlzz\AmoAPI\Model\Amo\Lead();
 
     // Заполним модель данными. Формат заполнения такой:
     $lead['name'] = 'New lead';

@@ -13,7 +13,7 @@
     /** @var \ddlzz\AmoAPI\Client $request */
     $request = \ddlzz\AmoAPI\ClientFactory::create($credentials);
 
-    $contact = new \ddlzz\AmoAPI\Entities\Amo\Contact();
+    $contact = new \ddlzz\AmoAPI\Model\Amo\Contact();
 
     // Заполним модель данными. Формат заполнения такой:
     $contact['name'] = 'New contact';

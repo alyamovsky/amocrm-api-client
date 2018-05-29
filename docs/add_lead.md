@@ -13,7 +13,7 @@
     /** @var \ddlzz\AmoAPI\Client $request */
     $request = \ddlzz\AmoAPI\ClientFactory::create($credentials);
 
-    $lead = new \ddlzz\AmoAPI\Entities\Amo\Lead();
+    $lead = new \ddlzz\AmoAPI\Model\Amo\Lead();
 
     // Заполним модель данными. Формат заполнения такой:
     $lead['name'] = 'New lead';

@@ -60,7 +60,7 @@ final class SettingsStorageTest extends TestCase
 
     /**
      * @dataProvider provideDataForTestSetScheme
-     * @expectedException \ddlzz\AmoAPI\Exceptions\InvalidArgumentException
+     * @expectedException \ddlzz\AmoAPI\Exception\InvalidArgumentException
      * @param string $scheme
      */
     public function testSetIncorrectScheme($scheme)
@@ -89,7 +89,7 @@ final class SettingsStorageTest extends TestCase
 
     /**
      * @dataProvider provideDataForTestSetDomain
-     * @expectedException \ddlzz\AmoAPI\Exceptions\InvalidArgumentException
+     * @expectedException \ddlzz\AmoAPI\Exception\InvalidArgumentException
      * @param string $domain
      */
     public function testSetIncorrectDomain($domain)
@@ -117,7 +117,7 @@ final class SettingsStorageTest extends TestCase
 
     /**
      * @dataProvider provideDataForTestSetUserAgent
-     * @expectedException \ddlzz\AmoAPI\Exceptions\InvalidArgumentException
+     * @expectedException \ddlzz\AmoAPI\Exception\InvalidArgumentException
      * @param string $userAgent
      */
     public function testSetIncorrectUserAgent($userAgent)
@@ -147,7 +147,7 @@ final class SettingsStorageTest extends TestCase
 
     /**
      * @dataProvider provideDataForTestSetMethodsPaths
-     * @expectedException \ddlzz\AmoAPI\Exceptions\InvalidArgumentException
+     * @expectedException \ddlzz\AmoAPI\Exception\InvalidArgumentException
      * @param array $methodsPaths
      */
     public function testSetIncorrectMethodsPaths($methodsPaths)
@@ -162,7 +162,7 @@ final class SettingsStorageTest extends TestCase
     }
 
     /**
-     * @expectedException \ddlzz\AmoAPI\Exceptions\InvalidArgumentException
+     * @expectedException \ddlzz\AmoAPI\Exception\InvalidArgumentException
      */
     public function testGetIncorrectMethodPath()
     {
@@ -193,7 +193,7 @@ final class SettingsStorageTest extends TestCase
 
     /**
      * @dataProvider provideDataForTestSetCookiePath
-     * @expectedException \ddlzz\AmoAPI\Exceptions\InvalidArgumentException
+     * @expectedException \ddlzz\AmoAPI\Exception\InvalidArgumentException
      * @param string $cookiePath
      */
     public function testSetIncorrectCookiePath($cookiePath)
@@ -227,7 +227,7 @@ final class SettingsStorageTest extends TestCase
     }
 
     /**
-     * @expectedException \ddlzz\AmoAPI\Exceptions\InvalidArgumentException
+     * @expectedException \ddlzz\AmoAPI\Exception\InvalidArgumentException
      */
     public function testNonexistentMethodCode()
     {

@@ -13,7 +13,7 @@
     /** @var \ddlzz\AmoAPI\Client $client */
     $client = \ddlzz\AmoAPI\ClientFactory::create($credentials);
 
-    /** @var \ddlzz\AmoAPI\Entities\Amo\Company $company */
+    /** @var \ddlzz\AmoAPI\Model\Amo\Company $company */
     $company = $client->findById('company', 4095565); // Получаем контакт со всеми заполненными полями
 
     $company['name'] = 'New name company' . rand();

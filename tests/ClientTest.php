@@ -5,8 +5,8 @@ namespace Tests\AmoAPI;
 
 use ddlzz\AmoAPI\Client;
 use ddlzz\AmoAPI\CredentialsManager;
-use ddlzz\AmoAPI\Entities\Amo\Lead;
-use ddlzz\AmoAPI\Entities\EntityInterface;
+use ddlzz\AmoAPI\Model\Amo\Lead;
+use ddlzz\AmoAPI\Model\EntityInterface;
 use ddlzz\AmoAPI\Request\DataSender;
 use ddlzz\AmoAPI\SettingsStorage;
 use org\bovigo\vfs\vfsStream;
@@ -76,7 +76,7 @@ final class ClientTest extends TestCase
         self::assertFalse(file_exists($incorrectCookie->url()));
     }
 
-    /** @expectedException \ddlzz\AmoAPI\Exceptions\RuntimeException */
+    /** @expectedException \ddlzz\AmoAPI\Exception\RuntimeException */
     public function testFailCreatingCookie()
     {
         /** @noinspection PhpUndefinedMethodInspection */
@@ -149,7 +149,7 @@ final class ClientTest extends TestCase
     }
 
     /**
-     * @expectedException \ddlzz\AmoAPI\Exceptions\InvalidArgumentException
+     * @expectedException \ddlzz\AmoAPI\Exception\InvalidArgumentException
      */
     public function testFindByNonexistentId()
     {

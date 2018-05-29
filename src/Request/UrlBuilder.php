@@ -3,7 +3,7 @@
 
 namespace ddlzz\AmoAPI\Request;
 
-use ddlzz\AmoAPI\Exceptions\InvalidArgumentException;
+use ddlzz\AmoAPI\Exception\InvalidArgumentException;
 use ddlzz\AmoAPI\SettingsStorage;
 
 

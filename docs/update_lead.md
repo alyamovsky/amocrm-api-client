@@ -13,7 +13,7 @@
     /** @var \ddlzz\AmoAPI\Client $client */
     $client = \ddlzz\AmoAPI\ClientFactory::create($credentials);
 
-    /** @var \ddlzz\AmoAPI\Entities\Amo\Lead $lead */
+    /** @var \ddlzz\AmoAPI\Model\Amo\Lead $lead */
     $lead = $client->findById('lead', 4095565); // Получаем сделку со всеми заполненными полями
 
     $lead['name'] = 'New name lead' . rand();

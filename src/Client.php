@@ -1,19 +1,17 @@
 <?php
 
-
 namespace ddlzz\AmoAPI;
 
-use ddlzz\AmoAPI\Model\ModelFactory;
-use ddlzz\AmoAPI\Model\ModelInterface;
 use ddlzz\AmoAPI\Exception\InvalidArgumentException;
 use ddlzz\AmoAPI\Exception\RuntimeException;
+use ddlzz\AmoAPI\Model\ModelFactory;
+use ddlzz\AmoAPI\Model\ModelInterface;
 use ddlzz\AmoAPI\Request\DataSender;
 use ddlzz\AmoAPI\Request\UrlBuilder;
 
-
 /**
  * Class Client. The main class for interacting with amoCRM.
- * @package ddlzz\AmoAPI
+ *
  * @author ddlzz
  */
 class Client
@@ -35,9 +33,11 @@ class Client
 
     /**
      * Client constructor.
-     * @param CredentialsManager $credentials
-     * @param DataSender $dataSender
+     *
+     * @param CredentialsManager            $credentials
+     * @param DataSender                    $dataSender
      * @param \ddlzz\AmoAPI\SettingsStorage $settings
+     *
      * @throws Exception\CurlException
      * @throws Exception\ErrorCodeException
      * @throws Exception\FailedAuthException
@@ -58,12 +58,14 @@ class Client
     /**
      * @param $type
      * @param $id
-     * @return ModelInterface
+     *
      * @throws Exception\CurlException
      * @throws Exception\EntityFactoryException
      * @throws Exception\ErrorCodeException
      * @throws Exception\FailedAuthException
      * @throws InvalidArgumentException
+     *
+     * @return ModelInterface
      */
     public function findById($type, $id)
     {
@@ -86,11 +88,13 @@ class Client
 
     /**
      * @param ModelInterface $entity
-     * @return string
+     *
      * @throws Exception\CurlException
      * @throws Exception\ErrorCodeException
      * @throws Exception\FailedAuthException
      * @throws InvalidArgumentException
+     *
+     * @return string
      */
     public function add(ModelInterface $entity)
     {
@@ -99,15 +103,18 @@ class Client
 
     /**
      * @param ModelInterface $entity
-     * @return string
+     *
      * @throws Exception\CurlException
      * @throws Exception\ErrorCodeException
      * @throws Exception\FailedAuthException
      * @throws InvalidArgumentException
+     *
+     * @return string
      */
     public function update(ModelInterface $entity)
     {
         $entity->setUpdatedAt();
+
         return $this->set($entity, 'update');
     }
 
@@ -124,21 +131,24 @@ class Client
             $result = $this->dataSender->send($this->urlBuilder->buildMethodUrl('auth'), $this->credentials->getCredentials());
 
             if (!empty($result) && (!file_exists($this->settings->getCookiePath()))) {
-                $message = 'An error occurred while creating the cookie file ' . $this->settings->getCookiePath();
+                $message = 'An error occurred while creating the cookie file '.$this->settings->getCookiePath();
                 throw new RuntimeException($message);
             }
         }
     }
 
     /**
-     * Adds or updates an entity
+     * Adds or updates an entity.
+     *
      * @param ModelInterface $entity
-     * @param string $action
-     * @return string
+     * @param string         $action
+     *
      * @throws Exception\CurlException
      * @throws Exception\ErrorCodeException
      * @throws Exception\FailedAuthException
      * @throws InvalidArgumentException
+     *
+     * @return string
      */
     private function set(ModelInterface $entity, $action)
     {
@@ -148,13 +158,12 @@ class Client
         $data[$action][] = $entity->getFields();
         $url = $this->urlBuilder->buildMethodUrl($entity->getRequestName());
         $this->waitASec();
-        $result = $this->dataSender->send($url, $data);
 
-        return $result;
+        return $this->dataSender->send($url, $data);
     }
 
     /**
-     * Adds a one second pause because of Amo request limits
+     * Adds a one second pause because of Amo request limits.
      */
     private function waitASec()
     {

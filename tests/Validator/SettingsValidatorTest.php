@@ -1,15 +1,13 @@
 <?php
 
-
 namespace Tests\AmoAPI\Validator;
-
 
 use ddlzz\AmoAPI\Validator\SettingsValidator;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class SettingsValidatorTest
- * @package Tests\AmoAPI\Validator
+ * Class SettingsValidatorTest.
+ *
  * @author ddlzz
  * @covers \ddlzz\AmoAPI\Validator\SettingsValidator
  */
@@ -40,6 +38,7 @@ final class SettingsValidatorTest extends TestCase
     /**
      * @dataProvider provideDataForTestValidateIncorrectScheme
      * @expectedException \ddlzz\AmoAPI\Exception\InvalidArgumentException
+     *
      * @param string $scheme
      */
     public function testValidateIncorrectScheme($scheme)
@@ -64,6 +63,7 @@ final class SettingsValidatorTest extends TestCase
     /**
      * @dataProvider provideDataForTestValidateIncorrectDomain
      * @expectedException \ddlzz\AmoAPI\Exception\InvalidArgumentException
+     *
      * @param string $domain
      */
     public function testValidateIncorrectDomain($domain)
@@ -88,6 +88,7 @@ final class SettingsValidatorTest extends TestCase
     /**
      * @dataProvider provideDataForTestValidateIncorrectUserAgent
      * @expectedException \ddlzz\AmoAPI\Exception\InvalidArgumentException
+     *
      * @param string $agent
      */
     public function testValidateIncorrectUserAgent($agent)
@@ -112,6 +113,7 @@ final class SettingsValidatorTest extends TestCase
     /**
      * @dataProvider provideDataForTestValidateIncorrectCookiePath
      * @expectedException \ddlzz\AmoAPI\Exception\InvalidArgumentException
+     *
      * @param string $path
      */
     public function testValidateIncorrectCookiePath($path)
@@ -141,6 +143,7 @@ final class SettingsValidatorTest extends TestCase
     /**
      * @dataProvider provideDataForTestValidateIncorrectMethodsPaths
      * @expectedException \ddlzz\AmoAPI\Exception\InvalidArgumentException
+     *
      * @param array $paths
      */
     public function testValidateIncorrectMethodsPaths(array $paths)

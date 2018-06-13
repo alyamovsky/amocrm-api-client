@@ -1,12 +1,10 @@
 <?php
 
-
 namespace ddlzz\AmoAPI;
 
-
 /**
- * Class Auth
- * @package ddlzz\AmoAPI
+ * Class Auth.
+ *
  * @author ddlzz
  */
 class Auth
@@ -19,6 +17,7 @@ class Auth
 
     /**
      * Auth constructor.
+     *
      * @param string $login
      * @param string $cookiePath
      */
@@ -30,6 +29,7 @@ class Auth
 
     /**
      * Checks if the cookie file exists and if it's valid.
+     *
      * @return bool
      */
     public function isAuthenticated()
@@ -42,8 +42,9 @@ class Auth
         }
 
         // If login has been changed, we need to delete the cookie file for the changes to take effect
-        if (false === (strpos(file_get_contents($cookie), (str_replace('@', '%40', $this->login))))) {
+        if (false === (mb_strpos(file_get_contents($cookie), (str_replace('@', '%40', $this->login))))) {
             unlink($cookie);
+
             return false;
         }
 

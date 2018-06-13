@@ -1,14 +1,12 @@
 <?php
 
-
 namespace ddlzz\AmoAPI;
 
 use ddlzz\AmoAPI\Validator\CredentialsValidator;
 
-
 /**
  * Class CredentialsManager. It stores and validates user credentials.
- * @package ddlzz\AmoAPI
+ *
  * @author ddlzz
  */
 class CredentialsManager
@@ -27,9 +25,11 @@ class CredentialsManager
 
     /**
      * CredentialsManager constructor.
+     *
      * @param string $domain
      * @param string $login
      * @param string $hash
+     *
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($domain, $login, $hash)

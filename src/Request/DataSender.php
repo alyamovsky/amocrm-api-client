@@ -1,16 +1,14 @@
 <?php
 
-
 namespace ddlzz\AmoAPI\Request;
 
 use ddlzz\AmoAPI\Exception\ErrorCodeException;
 use ddlzz\AmoAPI\Exception\FailedAuthException;
 use ddlzz\AmoAPI\SettingsStorage;
 
-
 /**
  * Class DataSender. It's responsible for interacting with amoCRM.
- * @package ddlzz\AmoAPI
+ *
  * @author ddlzz
  */
 class DataSender
@@ -22,7 +20,7 @@ class DataSender
     private $curl;
 
     /** DataSender constructor.
-     * @param Curl $curl
+     * @param Curl            $curl
      * @param SettingsStorage $settings
      */
     public function __construct(Curl $curl, SettingsStorage $settings)
@@ -33,11 +31,13 @@ class DataSender
 
     /**
      * @param string $url
-     * @param array $data
-     * @return string
+     * @param array  $data
+     *
      * @throws ErrorCodeException
      * @throws FailedAuthException
      * @throws \ddlzz\AmoAPI\Exception\CurlException
+     *
+     * @return string
      */
     public function send($url, array $data = [])
     {
@@ -64,11 +64,12 @@ class DataSender
         $this->curl->close();
         $this->validateCode($code, $url, $response);
 
-        return (string)$response;
+        return (string) $response;
     }
 
     /**
      * @param int $code
+     *
      * @return string
      */
     private static function getErrorByHttpCode($code)
@@ -86,25 +87,27 @@ class DataSender
             504 => '504 Gateway Timeout',
         ];
 
-        return isset($errors[$code]) ? $errors[$code] : $code . ' Unknown error';
+        return isset($errors[$code]) ? $errors[$code] : $code.' Unknown error';
     }
 
     /**
-     * @param int $code
+     * @param int    $code
      * @param string $url
      * @param string $response
-     * @return bool
+     *
      * @throws ErrorCodeException
      * @throws FailedAuthException
+     *
+     * @return bool
      */
     private function validateCode($code, $url, $response)
     {
         switch ($code) {
             case 401:
             case 403:
-                throw new FailedAuthException('Auth failed! ' . self::getErrorByHttpCode($code), $response);
+                throw new FailedAuthException('Auth failed! '.self::getErrorByHttpCode($code), $response);
                 break;
-            case (200 !== $code && 204 !== $code):
+            case 200 !== $code && 204 !== $code:
                 throw new ErrorCodeException(self::getErrorByHttpCode($code), $response, $url);
                 break;
         }

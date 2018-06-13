@@ -1,15 +1,13 @@
 <?php
 
-
 namespace ddlzz\AmoAPI\Request;
 
 use ddlzz\AmoAPI\Exception\InvalidArgumentException;
 use ddlzz\AmoAPI\SettingsStorage;
 
-
 /**
- * Class UrlBuilder
- * @package ddlzz\AmoAPI\Request
+ * Class UrlBuilder.
+ *
  * @author ddlzz
  */
 class UrlBuilder
@@ -22,8 +20,9 @@ class UrlBuilder
 
     /**
      * UrlBuilder constructor.
+     *
      * @param SettingsStorage $settings
-     * @param string $subdomain
+     * @param string          $subdomain
      */
     public function __construct(SettingsStorage $settings, $subdomain)
     {
@@ -33,9 +32,11 @@ class UrlBuilder
 
     /**
      * @param string $code
-     * @param array $params
-     * @return string
+     * @param array  $params
+     *
      * @throws InvalidArgumentException
+     *
+     * @return string
      */
     public function buildMethodUrl($code, $params = [])
     {
@@ -45,7 +46,7 @@ class UrlBuilder
         if (!empty($params)) {
             $query = '?';
             foreach ($params as $key => $param) {
-                $query .= $key . '=' . $param;
+                $query .= $key.'='.$param;
 
                 if ($param !== end($params)) {
                     $query .= '&';
@@ -53,17 +54,18 @@ class UrlBuilder
             }
         }
 
-        $result = isset($query) ? $host . $path . $query : $host . $path;
+        $result = isset($query) ? $host.$path.$query : $host.$path;
 
         return $result;
     }
 
     /**
      * @param string $subdomain
+     *
      * @return string
      */
     private function makeUserHost($subdomain)
     {
-        return $this->settings->getScheme() . '://' . $subdomain . '.' . $this->settings->getDomain();
+        return $this->settings->getScheme().'://'.$subdomain.'.'.$this->settings->getDomain();
     }
 }

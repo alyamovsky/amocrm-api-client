@@ -1,15 +1,13 @@
 <?php
 
-
 namespace ddlzz\AmoAPI\Model\Amo;
-
 
 use ddlzz\AmoAPI\Model\AbstractModel;
 use ddlzz\AmoAPI\Model\ModelInterface;
 
 /**
- * Class Contact
- * @package ddlzz\AmoAPI\Model\Amo
+ * Class Contact.
+ *
  * @author ddlzz
  */
 final class Contact extends AbstractModel implements ModelInterface

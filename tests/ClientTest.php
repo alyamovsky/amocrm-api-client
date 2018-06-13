@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Tests\AmoAPI;
 
 use ddlzz\AmoAPI\Client;
@@ -14,10 +13,9 @@ use org\bovigo\vfs\vfsStreamDirectory;
 use org\bovigo\vfs\vfsStreamFile;
 use PHPUnit\Framework\TestCase;
 
-
 /**
- * Class ClientTest
- * @package Tests\AmoAPI
+ * Class ClientTest.
+ *
  * @author ddlzz
  * @covers \ddlzz\AmoAPI\Client
  * @covers \ddlzz\AmoAPI\Auth
@@ -79,7 +77,7 @@ final class ClientTest extends TestCase
     /** @expectedException \ddlzz\AmoAPI\Exception\RuntimeException */
     public function testFailCreatingCookie()
     {
-        /** @noinspection PhpUndefinedMethodInspection */
+        /* @noinspection PhpUndefinedMethodInspection */
         $this->dataSender->method('send')->willReturn('Some non empty success result');
 
         $this->settings->setCookiePath('/nonexistent_cookie.txt');
@@ -95,7 +93,7 @@ final class ClientTest extends TestCase
 
         $result = json_decode($this->fakeSetEntity($entity, 'add'), true);
 
-        self::assertEquals($this->settings->getMethodPath($entity->getRequestName()), $result['_link']['self']['href']);
+        self::assertSame($this->settings->getMethodPath($entity->getRequestName()), $result['_link']['self']['href']);
     }
 
     public function testUpdateLead()
@@ -109,7 +107,7 @@ final class ClientTest extends TestCase
 
         $result = json_decode($this->fakeSetEntity($entity, 'update'), true);
 
-        self::assertEquals($this->settings->getMethodPath($entity->getRequestName()), $result['_link']['self']['href']);
+        self::assertSame($this->settings->getMethodPath($entity->getRequestName()), $result['_link']['self']['href']);
     }
 
     public function testSlowDown()
@@ -122,7 +120,7 @@ final class ClientTest extends TestCase
 
         $start = microtime(true);
 
-        for ($i = 0; $i < $repeatCounts; $i++) {
+        for ($i = 0; $i < $repeatCounts; ++$i) {
             $this->fakeSetEntity($entity, 'add');
         }
 
@@ -139,13 +137,13 @@ final class ClientTest extends TestCase
         $id = 42;
 
         $response = $this->buildGetEntityResponse($type, $id);
-        /** @noinspection PhpUndefinedMethodInspection */
+        /* @noinspection PhpUndefinedMethodInspection */
         $this->dataSender->method('send')->willReturn($response);
 
         $client = new Client($this->credentials, $this->dataSender, $this->settings);
         $entity = $client->findById($type, $id);
 
-        self::assertEquals($id, $entity->getFields()['id']);
+        self::assertSame($id, $entity->getFields()['id']);
     }
 
     /**
@@ -156,7 +154,7 @@ final class ClientTest extends TestCase
         $type = 'lead';
         $id = 42;
 
-        /** @noinspection PhpUndefinedMethodInspection */
+        /* @noinspection PhpUndefinedMethodInspection */
         $this->dataSender->method('send')->willReturn(''); // simulates an empty response
 
         $client = new Client($this->credentials, $this->dataSender, $this->settings);
@@ -165,51 +163,54 @@ final class ClientTest extends TestCase
 
     /**
      * @param ModelInterface $entity
+     *
      * @return string
      */
     private function buildSetEntityResponse(ModelInterface $entity)
     {
         $method = $this->settings->getMethodPath($entity->getRequestName());
-        $id = rand(200000, 300000);
+        $id = mt_rand(200000, 300000);
 
-        $result = '{"_link":{"self":{"href":"' . $method . '","method":"post"}},"_embedded":{"items":[{"id":' . $id .
-            ',"_link":{"self":{"href":"' . $method . '?id=' . $id . '","method":"get"}}}]}}';
+        $result = '{"_link":{"self":{"href":"'.$method.'","method":"post"}},"_embedded":{"items":[{"id":'.$id.
+            ',"_link":{"self":{"href":"'.$method.'?id='.$id.'","method":"get"}}}]}}';
 
         return $result;
     }
 
     /**
      * @param string $type
-     * @param int $id
+     * @param int    $id
+     *
      * @return string
      */
     private function buildGetEntityResponse($type, $id)
     {
         $method = $this->settings->getMethodCodeByType($type);
 
-        return '{"_links":{"self":{"href":"\/api\/v2\/' . $method . '?id=' . $id . '","method":"get"}},"_embedded": ' .
-            '{"items":[{"id":' . $id . ',"name":"new_name1228818400","responsible_user_id":1371625,"created_by":1371625,' .
-            '"created_at":1511350927,"updated_at":1512062652,"account_id":17397286,"is_deleted":false,' .
-            '"main_contact":{},"group_id":0,"company":{},"closed_at":0,"closest_task_at":0,"tags":[{"id":118205,' .
-            '"name":"tag_new 1"},{"id":118207,"name":"tag_new"},{"id":118209,"name":"2"}],"custom_fields":{},' .
-            '"status_id":17397292,"sale":150000,"contacts":{},"pipeline":{"id":872851,"_links":{"self":{"href":' .
-            '"\/api\/v2\/pipelines?id=872851","method":"get"}}},"_links":{"self":{"href":"\/api\/v2\/' . $method . '?' .
-            'id=' . $id . '","method":"get"}}}]}}';
+        return '{"_links":{"self":{"href":"\/api\/v2\/'.$method.'?id='.$id.'","method":"get"}},"_embedded": '.
+            '{"items":[{"id":'.$id.',"name":"new_name1228818400","responsible_user_id":1371625,"created_by":1371625,'.
+            '"created_at":1511350927,"updated_at":1512062652,"account_id":17397286,"is_deleted":false,'.
+            '"main_contact":{},"group_id":0,"company":{},"closed_at":0,"closest_task_at":0,"tags":[{"id":118205,'.
+            '"name":"tag_new 1"},{"id":118207,"name":"tag_new"},{"id":118209,"name":"2"}],"custom_fields":{},'.
+            '"status_id":17397292,"sale":150000,"contacts":{},"pipeline":{"id":872851,"_links":{"self":{"href":'.
+            '"\/api\/v2\/pipelines?id=872851","method":"get"}}},"_links":{"self":{"href":"\/api\/v2\/'.$method.'?'.
+            'id='.$id.'","method":"get"}}}]}}';
     }
 
     /**
      * @param ModelInterface $entity
-     * @param string $action
+     * @param string         $action
+     *
      * @return string
      */
     private function fakeSetEntity(ModelInterface $entity, $action)
     {
-        if (!in_array($action, ['add', 'update'])) {
+        if (!in_array($action, ['add', 'update'], true)) {
             throw new \Exception('Wrong action'); // just in case
         }
 
         $response = $this->buildSetEntityResponse($entity);
-        /** @noinspection PhpUndefinedMethodInspection */
+        /* @noinspection PhpUndefinedMethodInspection */
         $this->dataSender->method('send')->willReturn($response);
 
         $client = new Client($this->credentials, $this->dataSender, $this->settings);

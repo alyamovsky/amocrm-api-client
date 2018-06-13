@@ -1,14 +1,12 @@
 <?php
 
-
 namespace ddlzz\AmoAPI\Request;
 
 use ddlzz\AmoAPI\Exception\CurlException;
 
-
 /**
  * An abstraction layer for interacting with cURL library.
- * @package ddlzz\AmoAPI
+ *
  * @author ddlzz
  */
 class Curl
@@ -27,8 +25,9 @@ class Curl
     }
 
     /**
-     * @return array|false
      * @throws CurlException
+     *
+     * @return array|false
      */
     public function exec()
     {
@@ -53,8 +52,10 @@ class Curl
 
     /**
      * @param string $url
-     * @return bool
+     *
      * @throws CurlException
+     *
+     * @return bool
      */
     public function setUrl($url)
     {
@@ -63,8 +64,10 @@ class Curl
 
     /**
      * @param bool $value
-     * @return bool
+     *
      * @throws CurlException
+     *
+     * @return bool
      */
     public function setReturnTransfer($value)
     {
@@ -73,8 +76,10 @@ class Curl
 
     /**
      * @param string $agent
-     * @return bool
+     *
      * @throws CurlException
+     *
+     * @return bool
      */
     public function setUserAgent($agent)
     {
@@ -83,8 +88,10 @@ class Curl
 
     /**
      * @param array $header
-     * @return bool
+     *
      * @throws CurlException
+     *
+     * @return bool
      */
     public function setHttpHeader(array $header)
     {
@@ -93,8 +100,10 @@ class Curl
 
     /**
      * @param bool $value
-     * @return bool
+     *
      * @throws CurlException
+     *
+     * @return bool
      */
     public function setHeader($value)
     {
@@ -103,8 +112,10 @@ class Curl
 
     /**
      * @param string $cookie
-     * @return bool
+     *
      * @throws CurlException
+     *
+     * @return bool
      */
     public function setCookieFile($cookie)
     {
@@ -113,8 +124,10 @@ class Curl
 
     /**
      * @param string $cookieJar
-     * @return bool
+     *
      * @throws CurlException
+     *
+     * @return bool
      */
     public function setCookieJar($cookieJar)
     {
@@ -123,8 +136,10 @@ class Curl
 
     /**
      * @param bool $value
-     * @return bool
+     *
      * @throws CurlException
+     *
+     * @return bool
      */
     public function setSSLVerifyPeer($value)
     {
@@ -133,8 +148,10 @@ class Curl
 
     /**
      * @param int $value
-     * @return bool
+     *
      * @throws CurlException
+     *
+     * @return bool
      */
     public function setSSLVerifyHost($value)
     {
@@ -143,8 +160,10 @@ class Curl
 
     /**
      * @param string $request
-     * @return bool
+     *
      * @throws CurlException
+     *
+     * @return bool
      */
     public function setCustomRequest($request)
     {
@@ -153,8 +172,10 @@ class Curl
 
     /**
      * @param mixed $fields
-     * @return bool
+     *
      * @throws CurlException
+     *
+     * @return bool
      */
     public function setPostFields($fields)
     {
@@ -174,7 +195,7 @@ class Curl
     }
 
     /**
-     * Closes the connection in case of abnormal termination
+     * Closes the connection in case of abnormal termination.
      */
     public function __destruct()
     {
@@ -187,9 +208,11 @@ class Curl
      * Sets various cURL options.
      *
      * @param string $option
-     * @param mixed $value
-     * @return bool
+     * @param mixed  $value
+     *
      * @throws CurlException
+     *
+     * @return bool
      */
     private function setOpt($option, $value)
     {

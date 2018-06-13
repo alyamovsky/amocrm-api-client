@@ -1,18 +1,17 @@
 <?php
 
-
 namespace ddlzz\AmoAPI\Exception;
 
-
 /**
- * Class FailedAuthException
- * @package ddlzz\AmoAPI\Exception
+ * Class FailedAuthException.
+ *
  * @author ddlzz
  */
 class FailedAuthException extends AmoException
 {
     /**
      * ErrorCodeException constructor.
+     *
      * @param string $message
      * @param string $response
      */
@@ -20,6 +19,6 @@ class FailedAuthException extends AmoException
     {
         parent::__construct($message);
 
-        $this->message .= '. Server response: ' . $response;
+        $this->message .= '. Server response: '.$response;
     }
 }

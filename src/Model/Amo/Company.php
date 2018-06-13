@@ -1,22 +1,19 @@
 <?php
 
-
 namespace ddlzz\AmoAPI\Model\Amo;
-
 
 use ddlzz\AmoAPI\Model\AbstractModel;
 use ddlzz\AmoAPI\Model\ModelInterface;
 
 /**
- * Class Company
- * @package ddlzz\AmoAPI\Model\Amo
+ * Class Company.
+ *
  * @author ddlzz
  */
 final class Company extends AbstractModel implements ModelInterface
 {
     /** @var string */
     protected $requestName = 'companies';
-
 
     /** @var array */
     protected $fieldsParamsAppend = [

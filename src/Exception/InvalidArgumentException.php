@@ -1,15 +1,12 @@
 <?php
 
-
 namespace ddlzz\AmoAPI\Exception;
 
-
 /**
- * Class InvalidArgumentException
- * @package ddlzz\AmoAPI\Exception
+ * Class InvalidArgumentException.
+ *
  * @author ddlzz
  */
 class InvalidArgumentException extends AmoException
 {
-
 }

@@ -1,23 +1,23 @@
 <?php
 
-
 namespace ddlzz\AmoAPI\Validator;
 
 use ddlzz\AmoAPI\Exception\InvalidArgumentException;
 use ddlzz\AmoAPI\Utils\StringUtil;
 
-
 /**
- * Class CredentialsValidator
- * @package ddlzz\AmoAPI\Validator
+ * Class CredentialsValidator.
+ *
  * @author ddlzz
  */
 class CredentialsValidator
 {
     /**
      * @param string $subdomain
-     * @return bool
+     *
      * @throws InvalidArgumentException
+     *
+     * @return bool
      */
     public function validateSubdomain($subdomain)
     {
@@ -31,8 +31,10 @@ class CredentialsValidator
 
     /**
      * @param string $login
-     * @return bool
+     *
      * @throws InvalidArgumentException
+     *
+     * @return bool
      */
     public function validateLogin($login)
     {
@@ -46,8 +48,10 @@ class CredentialsValidator
 
     /**
      * @param string $hash
-     * @return bool
+     *
      * @throws InvalidArgumentException
+     *
+     * @return bool
      */
     public function validateHash($hash)
     {

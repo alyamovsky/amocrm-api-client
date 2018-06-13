@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Tests\AmoAPI;
 
 use ddlzz\AmoAPI\SettingsStorage;
@@ -8,8 +7,8 @@ use org\bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class SettingsStorageTest
- * @package Tests\AmoAPI
+ * Class SettingsStorageTest.
+ *
  * @author ddlzz
  * @covers \ddlzz\AmoAPI\SettingsStorage
  */
@@ -42,7 +41,7 @@ final class SettingsStorageTest extends TestCase
     public function testGetScheme()
     {
         $this->settingsStorage->setScheme($this->scheme);
-        self::assertEquals($this->scheme, $this->settingsStorage->getScheme());
+        self::assertSame($this->scheme, $this->settingsStorage->getScheme());
     }
 
     /**
@@ -61,6 +60,7 @@ final class SettingsStorageTest extends TestCase
     /**
      * @dataProvider provideDataForTestSetScheme
      * @expectedException \ddlzz\AmoAPI\Exception\InvalidArgumentException
+     *
      * @param string $scheme
      */
     public function testSetIncorrectScheme($scheme)
@@ -71,7 +71,7 @@ final class SettingsStorageTest extends TestCase
     public function testGetDomain()
     {
         $this->settingsStorage->setDomain($this->domain);
-        self::assertEquals($this->domain, $this->settingsStorage->getDomain());
+        self::assertSame($this->domain, $this->settingsStorage->getDomain());
     }
 
     /**
@@ -90,6 +90,7 @@ final class SettingsStorageTest extends TestCase
     /**
      * @dataProvider provideDataForTestSetDomain
      * @expectedException \ddlzz\AmoAPI\Exception\InvalidArgumentException
+     *
      * @param string $domain
      */
     public function testSetIncorrectDomain($domain)
@@ -100,7 +101,7 @@ final class SettingsStorageTest extends TestCase
     public function testGetUserAgent()
     {
         $this->settingsStorage->setUserAgent($this->userAgent);
-        self::assertEquals($this->userAgent, $this->settingsStorage->getUserAgent());
+        self::assertSame($this->userAgent, $this->settingsStorage->getUserAgent());
     }
 
     /**
@@ -118,6 +119,7 @@ final class SettingsStorageTest extends TestCase
     /**
      * @dataProvider provideDataForTestSetUserAgent
      * @expectedException \ddlzz\AmoAPI\Exception\InvalidArgumentException
+     *
      * @param string $userAgent
      */
     public function testSetIncorrectUserAgent($userAgent)
@@ -128,7 +130,7 @@ final class SettingsStorageTest extends TestCase
     public function testGetMethodsPaths()
     {
         $this->settingsStorage->setMethodsPaths($this->methodsPaths);
-        self::assertEquals($this->methodsPaths, $this->settingsStorage->getMethodsPaths());
+        self::assertSame($this->methodsPaths, $this->settingsStorage->getMethodsPaths());
     }
 
     /**
@@ -148,6 +150,7 @@ final class SettingsStorageTest extends TestCase
     /**
      * @dataProvider provideDataForTestSetMethodsPaths
      * @expectedException \ddlzz\AmoAPI\Exception\InvalidArgumentException
+     *
      * @param array $methodsPaths
      */
     public function testSetIncorrectMethodsPaths($methodsPaths)
@@ -158,7 +161,7 @@ final class SettingsStorageTest extends TestCase
     public function testGetCorrectMethodPath()
     {
         $this->settingsStorage->setMethodsPaths($this->methodsPaths);
-        self::assertEquals($this->settingsStorage->getMethodsPaths()['foo'], $this->settingsStorage->getMethodPath('foo'));
+        self::assertSame($this->settingsStorage->getMethodsPaths()['foo'], $this->settingsStorage->getMethodPath('foo'));
     }
 
     /**
@@ -175,7 +178,7 @@ final class SettingsStorageTest extends TestCase
         $file = vfsStream::newFile('cookie.txt')->at($vfsRoot);
 
         $this->settingsStorage->setCookiePath($file->url());
-        self::assertEquals($file->url(), $this->settingsStorage->getCookiePath());
+        self::assertSame($file->url(), $this->settingsStorage->getCookiePath());
     }
 
     /**
@@ -194,6 +197,7 @@ final class SettingsStorageTest extends TestCase
     /**
      * @dataProvider provideDataForTestSetCookiePath
      * @expectedException \ddlzz\AmoAPI\Exception\InvalidArgumentException
+     *
      * @param string $cookiePath
      */
     public function testSetIncorrectCookiePath($cookiePath)
@@ -218,12 +222,13 @@ final class SettingsStorageTest extends TestCase
 
     /**
      * @dataProvider provideDataForTestGetMethodCodeByType
+     *
      * @param string $key
      * @param string $value
      */
     public function testGetMethodCodeByType($key, $value)
     {
-        self::assertEquals($this->settingsStorage->getMethodCodeByType($key), $value);
+        self::assertSame($this->settingsStorage->getMethodCodeByType($key), $value);
     }
 
     /**

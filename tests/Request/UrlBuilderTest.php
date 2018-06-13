@@ -1,16 +1,14 @@
 <?php
 
-
 namespace Tests\AmoAPI\Request;
-
 
 use ddlzz\AmoAPI\Request\UrlBuilder;
 use ddlzz\AmoAPI\SettingsStorage;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class UrlBuilderTest
- * @package ddlzz\AmoAPI\Request
+ * Class UrlBuilderTest.
+ *
  * @author ddlzz
  * @covers \ddlzz\AmoAPI\Request\UrlBuilder
  */
@@ -25,7 +23,7 @@ final class UrlBuilderTest extends TestCase
     protected function setUp()
     {
         $this->settings = $this->createMock(SettingsStorage::class);
-        $callback = function ($code) {return "/{$code}_method";};
+        $callback = function ($code) {return "/{$code}_method"; };
         $this->settings->method('getMethodPath')->will(self::returnCallback($callback));
         $this->settings->method('getDomain')->willReturn('test.com');
         $this->settings->method('getScheme')->willReturn('http');
@@ -48,13 +46,14 @@ final class UrlBuilderTest extends TestCase
 
     /**
      * @dataProvider provideDataForTestPrepareMethodUrl
+     *
      * @param string $code
-     * @param array $params
+     * @param array  $params
      * @param string $result
      */
     public function testPrepareMethodUrl($code, array $params, $result)
     {
         $builder = new UrlBuilder($this->settings, $this->subdomain);
-        self::assertEquals($result, $builder->buildMethodUrl($code, $params));
+        self::assertSame($result, $builder->buildMethodUrl($code, $params));
     }
 }

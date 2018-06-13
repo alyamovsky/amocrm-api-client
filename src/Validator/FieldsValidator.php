@@ -1,14 +1,12 @@
 <?php
 
-
 namespace ddlzz\AmoAPI\Validator;
 
 use ddlzz\AmoAPI\Exception\EntityFieldsException;
 
-
 /**
- * Class FieldsValidator
- * @package ddlzz\AmoAPI\Validator
+ * Class FieldsValidator.
+ *
  * @author ddlzz
  */
 class FieldsValidator
@@ -21,6 +19,7 @@ class FieldsValidator
 
     /**
      * FieldsValidator constructor.
+     *
      * @param array $fieldsParams
      */
     public function __construct(array $fieldsParams)
@@ -38,9 +37,11 @@ class FieldsValidator
 
     /**
      * @param string $key
-     * @param mixed $value
-     * @return bool
+     * @param mixed  $value
+     *
      * @throws EntityFieldsException
+     *
+     * @return bool
      */
     public function isValid($key, $value)
     {
@@ -56,13 +57,15 @@ class FieldsValidator
 
     /**
      * @param string $key
-     * @return string
+     *
      * @throws EntityFieldsException
+     *
+     * @return string
      */
     private function prepareValidateType($key)
     {
         $key = str_replace('|', '', $key);
-        $method = 'validate' . ucfirst($key);
+        $method = 'validate'.ucfirst($key);
         if (!method_exists(self::class, $method)) {
             throw new EntityFieldsException(
                 "Internal error: the field \"$key\" doesn't match any of the entity predefined fields"
@@ -75,14 +78,16 @@ class FieldsValidator
     /**
      * @param $key
      * @param $value
-     * @return bool
+     *
      * @throws EntityFieldsException
+     *
+     * @return bool
      */
     private function validateRequired($key, $value)
     {
         if (('add' === $this->action) || ('update' === $this->action)) {
-            if (!isset($value) && (true === $this->fieldsParams[$key]['required_' . $this->action])) {
-                throw new EntityFieldsException(ucfirst($this->action) . " error: the required field \"$key\" is missing or empty");
+            if (!isset($value) && (true === $this->fieldsParams[$key]['required_'.$this->action])) {
+                throw new EntityFieldsException(ucfirst($this->action)." error: the required field \"$key\" is missing or empty");
             }
         }
 
@@ -90,15 +95,18 @@ class FieldsValidator
     }
 
     /** @noinspection PhpUnusedPrivateMethodInspection */
+
     /**
      * @param string $key
-     * @param int $value
-     * @return bool
+     * @param int    $value
+     *
      * @throws EntityFieldsException
+     *
+     * @return bool
      */
     private static function validateInt($key, $value)
     {
-        if (!is_int($value) || !preg_match('/^\d+$/', (string)$value)) {
+        if (!is_int($value) || !preg_match('/^\d+$/', (string) $value)) {
             throw new EntityFieldsException("The field \"$key\" must contain digits only");
         }
 
@@ -106,11 +114,14 @@ class FieldsValidator
     }
 
     /** @noinspection PhpUnusedPrivateMethodInspection */
+
     /**
      * @param string $key
      * @param string $value
-     * @return bool
+     *
      * @throws EntityFieldsException
+     *
+     * @return bool
      */
     private static function validateString($key, $value)
     {
@@ -122,15 +133,18 @@ class FieldsValidator
     }
 
     /** @noinspection PhpUnusedPrivateMethodInspection */
+
     /**
      * @param string $key
-     * @param bool $value
-     * @return bool
+     * @param bool   $value
+     *
      * @throws EntityFieldsException
+     *
+     * @return bool
      */
     private static function validateBool($key, $value)
     {
-        if (is_null(filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE))) {
+        if (null === filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE)) {
             throw new EntityFieldsException("The field \"$key\" must contain boolean values only");
         }
 
@@ -138,11 +152,14 @@ class FieldsValidator
     }
 
     /** @noinspection PhpUnusedPrivateMethodInspection */
+
     /**
      * @param string $key
-     * @param array $value
-     * @return bool
+     * @param array  $value
+     *
      * @throws EntityFieldsException
+     *
+     * @return bool
      */
     private static function validateArray($key, $value)
     {
@@ -154,13 +171,17 @@ class FieldsValidator
     }
 
     /** @noinspection PhpUnusedPrivateMethodInspection */
+
     /**
      * Because some fields must be either strings during entity creation or arrays during it's obtaining from server,
-     * we create this check
+     * we create this check.
+     *
      * @param string $key
-     * @param array $value
-     * @return bool
+     * @param array  $value
+     *
      * @throws EntityFieldsException
+     *
+     * @return bool
      */
     private static function validateArraystring($key, $value)
     {

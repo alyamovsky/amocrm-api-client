@@ -1,23 +1,23 @@
 <?php
 
-
 namespace ddlzz\AmoAPI\Validator;
 
 use ddlzz\AmoAPI\Exception\InvalidArgumentException;
 use ddlzz\AmoAPI\Utils\StringUtil;
 
-
 /**
- * Class SettingsValidator
- * @package ddlzz\AmoAPI\Validator
+ * Class SettingsValidator.
+ *
  * @author ddlzz
  */
 class SettingsValidator
 {
     /**
      * @param string $scheme
-     * @return bool
+     *
      * @throws InvalidArgumentException
+     *
+     * @return bool
      */
     public function validateScheme($scheme)
     {
@@ -31,8 +31,10 @@ class SettingsValidator
 
     /**
      * @param string $domain
-     * @return bool
+     *
      * @throws InvalidArgumentException
+     *
+     * @return bool
      */
     public function validateDomain($domain)
     {
@@ -46,8 +48,10 @@ class SettingsValidator
 
     /**
      * @param string $userAgent
-     * @return bool
+     *
      * @throws InvalidArgumentException
+     *
+     * @return bool
      */
     public function validateUserAgent($userAgent)
     {
@@ -61,8 +65,10 @@ class SettingsValidator
 
     /**
      * @param array $paths
-     * @return bool
+     *
      * @throws InvalidArgumentException
+     *
+     * @return bool
      */
     public function validateMethodsPaths(array $paths)
     {
@@ -86,8 +92,10 @@ class SettingsValidator
 
     /**
      * @param string $path
-     * @return bool
+     *
      * @throws InvalidArgumentException
+     *
+     * @return bool
      */
     public function validateCookiePath($path)
     {

@@ -1,18 +1,17 @@
 <?php
 
-
 namespace ddlzz\AmoAPI\Model;
 
-
 /**
- * Interface ModelInterface
- * @package ddlzz\AmoAPI\Interfaces
+ * Interface ModelInterface.
+ *
  * @author ddlzz
  */
 interface ModelInterface
 {
     /**
      * @param $action
+     *
      * @return string
      */
     public function setFields($action);
@@ -29,6 +28,7 @@ interface ModelInterface
 
     /**
      * @param array $data
+     *
      * @return ModelInterface
      */
     public function fill(array $data);
@@ -37,5 +37,4 @@ interface ModelInterface
      * Sets the 'updated_at' value as current time if nothing was passed to it.
      */
     public function setUpdatedAt();
-
 }

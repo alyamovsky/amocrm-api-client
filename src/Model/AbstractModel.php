@@ -1,6 +1,5 @@
 <?php
 
-
 namespace ddlzz\AmoAPI\Model;
 
 use ddlzz\AmoAPI\Exception\EntityFieldsException;
@@ -8,8 +7,8 @@ use ddlzz\AmoAPI\Exception\InvalidArgumentException;
 use ddlzz\AmoAPI\Validator\FieldsValidator;
 
 /**
- * Class AbstractModel
- * @package ddlzz\AmoAPI\Model
+ * Class AbstractModel.
+ *
  * @author ddlzz
  */
 abstract class AbstractModel implements \ArrayAccess
@@ -22,12 +21,14 @@ abstract class AbstractModel implements \ArrayAccess
 
     /**
      * Data container for an ArrayAccess interface implementation.
+     *
      * @var array
      */
     protected $container = [];
 
     /**
      * Fields parameters for validation purposes. These are fields that are used in every entity.
+     *
      * @var array
      */
     private $fieldsParams = [
@@ -71,14 +72,14 @@ abstract class AbstractModel implements \ArrayAccess
         'created_at' => 'date_create',
         'updated_at' => 'last_modified',
         'created_by' => 'created_user_id',
-
     ];
 
     /** @var array */
     protected $aliasesAppend = [];
 
     /**
-     * Entity data goes here
+     * Entity data goes here.
+     *
      * @var array
      */
     private $fields = [];
@@ -97,7 +98,7 @@ abstract class AbstractModel implements \ArrayAccess
 
     /**
      * @param string $action
-     * @return void
+     *
      * @throws InvalidArgumentException
      * @throws EntityFieldsException
      */
@@ -138,14 +139,17 @@ abstract class AbstractModel implements \ArrayAccess
 
     /**
      * @param array $data
-     * @return AbstractModel
+     *
      * @throws EntityFieldsException
      * @throws InvalidArgumentException
+     *
+     * @return AbstractModel
      */
     public function fill(array $data)
     {
         $this->container = $data;
         $this->setFields('fill');
+
         return $this;
     }
 
@@ -169,8 +173,10 @@ abstract class AbstractModel implements \ArrayAccess
 
     /**
      * @param array $data
-     * @return bool
+     *
      * @throws EntityFieldsException
+     *
+     * @return bool
      */
     private static function validateDataBeforeSet(array $data)
     {
@@ -188,13 +194,14 @@ abstract class AbstractModel implements \ArrayAccess
 
     /**
      * @param array $data
+     *
      * @return array
      */
     private function renameAliases(array $data)
     {
         foreach ($data as $key => $value) {
-            if (in_array($key, $this->aliases)) {
-                $newKey = array_search($key, $this->aliases);
+            if (in_array($key, $this->aliases, true)) {
+                $newKey = array_search($key, $this->aliases, true);
                 $data[$newKey] = $data[$key];
                 unset($data[$key]);
             }
@@ -205,19 +212,19 @@ abstract class AbstractModel implements \ArrayAccess
 
     /**
      * @param string $key
-     * @param mixed $value
+     * @param mixed  $value
      */
     private function setField($key, $value)
     {
         switch ($this->fieldsParams[$key]['type']) {
             case 'int':
-                $value = (int)$value;
+                $value = (int) $value;
                 break;
             case 'string':
-                $value = (string)$value;
+                $value = (string) $value;
                 break;
             case 'bool':
-                $value = (bool)$value;
+                $value = (bool) $value;
                 break;
         }
 
@@ -234,7 +241,7 @@ abstract class AbstractModel implements \ArrayAccess
      */
     public function offsetSet($offset, $value)
     {
-        if (is_null($offset)) {
+        if (null === $offset) {
             $this->container[] = $value;
         } else {
             $this->container[$offset] = $value;
@@ -243,6 +250,7 @@ abstract class AbstractModel implements \ArrayAccess
 
     /**
      * @param mixed $offset
+     *
      * @return bool
      */
     public function offsetExists($offset)
@@ -260,6 +268,7 @@ abstract class AbstractModel implements \ArrayAccess
 
     /**
      * @param mixed $offset
+     *
      * @return mixed|null
      */
     public function offsetGet($offset)

@@ -1,15 +1,13 @@
 <?php
 
-
 namespace ddlzz\AmoAPI\Model;
 
 use ddlzz\AmoAPI\Exception\EntityFactoryException;
 use ddlzz\AmoAPI\SettingsStorage;
 
-
 /**
- * Class ModelFactory
- * @package ddlzz\AmoAPI\Model
+ * Class ModelFactory.
+ *
  * @author ddlzz
  */
 class ModelFactory
@@ -27,30 +25,35 @@ class ModelFactory
 
     /**
      * @param string $type
-     * @return ModelInterface
+     *
      * @throws EntityFactoryException
+     *
+     * @return ModelInterface
      */
     public function create($type)
     {
         $entity = $this->prepareClassName($type);
         $this->validateClass($entity);
 
-        return new $entity;
+        return new $entity();
     }
 
     /**
      * @param string $name
+     *
      * @return string
      */
     private function prepareClassName($name)
     {
-        return SettingsStorage::NAMESPACE_PREFIX . '\Model\Amo\\' . rtrim(ucfirst($name), 's');
+        return SettingsStorage::NAMESPACE_PREFIX.'\Model\Amo\\'.rtrim(ucfirst($name), 's');
     }
 
     /**
      * @param string $name
-     * @return bool
+     *
      * @throws EntityFactoryException
+     *
+     * @return bool
      */
     private function validateClass($name)
     {

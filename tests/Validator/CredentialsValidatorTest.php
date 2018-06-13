@@ -1,15 +1,13 @@
 <?php
 
-
 namespace Tests\AmoAPI\Validator;
-
 
 use ddlzz\AmoAPI\Validator\CredentialsValidator;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class CredentialsValidatorTest
- * @package Tests\AmoAPI\Validator
+ * Class CredentialsValidatorTest.
+ *
  * @author ddlzz
  * @covers \ddlzz\AmoAPI\Validator\CredentialsValidator
  */
@@ -41,6 +39,7 @@ final class CredentialsValidatorTest extends TestCase
     /**
      * @dataProvider provideDataForTestValidateIncorrectSubdomain
      * @expectedException \ddlzz\AmoAPI\Exception\InvalidArgumentException
+     *
      * @param $subdomain
      */
     public function testValidateIncorrectSubdomain($subdomain)
@@ -67,6 +66,7 @@ final class CredentialsValidatorTest extends TestCase
     /**
      * @dataProvider provideDataForTestValidateIncorrectLogin
      * @expectedException \ddlzz\AmoAPI\Exception\InvalidArgumentException
+     *
      * @param $login
      */
     public function testValidateIncorrectLogin($login)
@@ -92,6 +92,7 @@ final class CredentialsValidatorTest extends TestCase
     /**
      * @dataProvider provideDataForTestValidateIncorrectHash
      * @expectedException \ddlzz\AmoAPI\Exception\InvalidArgumentException
+     *
      * @param $Hash
      */
     public function testValidateIncorrectHash($Hash)

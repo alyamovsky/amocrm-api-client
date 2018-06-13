@@ -1,15 +1,13 @@
 <?php
 
-
 namespace Tests\AmoAPI\Utils;
-
 
 use ddlzz\AmoAPI\Utils\StringUtil;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class StringUtilTest
- * @package Tests\AmoAPI\Utils
+ * Class StringUtilTest.
+ *
  * @author ddlzz
  * @covers \ddlzz\AmoAPI\Utils\StringUtil
  */
@@ -25,12 +23,13 @@ final class StringUtilTest extends TestCase
             ['12334'],
             [42],
             ['543test'],
-            [42 . 'test'],
+            [42 .'test'],
         ];
     }
 
     /**
      * @dataProvider provideDataForTestIsAlNumTrue
+     *
      * @param $value
      */
     public function testIsAlNumTrue($value)
@@ -53,6 +52,7 @@ final class StringUtilTest extends TestCase
 
     /**
      * @dataProvider provideDataForTestIsAlNumFalse
+     *
      * @param $value
      */
     public function testIsAlNumFalse($value)
@@ -73,6 +73,7 @@ final class StringUtilTest extends TestCase
 
     /**
      * @dataProvider provideDataForTestIsEmailTrue
+     *
      * @param $value
      */
     public function testIsEmailTrue($value)
@@ -97,6 +98,7 @@ final class StringUtilTest extends TestCase
 
     /**
      * @dataProvider provideDataForTestIsEmailFalse
+     *
      * @param $value
      */
     public function testIsEmailFalse($value)
@@ -117,6 +119,7 @@ final class StringUtilTest extends TestCase
 
     /**
      * @dataProvider provideDataForTestIsDomainTrue
+     *
      * @param $value
      */
     public function testIsDomainTrue($value)
@@ -139,6 +142,7 @@ final class StringUtilTest extends TestCase
 
     /**
      * @dataProvider provideDataForTestIsDomainFalse
+     *
      * @param $value
      */
     public function testIsDomainFalse($value)
@@ -159,6 +163,7 @@ final class StringUtilTest extends TestCase
 
     /**
      * @dataProvider provideDataForTestIsOnlyLettersTrue
+     *
      * @param $value
      */
     public function testIsOnlyLettersTrue($value)
@@ -183,6 +188,7 @@ final class StringUtilTest extends TestCase
 
     /**
      * @dataProvider provideDataForTestIsOnlyLettersFalse
+     *
      * @param $value
      */
     public function testIsOnlyLettersFalse($value)
@@ -203,6 +209,7 @@ final class StringUtilTest extends TestCase
 
     /**
      * @dataProvider provideDataForTestIsTextTrue
+     *
      * @param $value
      */
     public function testIsTextTrue($value)
@@ -224,6 +231,7 @@ final class StringUtilTest extends TestCase
 
     /**
      * @dataProvider provideDataForTestIsTextFalse
+     *
      * @param $value
      */
     public function testIsTextFalse($value)
@@ -243,6 +251,7 @@ final class StringUtilTest extends TestCase
 
     /**
      * @dataProvider provideDataForTestIsUrlPathTrue
+     *
      * @param $value
      */
     public function testIsUrlPathTrue($value)
@@ -265,6 +274,7 @@ final class StringUtilTest extends TestCase
 
     /**
      * @dataProvider provideDataForTestIsUrlPathFalse
+     *
      * @param $value
      */
     public function testIsUrlPathFalse($value)
@@ -285,6 +295,7 @@ final class StringUtilTest extends TestCase
 
     /**
      * @dataProvider provideDataForTestIsFilePathTrue
+     *
      * @param $value
      */
     public function testIsFilePathTrue($value)
@@ -307,6 +318,7 @@ final class StringUtilTest extends TestCase
 
     /**
      * @dataProvider provideDataForTestIsFilePathFalse
+     *
      * @param $value
      */
     public function testIsFilePathFalse($value)

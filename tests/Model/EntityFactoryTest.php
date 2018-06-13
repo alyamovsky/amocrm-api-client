@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Tests\AmoAPI\Model;
-
 
 use ddlzz\AmoAPI\Model\ModelFactory;
 use ddlzz\AmoAPI\Model\ModelInterface;
@@ -10,8 +8,8 @@ use ddlzz\AmoAPI\SettingsStorage;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class EntityFactoryTest
- * @package Tests\AmoAPI\Model
+ * Class EntityFactoryTest.
+ *
  * @author ddlzz
  * @covers \ddlzz\AmoAPI\Model\ModelFactory
  */

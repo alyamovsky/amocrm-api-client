@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Tests\AmoAPI;
 
 use ddlzz\AmoAPI\Client;
@@ -10,10 +9,9 @@ use ddlzz\AmoAPI\SettingsStorage;
 use org\bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;
 
-
 /**
- * Class ClientFactoryTest
- * @package Tests\AmoAPI
+ * Class ClientFactoryTest.
+ *
  * @author ddlzz
  * @covers  \ddlzz\AmoAPI\ClientFactory
  */

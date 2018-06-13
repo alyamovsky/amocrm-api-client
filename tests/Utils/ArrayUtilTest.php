@@ -1,21 +1,18 @@
 <?php
 
-
 namespace Tests\AmoAPI\Utils;
-
 
 use ddlzz\AmoAPI\Utils\ArrayUtil;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class ArrayUtilTest
- * @package Tests\AmoAPI\Utils
+ * Class ArrayUtilTest.
+ *
  * @author ddlzz
  * @covers \ddlzz\AmoAPI\Utils\ArrayUtil
  */
 final class ArrayUtilTest extends TestCase
 {
-
     /**
      * @return array
      */
@@ -23,14 +20,15 @@ final class ArrayUtilTest extends TestCase
     {
         return [
             ['foo', 'bar', ['foo', 'foo', 'cat', 'meow'],
-                ['bar', 'bar', 'cat', 'meow']],
+                ['bar', 'bar', 'cat', 'meow'], ],
             ['foo', 'bar', ['foo', 'foo', 'kek' => 'cat', 'meow' => ['baz', 'test' => 'cat', 'bar' => 'foo123']],
-                ['bar', 'bar', 'kek' => 'cat', 'meow' => ['baz', 'bar' => 'foo123', 'test' => 'cat']]],
+                ['bar', 'bar', 'kek' => 'cat', 'meow' => ['baz', 'bar' => 'foo123', 'test' => 'cat']], ],
         ];
     }
 
     /**
      * @dataProvider provideDataForTestSearchAndReplace
+     *
      * @param $search
      * @param $replace
      * @param $haystack

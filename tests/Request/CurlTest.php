@@ -1,19 +1,17 @@
 <?php
 
-
 namespace Tests\AmoAPI\Request;
-
 
 use ddlzz\AmoAPI\Request\Curl;
 use ddlzz\AmoAPI\SettingsStorage;
 use phpmock\functions\FixedValueFunction;
 use phpmock\Mock;
-use PHPUnit\Framework\TestCase;
 use phpmock\MockBuilder;
+use PHPUnit\Framework\TestCase;
 
 /**
- * Class CurlTest
- * @package Tests\AmoAPI\Request
+ * Class CurlTest.
+ *
  * @author ddlzz
  * @covers \ddlzz\AmoAPI\Request\Curl
  */
@@ -39,7 +37,7 @@ final class CurlTest extends TestCase
     }
 
     /**
-     * It doesn't really belong here but it may be useful to detect possible tests failures
+     * It doesn't really belong here but it may be useful to detect possible tests failures.
      */
     public function testCurlExtensionIsLoaded()
     {
@@ -77,13 +75,13 @@ final class CurlTest extends TestCase
 
         $output = 'Cats and dogs are friends!';
 
-        $this->mockBuilder->setNamespace(SettingsStorage::NAMESPACE_PREFIX . '\Request')
-            ->setName("curl_exec")
+        $this->mockBuilder->setNamespace(SettingsStorage::NAMESPACE_PREFIX.'\Request')
+            ->setName('curl_exec')
             ->setFunctionProvider(new FixedValueFunction($output));
 
         $mock = $this->mockBuilder->build();
         $mock->enable();
-        self::assertEquals($output, $this->curl->exec());
+        self::assertSame($output, $this->curl->exec());
         $mock->disable();
 
         $this->curl->close();
@@ -191,13 +189,13 @@ final class CurlTest extends TestCase
         $this->curl->setReturnTransfer(true);
         $this->curl->exec();
 
-        $this->mockBuilder->setNamespace(SettingsStorage::NAMESPACE_PREFIX . '\Request')
-            ->setName("curl_getinfo")
+        $this->mockBuilder->setNamespace(SettingsStorage::NAMESPACE_PREFIX.'\Request')
+            ->setName('curl_getinfo')
             ->setFunctionProvider(new FixedValueFunction(200));
 
         $mock = $this->mockBuilder->build();
         $mock->enable();
-        self::assertEquals(200, $this->curl->getHttpCode());
+        self::assertSame(200, $this->curl->getHttpCode());
         $mock->disable();
 
         $this->curl->close();

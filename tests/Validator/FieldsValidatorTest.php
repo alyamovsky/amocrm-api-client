@@ -1,15 +1,13 @@
 <?php
 
-
 namespace Tests\AmoAPI\Validator;
-
 
 use ddlzz\AmoAPI\Validator\FieldsValidator;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class FieldsValidatorTest
- * @package Tests\AmoAPI\Validator
+ * Class FieldsValidatorTest.
+ *
  * @author ddlzz
  * @covers \ddlzz\AmoAPI\Validator\FieldsValidator
  */
@@ -80,8 +78,9 @@ final class FieldsValidatorTest extends TestCase
      * @covers \ddlzz\AmoAPI\Validator\FieldsValidator::validateBool
      * @covers \ddlzz\AmoAPI\Validator\FieldsValidator::validateArray
      * @covers \ddlzz\AmoAPI\Validator\FieldsValidator::validateArraystring
+     *
      * @param string $key
-     * @param mixed $value
+     * @param mixed  $value
      */
     public function testIsValid($key, $value)
     {
@@ -123,8 +122,9 @@ final class FieldsValidatorTest extends TestCase
      * @covers \ddlzz\AmoAPI\Validator\FieldsValidator::validateBool
      * @covers \ddlzz\AmoAPI\Validator\FieldsValidator::validateArray
      * @covers \ddlzz\AmoAPI\Validator\FieldsValidator::validateArraystring
+     *
      * @param string $key
-     * @param mixed $value
+     * @param mixed  $value
      * @expectedException \ddlzz\AmoAPI\Exception\EntityFieldsException
      */
     public function testIsValidFail($key, $value)
@@ -162,8 +162,9 @@ final class FieldsValidatorTest extends TestCase
 
     /**
      * @dataProvider provideDataForTestValidateRequired
+     *
      * @param string $key
-     * @param mixed $value
+     * @param mixed  $value
      */
     public function testValidateRequired($key, $value)
     {
@@ -187,8 +188,9 @@ final class FieldsValidatorTest extends TestCase
 
     /**
      * @dataProvider provideDataForTestValidateRequiredException
+     *
      * @param string $key
-     * @param mixed $value
+     * @param mixed  $value
      * @expectedException \ddlzz\AmoAPI\Exception\EntityFieldsException
      */
     public function testValidateRequiredMissingValue($key, $value)

@@ -1,14 +1,13 @@
 <?php
 
-
 namespace Tests\AmoAPI;
 
 use ddlzz\AmoAPI\CredentialsManager;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class CredentialsManagerTest
- * @package Tests\AmoAPI
+ * Class CredentialsManagerTest.
+ *
  * @author ddlzz
  * @covers \ddlzz\AmoAPI\CredentialsManager
  */
@@ -62,17 +61,17 @@ final class CredentialsManagerTest extends TestCase
 
     public function testGetSubdomain()
     {
-        self::assertEquals($this->subdomain, $this->credentialsManager->getSubdomain());
+        self::assertSame($this->subdomain, $this->credentialsManager->getSubdomain());
     }
-    
+
     public function testGetLogin()
     {
-        self::assertEquals($this->login, $this->credentialsManager->getLogin());
+        self::assertSame($this->login, $this->credentialsManager->getLogin());
     }
 
     public function testGetCredentials()
     {
         $expectedResult = ['USER_LOGIN' => $this->login, 'USER_HASH' => $this->hash];
-        self::assertEquals($expectedResult, $this->credentialsManager->getCredentials());
+        self::assertSame($expectedResult, $this->credentialsManager->getCredentials());
     }
 }

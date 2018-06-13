@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Tests\AmoAPI\Request;
-
 
 use ddlzz\AmoAPI\Request\Curl;
 use ddlzz\AmoAPI\Request\DataSender;
@@ -10,8 +8,8 @@ use ddlzz\AmoAPI\SettingsStorage;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class DataSenderTest
- * @package Tests\AmoAPI\Request
+ * Class DataSenderTest.
+ *
  * @author ddlzz
  * @covers \ddlzz\AmoAPI\Request\DataSender
  */
@@ -37,11 +35,11 @@ final class DataSenderTest extends TestCase
 
     public function testSend()
     {
-        /** @noinspection PhpUndefinedMethodInspection */
+        /* @noinspection PhpUndefinedMethodInspection */
         $this->curl->method('getHttpCode')->willReturn(200);
 
         $dataSender = new DataSender($this->curl, $this->settings);
-        self::assertEquals($this->curl->exec(), $dataSender->send('http://catdog.test', ['foo']));
+        self::assertSame($this->curl->exec(), $dataSender->send('http://catdog.test', ['foo']));
     }
 
     /**
@@ -49,7 +47,7 @@ final class DataSenderTest extends TestCase
      */
     public function testFailedAuth()
     {
-        /** @noinspection PhpUndefinedMethodInspection */
+        /* @noinspection PhpUndefinedMethodInspection */
         $this->curl->method('getHttpCode')->willReturn(401);
 
         $dataSender = new DataSender($this->curl, $this->settings);
@@ -61,7 +59,7 @@ final class DataSenderTest extends TestCase
      */
     public function testHttpError()
     {
-        /** @noinspection PhpUndefinedMethodInspection */
+        /* @noinspection PhpUndefinedMethodInspection */
         $this->curl->method('getHttpCode')->willReturn(500);
 
         $dataSender = new DataSender($this->curl, $this->settings);

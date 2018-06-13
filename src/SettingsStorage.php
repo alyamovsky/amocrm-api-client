@@ -1,20 +1,18 @@
 <?php
 
-
 namespace ddlzz\AmoAPI;
 
 use ddlzz\AmoAPI\Exception\InvalidArgumentException;
 use ddlzz\AmoAPI\Validator\SettingsValidator;
 
-
 /**
  * Class SettingsStorage. All amo- and library related variables are stored here.
- * @package ddlzz\AmoAPI
+ *
  * @author ddlzz
  */
 class SettingsStorage
 {
-    const LIB_PATH = __DIR__ . '/..';
+    const LIB_PATH = __DIR__.'/..';
 
     const NAMESPACE_PREFIX = '\ddlzz\AmoAPI';
 
@@ -55,7 +53,7 @@ class SettingsStorage
     private $userAgent = 'amoAPI PHP Client';
 
     /** @var string */
-    private $cookiePath = self::LIB_PATH . '/var/cookie.txt';
+    private $cookiePath = self::LIB_PATH.'/var/cookie.txt';
 
     /**
      * SettingsStorage constructor.
@@ -75,6 +73,7 @@ class SettingsStorage
 
     /**
      * @param string $scheme
+     *
      * @throws InvalidArgumentException
      */
     public function setScheme($scheme)
@@ -93,6 +92,7 @@ class SettingsStorage
 
     /**
      * @param string $domain
+     *
      * @throws InvalidArgumentException
      */
     public function setDomain($domain)
@@ -111,6 +111,7 @@ class SettingsStorage
 
     /**
      * @param string $userAgent
+     *
      * @throws InvalidArgumentException
      */
     public function setUserAgent($userAgent)
@@ -129,8 +130,10 @@ class SettingsStorage
 
     /**
      * @param string $code
-     * @return string mixed
+     *
      * @throws InvalidArgumentException
+     *
+     * @return string mixed
      */
     public function getMethodPath($code)
     {
@@ -143,6 +146,7 @@ class SettingsStorage
 
     /**
      * @param array $paths
+     *
      * @throws InvalidArgumentException
      */
     public function setMethodsPaths(array $paths)
@@ -161,6 +165,7 @@ class SettingsStorage
 
     /**
      * @param string $path
+     *
      * @throws InvalidArgumentException
      */
     public function setCookiePath($path)
@@ -171,8 +176,10 @@ class SettingsStorage
 
     /**
      * @param string $type
-     * @return string
+     *
      * @throws InvalidArgumentException
+     *
+     * @return string
      */
     public function getMethodCodeByType($type)
     {

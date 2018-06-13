@@ -6,7 +6,7 @@ namespace Tests\AmoAPI;
 use ddlzz\AmoAPI\Client;
 use ddlzz\AmoAPI\CredentialsManager;
 use ddlzz\AmoAPI\Model\Amo\Lead;
-use ddlzz\AmoAPI\Model\EntityInterface;
+use ddlzz\AmoAPI\Model\ModelInterface;
 use ddlzz\AmoAPI\Request\DataSender;
 use ddlzz\AmoAPI\SettingsStorage;
 use org\bovigo\vfs\vfsStream;
@@ -164,10 +164,10 @@ final class ClientTest extends TestCase
     }
 
     /**
-     * @param EntityInterface $entity
+     * @param ModelInterface $entity
      * @return string
      */
-    private function buildSetEntityResponse(EntityInterface $entity)
+    private function buildSetEntityResponse(ModelInterface $entity)
     {
         $method = $this->settings->getMethodPath($entity->getRequestName());
         $id = rand(200000, 300000);
@@ -198,11 +198,11 @@ final class ClientTest extends TestCase
     }
 
     /**
-     * @param EntityInterface $entity
+     * @param ModelInterface $entity
      * @param string $action
      * @return string
      */
-    private function fakeSetEntity(EntityInterface $entity, $action)
+    private function fakeSetEntity(ModelInterface $entity, $action)
     {
         if (!in_array($action, ['add', 'update'])) {
             throw new \Exception('Wrong action'); // just in case

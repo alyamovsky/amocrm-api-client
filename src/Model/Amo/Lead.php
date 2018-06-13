@@ -4,15 +4,15 @@
 namespace ddlzz\AmoAPI\Model\Amo;
 
 
-use ddlzz\AmoAPI\Model\BaseEntity;
-use ddlzz\AmoAPI\Model\EntityInterface;
+use ddlzz\AmoAPI\Model\AbstractModel;
+use ddlzz\AmoAPI\Model\ModelInterface;
 
 /**
  * Class Lead
  * @package ddlzz\AmoAPI\Model
  * @author ddlzz
  */
-final class Lead extends BaseEntity implements EntityInterface
+final class Lead extends AbstractModel implements ModelInterface
 {
     /** @var string */
     protected $requestName = 'leads';

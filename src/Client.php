@@ -3,8 +3,8 @@
 
 namespace ddlzz\AmoAPI;
 
-use ddlzz\AmoAPI\Model\EntityFactory;
-use ddlzz\AmoAPI\Model\EntityInterface;
+use ddlzz\AmoAPI\Model\ModelFactory;
+use ddlzz\AmoAPI\Model\ModelInterface;
 use ddlzz\AmoAPI\Exception\InvalidArgumentException;
 use ddlzz\AmoAPI\Exception\RuntimeException;
 use ddlzz\AmoAPI\Request\DataSender;
@@ -58,7 +58,7 @@ class Client
     /**
      * @param $type
      * @param $id
-     * @return EntityInterface
+     * @return ModelInterface
      * @throws Exception\CurlException
      * @throws Exception\EntityFactoryException
      * @throws Exception\ErrorCodeException
@@ -76,8 +76,8 @@ class Client
             throw new InvalidArgumentException("The $type with id $id is not found on the server");
         }
 
-        $entityFactory = new EntityFactory($this->settings);
-        /** @var EntityInterface $entity */
+        $entityFactory = new ModelFactory($this->settings);
+        /** @var ModelInterface $entity */
         $entity = $entityFactory->create($type);
         $entity->fill($result['_embedded']['items'][0]);
 
@@ -85,27 +85,27 @@ class Client
     }
 
     /**
-     * @param EntityInterface $entity
+     * @param ModelInterface $entity
      * @return string
      * @throws Exception\CurlException
      * @throws Exception\ErrorCodeException
      * @throws Exception\FailedAuthException
      * @throws InvalidArgumentException
      */
-    public function add(EntityInterface $entity)
+    public function add(ModelInterface $entity)
     {
         return $this->set($entity, 'add');
     }
 
     /**
-     * @param EntityInterface $entity
+     * @param ModelInterface $entity
      * @return string
      * @throws Exception\CurlException
      * @throws Exception\ErrorCodeException
      * @throws Exception\FailedAuthException
      * @throws InvalidArgumentException
      */
-    public function update(EntityInterface $entity)
+    public function update(ModelInterface $entity)
     {
         $entity->setUpdatedAt();
         return $this->set($entity, 'update');
@@ -132,7 +132,7 @@ class Client
 
     /**
      * Adds or updates an entity
-     * @param EntityInterface $entity
+     * @param ModelInterface $entity
      * @param string $action
      * @return string
      * @throws Exception\CurlException
@@ -140,7 +140,7 @@ class Client
      * @throws Exception\FailedAuthException
      * @throws InvalidArgumentException
      */
-    private function set(EntityInterface $entity, $action)
+    private function set(ModelInterface $entity, $action)
     {
         $entity->setFields($action);
 

@@ -1,13 +1,11 @@
 <?php
 
-
 namespace Tests\AmoAPI\Model;
-
 
 use ddlzz\AmoAPI\Client;
 use ddlzz\AmoAPI\CredentialsManager;
-use ddlzz\AmoAPI\Model\BaseEntity;
-use ddlzz\AmoAPI\Model\EntityInterface;
+use ddlzz\AmoAPI\Model\AbstractModel;
+use ddlzz\AmoAPI\Model\ModelInterface;
 use ddlzz\AmoAPI\Request\DataSender;
 use ddlzz\AmoAPI\SettingsStorage;
 use org\bovigo\vfs\vfsStream;
@@ -16,12 +14,12 @@ use org\bovigo\vfs\vfsStreamFile;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class BaseEntityTest
- * @package Tests\AmoAPI\Model
+ * Class AbstractModelTest.
+ *
  * @author ddlzz
- * @covers \ddlzz\AmoAPI\Model\BaseEntity
+ * @covers \ddlzz\AmoAPI\Model\AbstractModel
  */
-final class BaseEntityTest extends TestCase
+final class AbstractModelTest extends TestCase
 {
     /** @var CredentialsManager */
     private $credentials;
@@ -59,28 +57,29 @@ final class BaseEntityTest extends TestCase
 
     public function testCanBeCreated()
     {
-        self::assertInstanceOf(BaseEntity::class, new class extends BaseEntity {});
+        self::assertInstanceOf(AbstractModel::class, new class() extends AbstractModel {
+        });
     }
 
     public function testGetRequestName()
     {
-        $child = new class extends BaseEntity
-        {
+        $child = new class() extends AbstractModel {
             protected $requestName = 'foo';
         };
 
-        self::assertEquals('foo', $child->getRequestName());
+        self::assertSame('foo', $child->getRequestName());
     }
 
     public function testSetFields()
     {
-        $child = new class extends BaseEntity {};
+        $child = new class() extends AbstractModel {
+        };
         $child['id'] = 42;
         $child['created_at'] = time();
 
         $child->setFields('add');
 
-        self::assertEquals(42, $child['id']);
+        self::assertSame(42, $child['id']);
     }
 
     /**
@@ -88,7 +87,8 @@ final class BaseEntityTest extends TestCase
      */
     public function testSetFieldsIncorrectAction()
     {
-        $child = new class extends BaseEntity {};
+        $child = new class() extends AbstractModel {
+        };
         $child['id'] = 42;
 
         $child->setFields('foo');
@@ -96,18 +96,20 @@ final class BaseEntityTest extends TestCase
 
     public function testGetFields()
     {
-        $child = new class extends BaseEntity {};
+        $child = new class() extends AbstractModel {
+        };
         $child['id'] = 42;
         $child['created_at'] = time();
 
         $child->setFields('fill');
 
-        self::assertEquals(42, $child->getFields()['id']);
+        self::assertSame(42, $child->getFields()['id']);
     }
 
     public function testFill()
     {
-        $child = new class extends BaseEntity {};
+        $child = new class() extends AbstractModel {
+        };
         $data = [
             'id' => 42,
             'name' => 'Test name',
@@ -120,14 +122,13 @@ final class BaseEntityTest extends TestCase
 
         $child->fill($data);
 
-        self::assertEquals(42, $child->getFields()['id']);
+        self::assertSame(42, $child->getFields()['id']);
     }
 
     public function testSetUpdatedAt()
     {
         $time = time() - 3600 * 24;
-        $child = new class() extends BaseEntity implements EntityInterface
-        {
+        $child = new class() extends AbstractModel implements ModelInterface {
             protected $requestName = 'foo';
         };
 
@@ -144,7 +145,8 @@ final class BaseEntityTest extends TestCase
 
     public function testSetCreatedAt()
     {
-        $child = new class extends BaseEntity {};
+        $child = new class() extends AbstractModel {
+        };
         $child['id'] = 42;
 
         $child->setFields('fill');
@@ -158,7 +160,8 @@ final class BaseEntityTest extends TestCase
      */
     public function testEmptyData()
     {
-        $child = new class extends BaseEntity implements EntityInterface {};
+        $child = new class() extends AbstractModel implements ModelInterface {
+        };
 
         $child->setFields('fill');
     }
@@ -169,7 +172,8 @@ final class BaseEntityTest extends TestCase
      */
     public function testIndexedArrayForData()
     {
-        $child = new class extends BaseEntity implements EntityInterface {};
+        $child = new class() extends AbstractModel implements ModelInterface {
+        };
         $child[0] = 'foo';
         $child[1] = 'bar';
         $child[2] = 'baz';
@@ -179,8 +183,7 @@ final class BaseEntityTest extends TestCase
 
     public function testRenameAliases()
     {
-        $child = new class extends BaseEntity implements EntityInterface
-        {
+        $child = new class() extends AbstractModel implements ModelInterface {
             protected $fieldsParamsAppend = ['new_alias' => ['type' => 'int', 'required_add' => false, 'required_update' => false]];
             protected $aliasesAppend = ['new_alias' => 'old_alias'];
         };
@@ -188,28 +191,27 @@ final class BaseEntityTest extends TestCase
         $child['old_alias'] = 42;
 
         $child->setFields('fill');
-        self::assertEquals(42, $child['new_alias']);
+        self::assertSame(42, $child['new_alias']);
     }
 
     public function testFieldsTypes()
     {
-        $child = new class extends BaseEntity implements EntityInterface
-        {
+        $child = new class() extends AbstractModel implements ModelInterface {
             protected $fieldsParamsAppend = [
                 'int_param' => [
                     'type' => 'int',
                     'required_add' => false,
-                    'required_update' => false
+                    'required_update' => false,
                 ],
                 'string_param' => [
                     'type' => 'string',
                     'required_add' => false,
-                    'required_update' => false
+                    'required_update' => false,
                 ],
                 'bool_param' => [
                     'type' => 'bool',
                     'required_add' => false,
-                    'required_update' => false
+                    'required_update' => false,
                 ],
             ];
         };
@@ -227,8 +229,7 @@ final class BaseEntityTest extends TestCase
 
     public function testOffsetSet()
     {
-        $child = new class extends BaseEntity
-        {
+        $child = new class() extends AbstractModel {
             public function getContainer()
             {
                 return $this->container;
@@ -238,13 +239,14 @@ final class BaseEntityTest extends TestCase
         $child[] = 'baz';
         $child['foo'] = 'bar';
 
-        self::assertEquals('baz', $child->getContainer()[0]);
-        self::assertEquals('bar', $child->getContainer()['foo']);
+        self::assertSame('baz', $child->getContainer()[0]);
+        self::assertSame('bar', $child->getContainer()['foo']);
     }
 
     public function testOffsetExists()
     {
-        $child = new class extends BaseEntity {};
+        $child = new class() extends AbstractModel {
+        };
         $child['foo'] = 'bar';
 
         self::assertTrue(empty($child['baz']));
@@ -253,7 +255,8 @@ final class BaseEntityTest extends TestCase
 
     public function testOffsetUnset()
     {
-        $child = new class extends BaseEntity {};
+        $child = new class() extends AbstractModel {
+        };
         $child['foo'] = 'bar';
 
         unset($child['foo']);
@@ -263,11 +266,12 @@ final class BaseEntityTest extends TestCase
 
     public function testOffsetGet()
     {
-        $child = new class extends BaseEntity {};
+        $child = new class() extends AbstractModel {
+        };
         $child['id'] = 42;
 
         $child->setFields('fill');
 
-        self::assertEquals(42, $child['id']);
+        self::assertSame(42, $child['id']);
     }
 }

@@ -5,11 +5,11 @@ namespace ddlzz\AmoAPI\Model;
 
 
 /**
- * Interface EntityInterface
+ * Interface ModelInterface
  * @package ddlzz\AmoAPI\Interfaces
  * @author ddlzz
  */
-interface EntityInterface
+interface ModelInterface
 {
     /**
      * @param $action
@@ -29,7 +29,7 @@ interface EntityInterface
 
     /**
      * @param array $data
-     * @return EntityInterface
+     * @return ModelInterface
      */
     public function fill(array $data);
 

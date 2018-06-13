@@ -8,11 +8,11 @@ use ddlzz\AmoAPI\Exception\InvalidArgumentException;
 use ddlzz\AmoAPI\Validator\FieldsValidator;
 
 /**
- * Class BaseEntity
+ * Class AbstractModel
  * @package ddlzz\AmoAPI\Model
  * @author ddlzz
  */
-abstract class BaseEntity implements \ArrayAccess
+abstract class AbstractModel implements \ArrayAccess
 {
     /** @var FieldsValidator */
     private $fieldsValidator;
@@ -84,7 +84,7 @@ abstract class BaseEntity implements \ArrayAccess
     private $fields = [];
 
     /**
-     * BaseEntity constructor.
+     * AbstractModel constructor.
      */
     public function __construct()
     {
@@ -138,7 +138,7 @@ abstract class BaseEntity implements \ArrayAccess
 
     /**
      * @param array $data
-     * @return BaseEntity
+     * @return AbstractModel
      * @throws EntityFieldsException
      * @throws InvalidArgumentException
      */

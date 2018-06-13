@@ -4,8 +4,8 @@
 namespace Tests\AmoAPI\Model;
 
 
-use ddlzz\AmoAPI\Model\EntityFactory;
-use ddlzz\AmoAPI\Model\EntityInterface;
+use ddlzz\AmoAPI\Model\ModelFactory;
+use ddlzz\AmoAPI\Model\ModelInterface;
 use ddlzz\AmoAPI\SettingsStorage;
 use PHPUnit\Framework\TestCase;
 
@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
  * Class EntityFactoryTest
  * @package Tests\AmoAPI\Model
  * @author ddlzz
- * @covers \ddlzz\AmoAPI\Model\EntityFactory
+ * @covers \ddlzz\AmoAPI\Model\ModelFactory
  */
 final class EntityFactoryTest extends TestCase
 {
@@ -27,13 +27,13 @@ final class EntityFactoryTest extends TestCase
 
     public function testCanBeCreated()
     {
-        self::assertInstanceOf(EntityFactory::class, new EntityFactory($this->settings));
+        self::assertInstanceOf(ModelFactory::class, new ModelFactory($this->settings));
     }
 
     public function testCreateEntity()
     {
-        $factory = new EntityFactory($this->settings);
-        self::assertInstanceOf(EntityInterface::class, $factory->create('lead'));
+        $factory = new ModelFactory($this->settings);
+        self::assertInstanceOf(ModelInterface::class, $factory->create('lead'));
     }
 
     /**
@@ -42,7 +42,7 @@ final class EntityFactoryTest extends TestCase
      */
     public function testCreateEntityNonexistentClassException()
     {
-        $factory = new EntityFactory($this->settings);
+        $factory = new ModelFactory($this->settings);
         $factory->create('foobar');
     }
 }

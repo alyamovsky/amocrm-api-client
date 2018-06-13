@@ -8,11 +8,11 @@ use ddlzz\AmoAPI\SettingsStorage;
 
 
 /**
- * Class EntityFactory
+ * Class ModelFactory
  * @package ddlzz\AmoAPI\Model
  * @author ddlzz
  */
-class EntityFactory
+class ModelFactory
 {
     /** @var SettingsStorage */
     private $settings;
@@ -27,7 +27,7 @@ class EntityFactory
 
     /**
      * @param string $type
-     * @return EntityInterface
+     * @return ModelInterface
      * @throws EntityFactoryException
      */
     public function create($type)

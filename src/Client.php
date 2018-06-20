@@ -17,19 +17,19 @@ use ddlzz\AmoAPI\Request\UrlBuilder;
 class Client
 {
     /** @var CredentialsManager */
-    private $credentials;
+    protected $credentials;
 
     /** @var DataSender */
-    private $dataSender;
+    protected $dataSender;
 
     /** @var SettingsStorage */
-    private $settings;
+    protected $settings;
 
     /** @var UrlBuilder */
-    private $urlBuilder;
+    protected $urlBuilder;
 
     /** @var Auth */
-    private $auth;
+    protected $auth;
 
     /**
      * Client constructor.
@@ -125,7 +125,7 @@ class Client
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
-    private function checkAuth()
+    protected function checkAuth()
     {
         if (!$this->auth->isAuthenticated()) {
             $result = $this->dataSender->send($this->urlBuilder->buildMethodUrl('auth'), $this->credentials->getCredentials());
@@ -150,7 +150,7 @@ class Client
      *
      * @return string
      */
-    private function set(ModelInterface $entity, $action)
+    protected function set(ModelInterface $entity, $action)
     {
         $entity->setFields($action);
 
@@ -165,7 +165,7 @@ class Client
     /**
      * Adds a one second pause because of Amo request limits.
      */
-    private function waitASec()
+    protected function waitASec()
     {
         $now = microtime(true);
         static $lastCheck = null;

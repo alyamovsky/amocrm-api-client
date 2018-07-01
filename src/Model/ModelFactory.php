@@ -26,8 +26,6 @@ class ModelFactory
     /**
      * @param string $type
      *
-     * @throws EntityFactoryException
-     *
      * @return ModelInterface
      */
     public function create($type)

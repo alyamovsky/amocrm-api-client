@@ -39,15 +39,13 @@ class FieldsValidator
      * @param string $key
      * @param mixed  $value
      *
-     * @throws EntityFieldsException
-     *
      * @return bool
      */
     public function isValid($key, $value)
     {
         $this->validateRequired($key, $value);
 
-        if (isset($value)) {
+        if (null !== $value) {
             $validate = $this->prepareValidateType($this->fieldsParams[$key]['type']);
             self::$validate($key, $value);
         }
@@ -68,7 +66,7 @@ class FieldsValidator
         $method = 'validate'.ucfirst($key);
         if (!method_exists(self::class, $method)) {
             throw new EntityFieldsException(
-                "Internal error: the field \"$key\" doesn't match any of the entity predefined fields"
+                sprintf('Internal error: the field "%s" doesn\'t match any of the entity predefined fields', $key)
             );
         }
 
@@ -86,8 +84,8 @@ class FieldsValidator
     private function validateRequired($key, $value)
     {
         if (('add' === $this->action) || ('update' === $this->action)) {
-            if (!isset($value) && (true === $this->fieldsParams[$key]['required_'.$this->action])) {
-                throw new EntityFieldsException(ucfirst($this->action)." error: the required field \"$key\" is missing or empty");
+            if (null === $value && (true === $this->fieldsParams[$key]['required_'.$this->action])) {
+                throw new EntityFieldsException(sprintf('%s error: the required field "%s" is missing or empty', ucfirst($this->action), $key));
             }
         }
 
@@ -107,7 +105,7 @@ class FieldsValidator
     private static function validateInt($key, $value)
     {
         if (!is_int($value) || !preg_match('/^\d+$/', (string) $value)) {
-            throw new EntityFieldsException("The field \"$key\" must contain digits only");
+            throw new EntityFieldsException(sprintf('The field "%s" must contain digits only', $key));
         }
 
         return true;
@@ -126,7 +124,7 @@ class FieldsValidator
     private static function validateString($key, $value)
     {
         if (!is_string($value) && !is_numeric($value)) {
-            throw new EntityFieldsException("The field \"$key\" must be string");
+            throw new EntityFieldsException(sprintf('The field "%s" must be string', $key));
         }
 
         return true;
@@ -145,7 +143,7 @@ class FieldsValidator
     private static function validateBool($key, $value)
     {
         if (null === filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE)) {
-            throw new EntityFieldsException("The field \"$key\" must contain boolean values only");
+            throw new EntityFieldsException(sprintf('The field "%s" must contain boolean values only', $key));
         }
 
         return true;
@@ -177,7 +175,7 @@ class FieldsValidator
      * we create this check.
      *
      * @param string $key
-     * @param array  $value
+     * @param mixed  $value
      *
      * @throws EntityFieldsException
      *
@@ -186,7 +184,7 @@ class FieldsValidator
     private static function validateArraystring($key, $value)
     {
         if ((!is_array($value)) && (!is_string($value) && !is_numeric($value))) {
-            throw new EntityFieldsException("The field \"$key\" must be an array or string");
+            throw new EntityFieldsException(sprintf('The field "%s" must be an array or string', $key));
         }
 
         return true;

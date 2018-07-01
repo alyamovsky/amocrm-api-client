@@ -100,7 +100,6 @@ abstract class AbstractModel implements \ArrayAccess
      * @param string $action
      *
      * @throws InvalidArgumentException
-     * @throws EntityFieldsException
      */
     public function setFields($action)
     {
@@ -140,9 +139,6 @@ abstract class AbstractModel implements \ArrayAccess
     /**
      * @param array $data
      *
-     * @throws EntityFieldsException
-     * @throws InvalidArgumentException
-     *
      * @return AbstractModel
      */
     public function fill(array $data)
@@ -159,7 +155,7 @@ abstract class AbstractModel implements \ArrayAccess
      */
     public function setUpdatedAt()
     {
-        if ((isset($this->fields['updated_at'])) && ($this->container['updated_at'] === $this->fields['updated_at'])) {
+        if (isset($this->fields['updated_at']) && ($this->container['updated_at'] === $this->fields['updated_at'])) {
             $this->container['updated_at'] = time();
         }
     }

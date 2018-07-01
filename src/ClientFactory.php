@@ -16,17 +16,11 @@ class ClientFactory
      * @param CredentialsManager   $credentials
      * @param SettingsStorage|null $settings
      *
-     * @throws Exception\CurlException
-     * @throws Exception\ErrorCodeException
-     * @throws Exception\FailedAuthException
-     * @throws Exception\InvalidArgumentException
-     * @throws Exception\RuntimeException
-     *
      * @return Client
      */
     public static function create(CredentialsManager $credentials, SettingsStorage $settings = null)
     {
-        $settings = isset($settings) ? $settings : new SettingsStorage();
+        $settings = $settings ?: new SettingsStorage();
         $dataSender = self::buildSender($settings);
 
         return new Client($credentials, $dataSender, $settings);

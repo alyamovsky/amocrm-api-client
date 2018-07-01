@@ -16,11 +16,7 @@ class StringUtil
      */
     public static function isAlNum($value)
     {
-        if (!self::isCorrectType($value) || !ctype_alnum((string) $value)) {
-            return false;
-        }
-
-        return true;
+        return !(!self::isCorrectType($value) || !ctype_alnum((string)$value));
     }
 
     /**
@@ -44,7 +40,7 @@ class StringUtil
      */
     public static function isDomain($value)
     {
-        return (self::isCorrectType($value))
+        return self::isCorrectType($value)
             && (preg_match("/^([a-z\d](-*[a-z\d])*)(\.([a-z\d](-*[a-z\d])*))*$/i", $value) // valid chars check
             && preg_match('/^.{1,253}$/', $value) // overall length check
             && preg_match("/^[^\.]{1,63}(\.[^\.]{1,63})*$/", $value)); // length of each label
@@ -57,11 +53,7 @@ class StringUtil
      */
     public static function isOnlyLetters($value)
     {
-        if (!self::isCorrectType($value) || !ctype_alpha($value)) {
-            return false;
-        }
-
-        return true;
+        return !(!self::isCorrectType($value) || !ctype_alpha($value));
     }
 
     /**
@@ -107,6 +99,6 @@ class StringUtil
      */
     private static function isCorrectType($value)
     {
-        return is_int($value) || (is_string($value));
+        return is_int($value) || is_string($value);
     }
 }

@@ -37,12 +37,6 @@ class Client
      * @param CredentialsManager            $credentials
      * @param DataSender                    $dataSender
      * @param \ddlzz\AmoAPI\SettingsStorage $settings
-     *
-     * @throws Exception\CurlException
-     * @throws Exception\ErrorCodeException
-     * @throws Exception\FailedAuthException
-     * @throws InvalidArgumentException
-     * @throws RuntimeException
      */
     public function __construct(CredentialsManager $credentials, DataSender $dataSender, SettingsStorage $settings)
     {
@@ -59,10 +53,6 @@ class Client
      * @param $type
      * @param $id
      *
-     * @throws Exception\CurlException
-     * @throws Exception\EntityFactoryException
-     * @throws Exception\ErrorCodeException
-     * @throws Exception\FailedAuthException
      * @throws InvalidArgumentException
      *
      * @return ModelInterface
@@ -89,11 +79,6 @@ class Client
     /**
      * @param ModelInterface $entity
      *
-     * @throws Exception\CurlException
-     * @throws Exception\ErrorCodeException
-     * @throws Exception\FailedAuthException
-     * @throws InvalidArgumentException
-     *
      * @return string
      */
     public function add(ModelInterface $entity)
@@ -103,11 +88,6 @@ class Client
 
     /**
      * @param ModelInterface $entity
-     *
-     * @throws Exception\CurlException
-     * @throws Exception\ErrorCodeException
-     * @throws Exception\FailedAuthException
-     * @throws InvalidArgumentException
      *
      * @return string
      */
@@ -119,10 +99,6 @@ class Client
     }
 
     /**
-     * @throws Exception\CurlException
-     * @throws Exception\ErrorCodeException
-     * @throws Exception\FailedAuthException
-     * @throws InvalidArgumentException
      * @throws RuntimeException
      */
     private function checkAuth()
@@ -142,11 +118,6 @@ class Client
      *
      * @param ModelInterface $entity
      * @param string         $action
-     *
-     * @throws Exception\CurlException
-     * @throws Exception\ErrorCodeException
-     * @throws Exception\FailedAuthException
-     * @throws InvalidArgumentException
      *
      * @return string
      */

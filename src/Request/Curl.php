@@ -77,8 +77,6 @@ class Curl
     /**
      * @param string $agent
      *
-     * @throws CurlException
-     *
      * @return bool
      */
     public function setUserAgent($agent)
@@ -88,8 +86,6 @@ class Curl
 
     /**
      * @param array $header
-     *
-     * @throws CurlException
      *
      * @return bool
      */
@@ -101,8 +97,6 @@ class Curl
     /**
      * @param bool $value
      *
-     * @throws CurlException
-     *
      * @return bool
      */
     public function setHeader($value)
@@ -112,8 +106,6 @@ class Curl
 
     /**
      * @param string $cookie
-     *
-     * @throws CurlException
      *
      * @return bool
      */
@@ -125,8 +117,6 @@ class Curl
     /**
      * @param string $cookieJar
      *
-     * @throws CurlException
-     *
      * @return bool
      */
     public function setCookieJar($cookieJar)
@@ -136,8 +126,6 @@ class Curl
 
     /**
      * @param bool $value
-     *
-     * @throws CurlException
      *
      * @return bool
      */
@@ -149,8 +137,6 @@ class Curl
     /**
      * @param int $value
      *
-     * @throws CurlException
-     *
      * @return bool
      */
     public function setSSLVerifyHost($value)
@@ -161,8 +147,6 @@ class Curl
     /**
      * @param string $request
      *
-     * @throws CurlException
-     *
      * @return bool
      */
     public function setCustomRequest($request)
@@ -172,8 +156,6 @@ class Curl
 
     /**
      * @param mixed $fields
-     *
-     * @throws CurlException
      *
      * @return bool
      */

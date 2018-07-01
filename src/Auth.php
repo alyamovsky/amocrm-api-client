@@ -42,7 +42,7 @@ class Auth
         }
 
         // If login has been changed, we need to delete the cookie file for the changes to take effect
-        if (false === (mb_strpos(file_get_contents($cookie), (str_replace('@', '%40', $this->login))))) {
+        if (false === mb_strpos(file_get_contents($cookie), str_replace('@', '%40', $this->login))) {
             unlink($cookie);
 
             return false;

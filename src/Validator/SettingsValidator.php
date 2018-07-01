@@ -22,8 +22,7 @@ class SettingsValidator
     public function validateScheme($scheme)
     {
         if (!StringUtil::isOnlyLetters($scheme)) {
-            $message = sprintf('"%s" is not a valid scheme', $scheme);
-            throw new InvalidArgumentException($message);
+            throw new InvalidArgumentException(sprintf('"%s" is not a valid scheme', $scheme));
         }
 
         return true;
@@ -39,8 +38,7 @@ class SettingsValidator
     public function validateDomain($domain)
     {
         if (!StringUtil::isDomain($domain)) {
-            $message = sprintf('"%s" is not a valid domain', $domain);
-            throw new InvalidArgumentException($message);
+            throw new InvalidArgumentException(sprintf('"%s" is not a valid domain', $domain));
         }
 
         return true;
@@ -56,8 +54,7 @@ class SettingsValidator
     public function validateUserAgent($userAgent)
     {
         if (!StringUtil::isText($userAgent)) {
-            $message = sprintf('"%s" is not a valid user agent', $userAgent);
-            throw new InvalidArgumentException($message);
+            throw new InvalidArgumentException(sprintf('"%s" is not a valid user agent', $userAgent));
         }
 
         return true;
@@ -78,12 +75,11 @@ class SettingsValidator
 
         foreach ($paths as $key => $item) {
             if (empty($item)) {
-                throw new InvalidArgumentException("An array item \"$key\" must not be empty");
+                throw new InvalidArgumentException(sprintf('An array item "%s" must not be empty', $key));
             }
 
             if (!StringUtil::isUrlPath($item)) {
-                $message = sprintf('"%s" is not a valid method path', $item);
-                throw new InvalidArgumentException($message);
+                throw new InvalidArgumentException(sprintf('"%s" is not a valid method path', $item));
             }
         }
 
@@ -100,8 +96,7 @@ class SettingsValidator
     public function validateCookiePath($path)
     {
         if (!StringUtil::isFilePath($path)) {
-            $message = sprintf('"%s" is not a valid file path', $path);
-            throw new InvalidArgumentException($message);
+            throw new InvalidArgumentException(sprintf('"%s" is not a valid file path', $path));
         }
 
         return true;

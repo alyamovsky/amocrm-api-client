@@ -22,8 +22,7 @@ class CredentialsValidator
     public function validateSubdomain($subdomain)
     {
         if (!StringUtil::isAlNum($subdomain)) {
-            $message = sprintf('"%s" is not a valid subdomain', $subdomain);
-            throw new InvalidArgumentException($message);
+            throw new InvalidArgumentException(sprintf('"%s" is not a valid subdomain', $subdomain));
         }
 
         return true;
@@ -39,8 +38,7 @@ class CredentialsValidator
     public function validateLogin($login)
     {
         if (!StringUtil::isEmail($login)) {
-            $message = sprintf('"%s" is not a valid login', $login);
-            throw new InvalidArgumentException($message);
+            throw new InvalidArgumentException(sprintf('"%s" is not a valid login', $login));
         }
 
         return true;
@@ -56,8 +54,7 @@ class CredentialsValidator
     public function validateHash($hash)
     {
         if (!StringUtil::isAlNum($hash)) {
-            $message = sprintf('"%s" is not a valid hash', $hash);
-            throw new InvalidArgumentException($message);
+            throw new InvalidArgumentException(sprintf('"%s" is not a valid hash', $hash));
         }
 
         return true;

@@ -73,8 +73,6 @@ class SettingsStorage
 
     /**
      * @param string $scheme
-     *
-     * @throws InvalidArgumentException
      */
     public function setScheme($scheme)
     {
@@ -92,8 +90,6 @@ class SettingsStorage
 
     /**
      * @param string $domain
-     *
-     * @throws InvalidArgumentException
      */
     public function setDomain($domain)
     {
@@ -111,8 +107,6 @@ class SettingsStorage
 
     /**
      * @param string $userAgent
-     *
-     * @throws InvalidArgumentException
      */
     public function setUserAgent($userAgent)
     {
@@ -146,8 +140,6 @@ class SettingsStorage
 
     /**
      * @param array $paths
-     *
-     * @throws InvalidArgumentException
      */
     public function setMethodsPaths(array $paths)
     {
@@ -165,8 +157,6 @@ class SettingsStorage
 
     /**
      * @param string $path
-     *
-     * @throws InvalidArgumentException
      */
     public function setCookiePath($path)
     {

@@ -157,7 +157,7 @@ class Client
      *
      * @return string
      */
-    public function checkAccount()
+    public function accountInfo()
     {
         $url = $this->urlBuilder->buildMethodUrl('current');
         return $this->dataSender->send($url, []);

@@ -107,6 +107,6 @@ final class Lead extends AbstractModel implements ModelInterface
         'closed_at' => 'date_close',
         'closest_task_at' => 'closest_task',
         'sale' => 'price',
-        'pipeline' => 'pipeline_id',
+        /*'pipeline' => 'pipeline_id', */
     ];
 }

@@ -151,4 +151,15 @@ class Client
 
         $lastCheck = microtime(true);
     }
+
+    /**
+     * Provides some info about current account and its custom fields ids.
+     *
+     * @return string
+     */
+    public function accountInfo()
+    {
+        $url = $this->urlBuilder->buildMethodUrl('current');
+        return $this->dataSender->send($url, []);
+    }
 }
